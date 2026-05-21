@@ -20,7 +20,7 @@ const headings = (entry.body?.match(/^#{2,3}\s+(.+)$/gm) || []).map(line => {
   const slug = text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
   return { depth, text, slug };
 });
-const minRead = Math.max(1, Math.ceil((entry.body?.split(/\s+/).filter(Boolean).length ?? 0) / 200));
+const minRead = Math.max(1, Math.ceil((entry.body?.split(/\s+/).filter(Boolean).length ?? 0) / 100));
 
 const meta = {
   title: `${entry.data.title} — ysabella`,
