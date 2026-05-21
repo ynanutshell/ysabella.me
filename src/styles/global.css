@@ -245,7 +245,7 @@ ol, ul {
 
   li::marker {
     font-family: var(--font-mono);
-    font-size: var(--size-type-small);
+    font-size: var(--size-type-caption);
   }
 }
 
