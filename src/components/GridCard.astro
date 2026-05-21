@@ -1,0 +1,234 @@
+---
+import Lottie from '../components/Lottie.astro';
+
+type MediaType = 
+  | { type: 'video'; src: string }
+  | { type: 'lottie'; src: string; loop?: boolean; autoplay?: boolean };
+
+interface Props {
+  cards: {
+    title: string;
+    image?: string;
+    alt?: string;
+    video?: MediaType;
+    href?: string;
+    background?: string;
+    tags?: string[];
+    fit?: string;
+    colSpan: number;
+    rowSpan: number;
+  }[];
+  filter?: string;
+}
+
+const { cards, filter } = Astro.props;
+const filtered = filter 
+  ? cards.filter(card => card.tags?.some(tag => tag.toLowerCase().includes(filter.toLowerCase())))
+  : cards;
+---
+<div id="grid" class="container">
+  {filtered.map((card) => {
+    const isLink = !!card.href;
+    const CardWrapper = isLink ? 'a' : 'div';
+    
+    return (
+      <CardWrapper 
+        data-tags={card.tags?.join(',')}
+        href={isLink ? card.href : undefined}
+        class={`card grid ${card.fit || 'cover'}`}
+        style={[
+          `grid-column: span ${card.colSpan}`,
+          `grid-row: span ${card.rowSpan}`,
+          card.background ? `background: ${card.background}` : ''
+        ].filter(Boolean).join('; ')}
+      >
+        {card.fit !== 'phone' && card.fit !== 'contain' && (
+          <>
+            {card.image ? (
+              <img src={card.image} decoding="async" alt={card.alt || null} loading="lazy" />
+            ) : 
+            card.video ? (
+              <figure class="wide">
+                {card.video.type === 'lottie' && (
+                  <Lottie 
+                    src={card.video.src}
+                    loop={card.video.loop ?? true}
+                    autoplay={card.video.autoplay ?? true}
+                    aria-label={card.alt || null}
+                  />
+                )}
+                {card.video.type === 'video' && (
+                  <video src={card.video.src} autoplay muted loop playsinline poster={card.image} />
+                )}
+              </figure>
+            ) : null}
+          </>
+        )}
+        {card.fit === 'contain' && (
+          <div class="contained">
+            {card.image ? (
+              <img src={card.image} decoding="async" alt={card.alt || null} loading="lazy" />
+            ) : 
+            card.video ? (
+              <figure class="wide">
+                {card.video.type === 'lottie' && (
+                  <Lottie 
+                    src={card.video.src}
+                    loop={card.video.loop ?? true}
+                    autoplay={card.video.autoplay ?? true}
+                    aria-label={card.alt || null}
+                  />
+                )}
+                {card.video.type === 'video' && (
+                  <video src={card.video.src} autoplay muted loop playsinline poster={card.image} />
+                )}
+              </figure>
+            ) : null}
+          </div>
+        )}
+        {card.fit === 'horizontal' && (
+          <div class="horizontal">
+            {card.image ? (
+              <img src={card.image} decoding="async" alt={card.alt || null} loading="lazy" />
+            ) : 
+            card.video ? (
+              <figure class="wide">
+                {card.video.type === 'lottie' && (
+                  <Lottie 
+                    src={card.video.src}
+                    loop={card.video.loop ?? true}
+                    autoplay={card.video.autoplay ?? true}
+                    aria-label={card.alt || null}
+                  />
+                )}
+                {card.video.type === 'video' && (
+                  <video src={card.video.src} autoplay muted loop playsinline poster={card.image} />
+                )}
+              </figure>
+            ) : null}
+          </div>
+        )}
+        {card.fit === 'phone' && (
+          <figure class="mockup">
+            {card.image ? (
+              <img class="screen" src={card.image} decoding="async" alt={card.alt || null} loading="lazy" />
+            ) : 
+            card.video ? (
+              <>
+                {card.video.type === 'lottie' && (
+                  <Lottie 
+                    src={card.video.src}
+                    loop={card.video.loop ?? true}
+                    autoplay={card.video.autoplay ?? true}
+                    aria-label={card.alt || null}
+                  />
+                )}
+                {card.video.type === 'video' && (
+                  <video class="screen" src={card.video.src} autoplay muted loop playsinline poster={card.image} />
+                )}
+              </>
+            ) : null}
+          </figure>
+        )}
+      </CardWrapper>
+    );
+  })}
+</div>
+
+<style>
+  #grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-flow: dense;
+    grid-auto-rows: auto;
+    gap: var(--size-padding-lg);
+  }
+
+  .card.grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--color-background-200);
+    color: var(--color-foreground-100);
+    text-decoration: none;
+  }
+
+  .card.grid figure, .card.grid img, .card.grid video {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: var(--transition-md);
+  }
+
+  .card.grid.vertical figure, .card.grid.vertical img, .card.grid.vertical video {
+    width: auto;
+    height: 100%;
+  }
+
+  /* Contained */
+  .card.grid .contained {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    padding: var(--size-padding-2xl);
+  }
+
+  .contained img, .contained video {
+    object-fit: contain;
+  }
+
+  /* Phone Frame */
+  .mockup {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: var(--size-padding-2xl);
+    transition: var(--transition-md);
+  }
+
+  .card.grid .screen {
+    object-fit: contain;
+    overflow: hidden;
+    max-width: 70%;
+    height: auto;
+    border-radius: clamp(1.8rem, 2vw, 4rem);
+    border: var(--size-padding-sm) solid var(--color-black);
+  }
+
+  .card.grid .screen img,
+  .card.grid .screen video {
+    width: auto;
+    height: auto;
+  }
+
+  .card.grid .frame {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+    padding: var(--size-padding-xl);
+    color: var(--color-black);
+    pointer-events: none;
+  }
+  
+  @media (max-width: 1200px) {
+    #grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    #grid {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+</style>

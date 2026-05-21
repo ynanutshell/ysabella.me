@@ -1,0 +1,135 @@
+---
+interface Props {
+  tags: string[];
+}
+
+const { tags } = Astro.props;
+---
+<nav aria-label="Filter Menu" id="filters">
+  <div class="scroll">
+    {tags.map(tag => (
+      <button class="filter" data-filter={tag.toLowerCase()}>
+        {tag}
+      </button>
+      <span class="divider" aria-hidden="true" />
+    ))}
+    {tags.map(tag => (
+      <button class="filter" data-filter={tag.toLowerCase()}>
+        {tag}
+      </button>
+      <span class="divider" aria-hidden="true" />
+    ))}
+    {tags.map(tag => (
+      <button class="filter" data-filter={tag.toLowerCase()}>
+        {tag}
+      </button>
+      <span class="divider" aria-hidden="true" />
+    ))}
+  </div>
+</nav>
+
+<style>
+  #filters {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: calc(var(--size-padding-sm) / 1.5);
+    background-color: var(--color-secondary);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    gap: var(--size-padding-lg);
+    animation: loop 60s linear infinite;
+  }
+
+  @keyframes loop {
+    0% {transform: translateX(0%);}
+    100% {transform: translateX(-50%);}
+  }
+
+  #filters:active .scroll, .scroll:hover {
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+  }
+
+  .filter {
+    width: max-content;
+    color: var(--color-secondary-fg);
+    line-height: 100%;
+    text-wrap: nowrap;
+  }
+
+  .filter:hover {
+    color: var(--color-tertiary);
+  }
+
+  .filter.active {
+    color: var(--color-tertiary);
+  }
+
+  .divider {
+    background-color: var(--color-secondary-fg);
+  }
+
+  .divider:last-of-type {
+    display: none;
+  }
+</style>
+
+<script>
+  const all = document.querySelectorAll<HTMLButtonElement>('.filter');
+  const grid = document.getElementById('grid') as HTMLDivElement | null;
+  const container = document.getElementById('filters');
+  const scroll = document.querySelector('.scroll');
+
+  if (container && scroll) {
+    container.addEventListener('scroll', () => {
+      (scroll as HTMLElement).style.animation = 'none';
+    }, { once: true });
+  }
+
+  function updateActive(filter: string) {
+    all.forEach(b => {
+      b.classList.remove('active');
+      if (b.dataset.filter === filter) {
+        b.classList.add('active');
+      }
+    });
+  }
+
+  function filterCards(filter: string) {
+    if (!grid) return;
+    const cards = grid.querySelectorAll<HTMLElement>('.card');
+    cards.forEach(card => {
+      const tags = card.getAttribute('data-tags') || '';
+      if (!filter || tags.split(',').some(t => t.toLowerCase() === filter)) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  all.forEach(button => {
+    button.addEventListener('click', () => {
+      const filter = button.dataset.filter || '';
+      const isActive = button.classList.contains('active');
+      
+      if (isActive) {
+        updateActive('');
+        filterCards('');
+      } else {
+        updateActive(filter);
+        filterCards(filter);
+      }
+    });
+  });
+</script>

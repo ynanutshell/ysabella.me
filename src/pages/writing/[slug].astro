@@ -1,0 +1,67 @@
+---
+import GardenLayout from '../../layouts/GardenLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('garden');
+  return entries
+    .filter(entry => entry.data.published !== false && entry.data.type !== 'bookmark')
+    .map(entry => ({
+      params: { slug: (entry.data.slug || entry.id).toLowerCase() },
+      props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const html = entry.rendered?.html || '';
+const headings = (entry.body?.match(/^#{2,3}\s+(.+)$/gm) || []).map(line => {
+  const depth = line.startsWith('### ') ? 3 : 2;
+  const text = line.replace(/^#{2,3}\s+/, '');
+  const slug = text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+  return { depth, text, slug };
+});
+const minRead = Math.max(1, Math.ceil((entry.body?.split(/\s+/).filter(Boolean).length ?? 0) / 200));
+
+const meta = {
+  title: `${entry.data.title} — ysabella`,
+  description: entry.data.description || entry.body
+    ?.split('\n')
+    .filter(l => l.trim() && !l.startsWith('#') && !l.startsWith('!') && !l.startsWith('['))
+    .slice(0, 2)
+    .join(' ')
+    .slice(0, 157) + '...',
+  ogImage: entry.data.ogImage || '/opengraph.png',
+};
+
+const data = {
+  headline: entry.data.title,
+  subline: entry.data.description,
+  cover: entry.data.cover,
+  type: entry.data.type,
+  subtype: entry.data.subtype,
+  plantedDate: entry.data.planted || undefined,
+  lastTendedDate: entry.data.tended || undefined,
+  tags: entry.data.tags,
+  subheadings: headings,
+  minRead,
+};
+---
+<GardenLayout meta={meta} data={data}>
+  <div class="column content" set:html={html} />
+</GardenLayout>
+
+<style>
+  h3 {
+    font-size: var(--size-heading-xs);
+  }
+
+  h2 {
+    position: relative;
+    color: var(--color-foreground-300);
+    font-family: var(--font-mono);
+    font-size: var(--size-type-caption);
+    text-transform: uppercase;
+    letter-spacing: 10%;
+    white-space: nowrap;
+  }
+</style>

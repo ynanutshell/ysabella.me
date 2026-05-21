@@ -1,0 +1,62 @@
+---
+import Dropdown from './Dropdown.astro';
+
+interface Subheading {
+  depth: number;
+  text: string;
+  slug: string;
+}
+
+interface Props {
+  subheadings: Subheading[];
+}
+
+const { subheadings } = Astro.props;
+---
+
+{subheadings.length > 0 && (
+  <Dropdown label="contents">
+    <ul>
+      {subheadings.map((subheading, i) => (
+        <li class="dropdown item">
+          <a class={`row stretch apart depth-${subheading.depth}`} href={`#${subheading.slug}`}>
+            {subheading.text.toLowerCase()}
+            <span>{i + 1}</span>
+            </a>
+        </li>
+      ))}
+    </ul>
+  </Dropdown>
+)}
+
+<style>
+  .dropdown.item a.depth-3 { 
+    padding-left: calc(var(--size-padding-md) * 2); 
+  }
+  
+  .dropdown.item a.depth-4 {
+    padding-left: calc(var(--size-padding-md) * 3); 
+  }
+</style>
+
+<script>
+  const tocLinks = document.querySelectorAll('#toc .dropdown.item a');
+  const sections = document.querySelectorAll('section[id]');
+  const details = document.querySelector('#toc details') as HTMLDetailsElement | null;
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      if (section.getBoundingClientRect().top <= 300) {
+        current = section.id;
+      }
+    });
+    tocLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+    });
+  });
+
+  if (details) {
+    details.open = window.matchMedia('(min-width: 1200px)').matches;
+  }
+</script>

@@ -1,0 +1,271 @@
+---
+export interface Props {
+  className?: string;
+  style?: string;
+  disabled?: boolean;
+  initialScale?: number;
+  minScale?: number;
+  maxScale?: number;
+  wheelPanning?: boolean;
+  pinchDisabled?: boolean;
+}
+
+const {
+  className = '',
+  style = '',
+  disabled = false,
+  initialScale = 1,
+  minScale = 0.5,
+  maxScale = 4,
+  wheelPanning = true,
+  pinchDisabled = false,
+} = Astro.props;
+---
+<div
+  class={`zoom-pan-container ${className}`}
+  style={`width: 100%; height: 100%; overflow: hidden; ${style}`}
+  data-zoom-pan
+  data-initial-scale={initialScale}
+  data-min-scale={minScale}
+  data-max-scale={maxScale}
+  data-wheel-panning={wheelPanning}
+  data-pinch-disabled={pinchDisabled}
+  data-disabled={disabled}
+>
+  <div class="zoom-pan-content" style="transform-origin: 0 0;">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .zoom-pan-container {
+    position: relative;
+    touch-action: none;
+    user-select: none;
+  }
+  
+  .zoom-pan-container[data-disabled="true"] {
+    overflow: auto;
+    touch-action: auto;
+    user-select: auto;
+  }
+  
+  .zoom-pan-content {
+    will-change: transform;
+    transition: var(--transition-fast);
+  }
+</style>
+
+<script>
+  class ZoomPanController {
+    private container: HTMLElement;
+    private content: HTMLElement;
+    private scale: number;
+    private minScale: number;
+    private maxScale: number;
+    private wheelPanning: boolean;
+    private pinchDisabled: boolean;
+    private disabled: boolean;
+    private translateX: number;
+    private translateY: number;
+    private isPanning: boolean;
+    private startX: number;
+    private startY: number;
+    private lastPinchDistance: number;
+    private resizeObserver: ResizeObserver | null;
+    
+    constructor(container: HTMLElement) {
+      this.container = container;
+      const content = container.querySelector('.zoom-pan-content');
+      
+      if (!content) throw new Error('No content element found');
+      this.content = content as HTMLElement;
+      
+      this.scale = parseFloat(container.dataset.initialScale || '1');
+      this.minScale = parseFloat(container.dataset.minScale || '0.5');
+      this.maxScale = parseFloat(container.dataset.maxScale || '4');
+      this.wheelPanning = container.dataset.wheelPanning !== 'false';
+      this.pinchDisabled = container.dataset.pinchDisabled === 'true';
+      this.disabled = container.dataset.disabled === 'true';
+      
+      this.translateX = 0;
+      this.translateY = 0;
+      this.isPanning = false;
+      this.startX = 0;
+      this.startY = 0;
+      this.lastPinchDistance = 0;
+      this.resizeObserver = null;
+      
+      if (!this.disabled) {
+        this.init();
+      }
+    }
+    
+    private init(): void {
+      // Mouse wheel zoom/pan
+      this.container.addEventListener('wheel', this.handleWheel.bind(this), { passive: false });
+      
+      // Pan with mouse/touch
+      this.container.addEventListener('mousedown', this.handlePanStart.bind(this));
+      this.container.addEventListener('touchstart', this.handlePanStart.bind(this), { passive: false });
+      
+      window.addEventListener('mousemove', this.handlePanMove.bind(this));
+      window.addEventListener('touchmove', this.handlePanMove.bind(this), { passive: false });
+      
+      window.addEventListener('mouseup', this.handlePanEnd.bind(this));
+      window.addEventListener('touchend', this.handlePanEnd.bind(this));
+      
+      // Pinch zoom
+      if (!this.pinchDisabled) {
+        this.container.addEventListener('touchstart', this.handlePinchStart.bind(this), { passive: false });
+        this.container.addEventListener('touchmove', this.handlePinchMove.bind(this), { passive: false });
+      }
+      
+      // Double-click zoom
+      this.container.addEventListener('dblclick', this.handleDoubleClick.bind(this));
+      
+      // Center content initially
+      this.centerContent();
+      
+      // Resize observer
+      this.resizeObserver = new ResizeObserver(() => this.centerContent());
+      this.resizeObserver.observe(this.container);
+    }
+    
+    private handleWheel(e: WheelEvent): void {
+      if (e.ctrlKey || e.metaKey) return;
+      
+      e.preventDefault();
+      
+      if (this.wheelPanning) {
+        // Pan with wheel
+        this.translateX -= e.deltaX / this.scale;
+        this.translateY -= e.deltaY / this.scale;
+        this.clampPosition();
+      } else {
+        // Zoom with wheel
+        const delta = e.deltaY > 0 ? -0.1 : 0.1;
+        this.zoom(this.scale + delta, e.clientX, e.clientY);
+      }
+      
+      this.updateTransform();
+    }
+    
+    private handlePanStart(e: MouseEvent | TouchEvent): void {
+      if (e.type === 'touchstart' && (e as TouchEvent).touches.length === 2) return;
+      
+      this.isPanning = true;
+      const point = 'touches' in e ? (e as TouchEvent).touches[0] : (e as MouseEvent);
+      this.startX = point.clientX - this.translateX;
+      this.startY = point.clientY - this.translateY;
+      
+      this.content.style.transition = 'none';
+    }
+    
+    private handlePanMove(e: MouseEvent | TouchEvent): void {
+      if (!this.isPanning) return;
+      
+      e.preventDefault();
+      const point = 'touches' in e ? (e as TouchEvent).touches[0] : (e as MouseEvent);
+      
+      this.translateX = point.clientX - this.startX;
+      this.translateY = point.clientY - this.startY;
+      
+      this.updateTransform();
+    }
+    
+    private handlePanEnd(): void {
+      this.isPanning = false;
+      this.content.style.transition = 'transform 0.1s ease-out';
+      this.clampPosition();
+      this.updateTransform();
+    }
+    
+    private handlePinchStart(e: TouchEvent): void {
+      if (e.touches.length !== 2) return;
+      this.lastPinchDistance = this.getPinchDistance(e.touches);
+    }
+    
+    private handlePinchMove(e: TouchEvent): void {
+      if (e.touches.length !== 2 || this.pinchDisabled) return;
+      
+      e.preventDefault();
+      const newDistance = this.getPinchDistance(e.touches);
+      const scaleFactor = newDistance / this.lastPinchDistance;
+      
+      const center = this.getPinchCenter(e.touches);
+      this.zoom(this.scale * scaleFactor, center.x, center.y);
+      
+      this.lastPinchDistance = newDistance;
+      this.updateTransform();
+    }
+    
+    private handleDoubleClick(e: MouseEvent): void {
+      const newScale = this.scale === 1 ? this.maxScale / 2 : 1;
+      this.zoom(newScale, e.clientX, e.clientY);
+    }
+    
+    private zoom(newScale: number, centerX: number, centerY: number): void {
+      const oldScale = this.scale;
+      this.scale = Math.min(Math.max(newScale, this.minScale), this.maxScale);
+      
+      const rect = this.container.getBoundingClientRect();
+      const mouseX = centerX - rect.left;
+      const mouseY = centerY - rect.top;
+      
+      this.translateX = mouseX - (mouseX - this.translateX) * (this.scale / oldScale);
+      this.translateY = mouseY - (mouseY - this.translateY) * (this.scale / oldScale);
+      
+      this.clampPosition();
+    }
+    
+    private clampPosition(): void {
+      const rect = this.container.getBoundingClientRect();
+      const contentRect = this.content.getBoundingClientRect();
+      
+      const maxTranslateX = rect.width - contentRect.width / this.scale;
+      const maxTranslateY = rect.height - contentRect.height / this.scale;
+      
+      this.translateX = Math.max(maxTranslateX, Math.min(0, this.translateX));
+      this.translateY = Math.max(maxTranslateY, Math.min(0, this.translateY));
+    }
+    
+    private centerContent(): void {
+      const rect = this.container.getBoundingClientRect();
+      const contentRect = this.content.getBoundingClientRect();
+      
+      this.translateX = (rect.width - contentRect.width) / 2;
+      this.translateY = (rect.height - contentRect.height) / 2;
+      this.scale = 1;
+      this.updateTransform();
+    }
+    
+    private updateTransform(): void {
+      this.content.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
+    }
+    
+    private getPinchDistance(touches: TouchList): number {
+      return Math.hypot(
+        touches[0].clientX - touches[1].clientX,
+        touches[0].clientY - touches[1].clientY
+      );
+    }
+    
+    private getPinchCenter(touches: TouchList): { x: number; y: number } {
+      return {
+        x: (touches[0].clientX + touches[1].clientX) / 2,
+        y: (touches[0].clientY + touches[1].clientY) / 2,
+      };
+    }
+    
+    public destroy(): void {
+      this.resizeObserver?.disconnect();
+      // Clean up event listeners if needed
+    }
+  }
+  
+  // Initialize on all zoom-pan containers
+  document.querySelectorAll('[data-zoom-pan]').forEach(container => {
+    new ZoomPanController(container as HTMLElement);
+  });
+</script>

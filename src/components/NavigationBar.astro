@@ -1,0 +1,73 @@
+---
+interface Props {
+  activeTab?: string;
+}
+
+const { activeTab } = Astro.props;
+
+const tabs = [
+  { href: "/", label: "work" },
+  { href: "/garden", label: "garden" },
+  { href: "/about", label: "about" },
+  { href: "mailto:hello@ysabella.me", label: "contact" },
+  // { href: "/more", label: "..." },
+];
+---
+<nav aria-label="Site Menu" id="navbar">
+  {tabs.map((tab) => (
+    <a 
+      class={`noborder tab ${activeTab === tab.label ? 'active' : ''}`}
+      href={tab.href}
+      data-tab={tab.label}
+    >
+      {tab.label}
+    </a>
+  ))}
+</nav>
+
+<style>
+  nav {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    position: sticky;
+    bottom: 0;
+    margin-left: var(--size-padding-lg);
+    gap: var(--size-padding-sm);
+    z-index: 2;
+  }
+
+  .tab {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: var(--base-size-120) var(--base-size-160);
+    font-family: var(--font-mono);
+    font-size: var(--size-type-caption);
+    line-height: 1;
+    background-color: var(--color-background-200);
+    color: var(--color-foreground-100);
+    transform-origin: bottom;
+    transition: var(--transition-md);
+  }
+
+  .tab.active {
+    background-color: var(--color-background-300);
+  }
+
+  .tab:hover {
+    padding-bottom: var(--base-size-200);
+    margin-top: calc(-1 * (var(--base-size-80)));
+    background-color: var(--color-tertiary-bg);
+  }
+
+  .over-footer .tab {
+    background-color: var(--color-primary-bg);
+    color: var(--color-primary);
+  }
+  
+  .over-footer .tab.active {
+    background-color: var(--color-primary);
+    color: var(--color-primary-bg);
+  }
+</style>

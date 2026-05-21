@@ -1,0 +1,35 @@
+---
+export interface Props {
+  href?: string;
+  target?: '_blank' | '_self';
+  class?: string;
+}
+
+const { 
+  href,
+  target = '_self',
+  class: className,
+  ...rest 
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+---
+
+{Tag === 'a' ? (
+  <a 
+    href={href}
+    target={target}
+    {...rest}
+    class={`btn noborder ${className || ''}`}
+    rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+  >
+    <slot />
+  </a>
+) : (
+  <button 
+    {...rest}
+    class={`btn ${className || ''}`}
+  >
+    <slot />
+  </button>
+)}

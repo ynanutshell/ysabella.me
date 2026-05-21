@@ -1,0 +1,27 @@
+---
+export interface Props {
+  label: string;
+  open?: boolean;
+  class?: string;
+  id?: string;
+}
+
+const { label, open = false, class: className, id } = Astro.props;
+---
+<nav class={`dropdown ${className || ''}`} id={id} aria-label={label}>
+  <details open={open}>
+    <summary>
+      <span class="label">
+        <slot name="label">{label}</slot>
+      </span>
+      <span class="btn" aria-hidden="true">
+        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="line-top" d="M0 0.5H8" stroke="currentColor"/>
+          <path class="line-mid" d="M0 4H5" stroke="currentColor"/>
+          <path class="line-bottom" d="M0 7.5H8" stroke="currentColor"/>
+        </svg>
+      </span>
+    </summary>
+    <slot />
+  </details>
+</nav>

@@ -1,0 +1,71 @@
+---
+import { getCommit } from '../utils/commit';
+import SmallCard from "../components/SmallCard.astro";
+
+const commit = await getCommit();
+const src = "https://assets.ysabella.me/cdn-cgi/image/format=webp,quality=100,width=1500";
+---
+<footer>
+  <div class="container">
+    <p class="caption">designed and built with a lot of overthinking and late nights</p>
+    <SmallCard id="mail" background="white" linkText="hello@ysabella.me" href="mailto:hello@ysabella.me">
+      say hello!
+    </SmallCard>
+    <SmallCard id="linkedin" background="white" linkText="/in/ysabellanicole" href="https://www.linkedin.com/in/ysabellanicole">
+      connect with me
+    </SmallCard>
+    <figure class="portrait">
+      <img src=`${src}/portrait.jpeg` alt="Portrait shot of Ysabella Nicole Alvarez" loading="lazy" />
+    </figure>
+  </div>
+  <div class="row stretch apart">
+    <small>&copy; 2026 Ysabella Nicole Alvarez</small>
+    <div class="row right">
+      <dd><a class="small" href="https://analytics.ysabella.me/share" target="_blank">Analytics</a></dd>
+      <span class="divider" />
+      <dd><a class="small" href="https://github.com/ynanutshell/ysabella.me" target="_blank">Source</a></dd>
+      {commit !== 'unknown' && (
+        <span class="divider" />
+        <div class="row sm">
+          <dt>Last commit:</dt>
+          <dd><a class="small" href={`https://github.com/ynanutshell/ysabella.me/commit/${commit}`} target="_blank">{commit.slice(0, 7)}</a></dd>
+        </div>
+      )}
+    </div>
+  </div>
+</footer>
+
+<style is:global>
+  footer .container > * {
+    color: var(--color-primary-fg);
+    text-align: center;
+    text-wrap: pretty;
+  }
+
+  .portrait {
+    position: absolute;
+    right: 8vw;
+    bottom: 4vh;
+    transform: rotate3d(0, 0, 1, -8deg);
+  }
+
+  #mail {
+    bottom: 65%;
+    transform: rotate3d(0,0,1,-6deg);
+  }
+
+  #linkedin {
+    left: 12%;
+    top: 65%;
+    transform: rotate3d(0, 0, 1, 4deg);
+    z-index: 1;
+  }
+
+  @media (max-width: 768px) {
+    footer .stretch.apart {
+      align-items: center;
+      justify-content: center;
+      flex-flow: column-reverse;
+    }
+  }
+</style>

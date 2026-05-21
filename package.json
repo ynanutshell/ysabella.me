@@ -1,0 +1,31 @@
+{
+  "name": "ysabella.me",
+  "version": "0.3.0",
+  "description": "Personal site and playground of Ysabella Nicole Alvarez, product designer and aspiring technologist.",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "sync": "rsync -av --delete --exclude='.obsidian/' --exclude='plugins/' --exclude='templates/' --include='*/' --include='*.md' --exclude='*' \"$GARDEN_PATH/\" src/content/garden/",
+    "prebuild": "git rev-parse --short HEAD > src/commit.txt",
+    "watch": "fswatch -o \"$GARDEN_PATH/\" | xargs -I{} sh -c 'npm run sync'",
+    "build": "astro build",
+    "preview": "npm run build && wrangler dev",
+    "generate-types": "wrangler types",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.2",
+    "astro": "^6.3.5",
+    "lottie-web": "^5.13.0",
+    "remark-obsidian-callout": "^1.5.1",
+    "remark-wiki-link": "^2.0.1",
+    "unist-util-visit": "^5.1.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.92.0"
+  },
+  "overrides": {
+    "vite": "^7"
+  }
+}

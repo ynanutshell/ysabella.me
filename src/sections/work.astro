@@ -1,0 +1,134 @@
+---
+import FilterBar from '../components/FilterBar.astro';
+import GridCard from '../components/GridCard.astro';
+
+const VidSrc = "https://assets.ysabella.me"
+const ImgSrc = "https://assets.ysabella.me/cdn-cgi/image/format=webp,quality=100,width=1500";
+
+const cards = [
+  {
+    title: "Cashmonki",
+    video: { type: 'video' as const, src: `${VidSrc}/work/cashmonki.mp4` },
+    // href: "/work/cashmonki",
+    tags: ["interaction design", "ux design", "product design"],
+    background: "#542EFF",
+    fit: "phone",
+    colSpan: 1,
+    rowSpan: 2
+  },
+  {
+    title: "GCash",
+    video: { type: 'video' as const, src: `${VidSrc}/work/gcash.mp4` },
+    background: "#FFF",
+    // href: "/work/gcash",
+    fit: "contain",
+    tags: ["low-code development", "design systems"],
+    colSpan: 1,
+    rowSpan: 1
+  },
+  {
+    title: "TinyFast",
+    image: `${ImgSrc}/work/navbar.png`,
+    alt: "Liquid glass redesign of TinyFast's navigation bar, featured against a dark background.",
+    tags: ["ui design", "web design"],
+    background: "#151515",
+    fit: "contain",
+    colSpan: 1,
+    rowSpan: 1
+  },
+  {
+    title: "Paste",
+    image: `${ImgSrc}/work/paste.png`,
+    alt: "Conceptual redesign of Paste's hero section, with the headline 'Limitless clipboard'. Focusing on the product's key features, the design incorporates a vibrant color palette and dynamic, floating elements straight from Paste's interface over a render of the app on a MacBook screen.",
+    tags: ["ui design", "web design"],
+    background: "#FF950E",
+    fit: "contain",
+    colSpan: 1,
+    rowSpan: 1,
+  },
+  {
+    title: "Eztrackr",
+    image: `${ImgSrc}/work/eztrackr.png`,
+    alt: "Mobile dashboard of Eztrackr, a dashboard for tracking job applications. The dashboard is focused on a resume, with a scrollable navigation bar currently displaying the following tabs: Personal Details, Education, and Professional Summary. On the Professional Summary tab, the user has the option to enhance their summary with AI. Below, a chart visualizes the match rate of the user's resume against a job description, with the current match rate at 50%.",
+    // href: "/work/eztrackr",
+    tags: ["design systems", "product design", "ux design"],
+    background: "#6001D2",
+    fit: "phone",
+    colSpan: 1,
+    rowSpan: 2
+  },
+  {
+    title: "Momentum",
+    image: `${ImgSrc}/work/momentum.png`,
+    alt: "Hero section for Momentum, a community-based platform focusing on accountability. The headline reads 'Stay on track, together.', centered around visual elements of an open book, calendar, daily planner, and a list of goals on a sticky note.",
+    tags: ["ui design", "web design"],
+    background: "#FFF3E4",
+    fit: "contain",
+    colSpan: 1,
+    rowSpan: 1
+  },
+  {
+    title: "Mematic",
+    image: `${ImgSrc}/work/mematic.png`,
+    alt: "Brand identity for Mematic, a meme creation app. The design features a smiley with a winking sparkle for an eye.",
+    tags: ["branding and identity"],
+    background: "#FF0077",
+    fit: "contain",
+    colSpan: 1,
+    rowSpan: 1
+  },
+  {
+    title: "Olifant",
+    image: `${ImgSrc}/work/olifant.png`,
+    alt: "Brand identity for Olifant, a platform that takes the guesswork out of language learning by connecting you with like-minded learners. The design features the side profile of an elephant, or a chat bubble, symbolizing memory and learning, along with borderless communication.",
+    tags: ["branding and identity"],
+    background: "#3033FF",
+    fit: "contain",
+    colSpan: 1,
+    rowSpan: 1
+  },
+  {
+    title: "Artaku",
+    video: { type: 'video' as const, src: `${VidSrc}/work/artaku.mp4` },
+    background: "#F7F7F7",
+    fit: "phone",
+    tags: ["branding and identity", "ui design"],
+    colSpan: 1,
+    rowSpan: 2
+  },
+  {
+    title: "BlogFox",
+    image: `${ImgSrc}/work/blogfox.png`,
+    alt: "Brand identity for the YouTube to blog post conversion platform, Blogfox. The design features a fox with a quill pen head, symbolizing the transformation of video content into written form.",
+    tags: ["branding and identity"],
+    background: "#FFFFFF",
+    fit: "contain",
+    colSpan: 1,
+    rowSpan: 1
+  },
+  {
+    title: "RealRoots",
+    image: `${ImgSrc}/work/realroots.png`,
+    alt: "Conceptual redesign of RealRoots' hero section, with the headline 'Real friendship, guaranteed'. Focusing on fostering community, polaroids featuring different groups of women are scattered across the design, captioned with quotes from users.",
+    tags: ["ui design", "web design"],
+    background: "#FFF3E4",
+    fit: "contain",
+    colSpan: 1,
+    rowSpan: 1,
+  },
+  {
+    title: "TinyFast",
+    image: `${ImgSrc}/work/tinyfast.png`,
+    alt: "Conceptual redesign of TinyFast's hero section, with the headline 'Shrink Big Files. Instantly.'. Focusing on the product's interface, the design incorporates a liquid glass finish, and large files being compressed into smaller ones after being processed.",
+    tags: ["ui design", "web design"],
+    background: "#6044FF",
+    fit: "contain",
+    colSpan: 1,
+    rowSpan: 1,
+  },
+];
+
+const all = [...new Set(cards.flatMap(card => card.tags || []))].sort();
+---
+<FilterBar tags={all} />
+<GridCard cards={cards} />

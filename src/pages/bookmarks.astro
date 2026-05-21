@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import { getPageMetadata } from '../utils/seo';
+import Layout from '../layouts/BaseLayout.astro';
+import LinkButton from '../components/LinkButton.astro';
+import Links from '../sections/links.astro';
+
+const metadata = getPageMetadata('garden');
+const entries = await getCollection('garden');
+
+const published = entries.filter(entry => entry.data.published !== false);
+const bookmarks = published.filter(entry => entry.data.type === 'bookmark');
+---
+<Layout {...metadata} activeTab="garden">
+  <article>
+    <header class="column sm">
+      <h1>Things I Find Interesting.</h1>
+      <div class="subline">
+        <p>A log of things on the internet that I find interesting—mostly for future reference, for when I inevitably have to hunt down an article, resource, or site from eons ago.</p>
+      </div>
+    </header>
+    {bookmarks.length > 0 && (
+      <section class="column sm" id="bookmarks">
+        <div class="row stretch apart">
+          <LinkButton class="backlink" href="/garden">
+            <svg class="arrow-left" width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8.70715 3.35352H0.707153M3.70715 6.35352L0.707153 3.35352L3.70715 0.353516" stroke="#7D89B0"/>
+            </svg>
+            <span>back to garden</span>
+          </LinkButton>
+        </div>
+        <Links entries={bookmarks.slice(0, 100)} />
+      </section>
+    )}
+</Layout>

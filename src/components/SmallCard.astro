@@ -1,0 +1,110 @@
+---
+type Props = {
+  background?: "primary" | "secondary" | "white" | "green" | "yellow" | "purple" | "pink" | "magenta";
+  linkText?: string;
+  href?: string;
+  id?: string;
+};
+
+const { 
+  background = "primary",
+  linkText,
+  href,
+  id
+} = Astro.props;
+---
+<aside 
+  id={id}
+  class={[
+    "accent card lg",
+    background,
+  ].filter(Boolean).join(" ")}
+>
+  <p class="caption">
+    <slot />
+    {linkText && (
+      <>
+      <br />
+      {href ? (
+        <a href={href} target="_blank"  >
+          {linkText}
+        </a>
+      ) : (
+        linkText
+      )}
+      </>
+    )}
+  </p>
+</aside>
+
+<style is:global>
+  .accent.card {
+    position: absolute;
+    text-align: center;
+  }
+
+  /* Background Colors */
+  .card.primary {
+    background-color: var(--color-primary);
+    
+    *:not(a) {
+      color: var(--color-primary-fg);
+    }
+  }
+
+  .card.secondary {
+    background-color: var(--color-secondary);
+
+    *:not(a) {
+      color: var(--color-secondary-fg);
+    }
+  }
+
+  .card.white {
+    background-color: var(--color-background-100);
+
+    *:not(a) {
+      color: var(--color-foreground-100);
+    }
+  }
+
+  .card.green {
+    background-color: #46B600;
+
+    * {
+      color: var(--color-primary-fg);
+    }
+  }
+
+  .card.yellow {
+    background-color: #FFF353;
+
+    * {
+      color: #543c07;
+    }
+  }
+
+  .card.purple {
+    background-color: #8F60FF;
+
+    * {
+      color: var(--color-primary-fg);
+    }
+  }
+
+  .card.pink {
+    background-color: #FF1A98;
+
+    * {
+      color: var(--color-primary-fg);
+    }
+  }
+
+  .card.magenta {
+    background-color: #FF0162;
+
+    * {
+      color: var(--color-primary-fg);
+    }
+  }
+</style>

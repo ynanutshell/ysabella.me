@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import { getPageMetadata } from '../../utils/seo';
+import Layout from '../../layouts/BaseLayout.astro';
+import LinkButton from '../../components/LinkButton.astro';
+import Writings from '../../sections/writing.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('garden');
+  const allFilters = [...new Set(entries
+    .filter(e => e.data.published !== false && e.data.type !== 'bookmark')
+    .flatMap(e => [e.data.type, e.data.subtype, ...(e.data.tags || [])])
+    .filter(Boolean))];
+
+  return allFilters.map(filter => ({
+    params: { filter },
+    props: { filter },
+  }));
+}
+
+const metadata = getPageMetadata('garden');
+const entries = await getCollection('garden');
+const { filter } = Astro.props;
+
+const items = entries
+  .filter(e => e.data.published !== false && e.data.type !== 'bookmark')
+  .filter(e => e.data.type === filter || e.data.subtype === filter || e.data.tags?.includes(filter))
+  .sort((a, b) => (b.data.planted?.getTime() ?? 0) - (a.data.planted?.getTime() ?? 0));
+---
+<Layout {...metadata} activeTab="garden">
+  <article>
+    <header class="column sm">
+      <h1>Tags: <span class="emphasis">{filter[0].toUpperCase() + filter.slice(1)}</span> ({items.length})</h1>
+    </header>
+    {entries.length > 0 && (
+      <section class="column sm" id="writing">
+        <div class="row stretch apart">
+          <LinkButton class="backlink" href="/writing">
+            <svg class="arrow-left" width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8.70715 3.35352H0.707153M3.70715 6.35352L0.707153 3.35352L3.70715 0.353516" stroke="#7D89B0"/>
+            </svg>
+            <span>back to writing</span>
+          </LinkButton>
+        </div>
+        {items.length > 0 && (
+          <Writings entries={items} limit={4} />
+        )}
+      </section>
+    )}
+</Layout>
+
+<style>
+  h1 {
+    color: var(--color-foreground-300);
+  }
+</style>

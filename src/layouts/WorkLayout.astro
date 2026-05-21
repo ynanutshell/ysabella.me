@@ -1,0 +1,204 @@
+---
+import '../styles/global.css';
+import LinkButton from '../components/LinkButton.astro';
+import Lottie from '../components/Lottie.astro';
+import TOC from '../components/TOC.astro';
+
+interface MetadataItem {
+  label: string;
+  value: string | string[];
+}
+
+type Cover = 
+  | { type: 'image'; src: string }
+  | { type: 'video'; src: string }
+  | { type: 'lottie'; src: string; loop?: boolean; autoplay?: boolean };
+
+export interface Props {
+  meta: {
+    title: string;
+    description: string;
+    ogImage?: string;
+  };
+  data: {
+    status: 'shipped' | 'roadmap' | 'development';
+    headline: string;
+    subline: string;
+    visual?: Cover;
+    preview?: string;
+    alt?: string;
+    metadata?: MetadataItem[];
+    subheadings?: { depth: number; text: string; slug: string }[];
+  };
+}
+
+const { meta, data } = Astro.props;
+const { title, description, ogImage } = meta;
+const { headline, subline, visual, preview, alt, metadata = [], subheadings = [] } = data;
+
+const siteName = "ysabella nicole alvarez";
+const siteURL = "https://www.ysabella.me";
+const author = "Ysabella Nicole Alvarez";
+const twitterHandle = "@ysabelladalawa";
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content={author} />
+    
+    <!-- Robots -->
+    <meta name="robots" content="index, follow" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <link rel="canonical" href={ new URL(Astro.url.pathname, siteURL).toString()} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content={ new URL(Astro.url.pathname, siteURL).toString()} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content="en_US" />
+    {ogImage && <meta property="og:image" content={new URL(ogImage, siteURL).toString()} />}
+    {ogImage && <meta property="og:image:width" content="1200" />}
+    {ogImage && <meta property="og:image:height" content="630" />}
+    {ogImage && <meta property="og:image:alt" content={title} />}
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={twitterHandle} />
+    <meta name="twitter:creator" content={twitterHandle} />
+    <meta name="twitter:url" content={ new URL(Astro.url.pathname, siteURL).toString()} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={new URL(ogImage, siteURL).toString()} />}
+    {ogImage && <meta name="twitter:image:alt" content={title} />}
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    {import.meta.env.PROD && (
+
+      <!-- Analytics -->
+      <script 
+        defer 
+        src="https://analytics.ysabella.me/script.js" 
+        data-website-id="717fb694-5754-4a02-83e7-31af6d33c492"
+      ></script>
+    )}
+  </head>
+
+  <body>
+    <article>
+      <nav id="top-nav">
+        <LinkButton class="backlink" href="/#work">
+          <svg class="arrow-left" width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.70715 3.35352H0.707153M3.70715 6.35352L0.707153 3.35352L3.70715 0.353516" stroke="#7D89B0"/>
+          </svg>
+          <span>back to work</span>
+        </LinkButton>
+        {subheadings.length > 0 && (
+          <TOC subheadings={subheadings} />
+        )}
+      </nav>
+      <header class="column md">
+        <div class="column content">
+          <div class="status">
+            <span class=`indicator ${data.status}` />
+            <span class="caption label">
+              {data.status === 'shipped'  && ('shipped')}
+              {data.status === 'development' && ('in development')}
+              {data.status === 'roadmap' && ('on the roadmap')}
+            </span>
+          </div>
+          <h1>{headline}</h1>
+          <p class="subline">{subline}</p>
+        </div>
+        {metadata.length > 0 && (
+          <dl class="metadata">
+            {metadata.map(item => (
+              <div class="datapoint">
+                <dt>{item.label}</dt>
+                <dd class="item">
+                  {Array.isArray(item.value) 
+                    ? item.value.map((v, i) => (
+                        <p class="item">
+                          {v}
+                        </p>
+                      ))
+                    : item.value
+                  }
+                </dd>
+              </div>
+            ))}
+          </dl>
+        )}
+        {visual && (
+          <figure class="wide">
+            {visual.type === 'lottie' && (
+              <Lottie 
+                src={visual.src}
+                loop={visual.loop ?? true}
+                autoplay={visual.autoplay ?? true}
+                aria-label={alt || null}
+              />
+            )}
+            {visual.type === 'video' && (
+              <video src={visual.src} autoplay muted loop playsinline poster={preview} />
+            )}
+            {visual.type === 'image' && (
+              <img src={visual.src} alt={alt || null} />
+            )}
+          </figure>
+        )}
+      </header>
+      <div class="column content lg">
+        <slot />
+      </div>
+      <nav id="bottom-nav">
+        <LinkButton class="backlink" href="/#work">
+          <svg class="arrow-left" width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.70715 3.35352H0.707153M3.70715 6.35352L0.707153 3.35352L3.70715 0.353516" stroke="#7D89B0"/>
+          </svg>
+          <span>back to work</span>
+        </LinkButton>
+        <LinkButton class="scroll-top" aria-label="Scroll to top">scroll to top</LinkButton>
+      </nav>
+    </article>
+  </body>
+</html>
+
+<script>
+      const scrollTopBtn = document.querySelector('.scroll-top');
+      if (scrollTopBtn) {
+        window.addEventListener('scroll', () => {
+          scrollTopBtn.classList.toggle('visible', window.scrollY > 300);
+        });
+        scrollTopBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      const tocLinks = document.querySelectorAll('.toc a');
+      if (tocLinks.length > 0) {
+        const headings = document.querySelectorAll('h2[id], h3[id]');
+        window.addEventListener('scroll', () => {
+          let current = '';
+          headings.forEach(h => {
+            if (h.getBoundingClientRect().top <= 100) current = h.id;
+          });
+          tocLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+          });
+        });
+      }
+    </script>

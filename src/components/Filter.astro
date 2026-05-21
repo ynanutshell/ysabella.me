@@ -1,0 +1,38 @@
+---
+import Dropdown from './Dropdown.astro';
+
+interface FilterOption {
+  label: string;
+  value: string;
+  count?: number;
+}
+
+interface Props {
+  filters: FilterOption[];
+  active?: string;
+  category?: string;
+}
+
+const { filters, active, category = 'tag', } = Astro.props;
+---
+{filters.length > 0 && (
+  <Dropdown label="filter" class="filter">
+    <span class="" slot="label">
+      filter by
+      {active && <>: <strong>{active.toLowerCase()}</strong></>}
+    </span>
+    <ul>
+      <li class="dropdown item">
+        <a class="noborder" href="/writing" class:list={[{ active: !active }]}>all</a>
+      </li>
+      {filters.map(f => (
+        <li class="dropdown item">
+          <a class="noborder" href={`/tags/${f.value}`} class="row stretch apart">
+            {f.label.toLowerCase()}
+            {f.count !== undefined && <span class="count">{f.count}</span>}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Dropdown>
+)}
