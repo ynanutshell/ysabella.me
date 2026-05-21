@@ -31,7 +31,7 @@ export default defineConfig({
           permalinks: [],
           pageResolver: (name) => [name],
       }],
-      'remark-obsidian-callout',
+      'remark-callout',
     ],
     rehypePlugins: [rehypeObsidian],
   },

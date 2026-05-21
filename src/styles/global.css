@@ -180,6 +180,10 @@ h1 {
 
 h2 {
   font-size: var(--size-heading-md);
+
+  a {
+    color: inherit;
+  }
 }
 
 h3 {
@@ -229,7 +233,6 @@ a.noborder:hover {
 
 ol, ul {
   margin-left: var(--base-size-200);
-  list-style-type: square;
 
   li {
     margin-left: var(--size-padding-sm);
@@ -244,6 +247,10 @@ ol, ul {
     font-family: var(--font-mono);
     font-size: var(--size-type-small);
   }
+}
+
+ul {
+  list-style-type: square;
 }
 
 ul li {
@@ -262,8 +269,12 @@ ul li::marker {
   font-size: var(--size-type-body);
 }
 
+ol {
+  list-style-type: decimal-leading-zero;
+}
+
 ol li {
-  counter-increment: item;
+  display: list-item;
 
   div {
     margin-left: var(--size-padding-xs);
@@ -271,9 +282,12 @@ ol li {
 }
 
 ol li::marker {
-  content: counter(item, decimal-leading-zero) " ";
   color: var(--color-foreground-300);
   
+}
+
+.bookmark {
+  display: fle
 }
 
 .italic {
@@ -338,13 +352,13 @@ blockquote {
   }
 }
 
-.caption, .callout-title-text {
+.caption, .callout-title {
   color: var(--color-foreground-300);
   font-family: var(--font-mono);
   font-size: var(--size-type-caption);
 }
 
-.caption.label, .callout-title-text {
+.caption.label, .callout-title {
   display: inline-flex;
   align-items: center;
   gap: var(--size-padding-xs);
@@ -392,21 +406,39 @@ pre, .astro-code {
   }
 }
 
-.card.note .callout-note {
+.card.note, .callout.note {
   display: flex;
   flex-direction: column;
-  gap: var(--size-padding-md);
+  gap: var(--size-padding-xs);
   padding: var(--size-padding-lg);
   background-color: var(--color-background-200);
   border-left: unset;
 
-  * {
+  .callout-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-padding-xs);
     font-family: var(--font-body);
+    line-height: 1.5;
   }
 }
 
-.callout-title-icon {
+.callout-icon {
   display: none;
+}
+
+.anchor {
+  opacity: 0;
+  text-decoration: none;
+  color: var(--color-foreground-300);
+  font-size: inherit;
+  margin-left: var(--size-padding-2xs);
+  transition: opacity 0.2s;
+}
+
+h2:hover .anchor,
+h3:hover .anchor {
+  opacity: 1;
 }
 
 /* Layouts */
@@ -774,6 +806,7 @@ button {
 
 .dropdown.item {
   margin-block: 0;
+  margin: 0;
 }
 
 .dropdown.item a {

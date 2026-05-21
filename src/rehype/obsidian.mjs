@@ -2,20 +2,19 @@ import { visit } from 'unist-util-visit';
 
 export function rehypeObsidian() {
   return (tree) => {
-    visit(tree, 'text', (node) => {
-      if (!node.value) return;
-      // Comments
-      node.value = node.value.replace(/%%.+?%%/g, '');
-      // Highlights
-      node.value = node.value.replace(/==(.+?)==/g, '<mark>$1</mark>');
-    });
-    // Convert raw mark strings to actual elements
-    visit(tree, 'text', (node, index, parent) => {
-      if (node.value?.includes('<mark>')) {
-        node.type = 'raw';
-      }
-    });
     visit(tree, 'element', (node) => {
+      if (node.tagName === 'h2' || node.tagName === 'h3') {
+        const text = node.children.find(c => c.type === 'text')?.value || '';
+        const id = text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+        node.properties = { ...node.properties, id };
+        
+        node.children.push({
+          type: 'element',
+          tagName: 'a',
+          properties: { href: `#${id}`, class: 'anchor' },
+          children: [{ type: 'text', value: '#' }],
+        });
+      }
       if (node.properties?.className === 'data-footnote-backref' ||
           (Array.isArray(node.properties?.className) && node.properties?.className.includes('data-footnote-backref'))) {
         node.children = [{
@@ -41,6 +40,19 @@ export function rehypeObsidian() {
           properties: {},
           children: node.children,
         }];
+      }
+    });
+    visit(tree, 'text', (node) => {
+      if (!node.value) return;
+      // Comments
+      node.value = node.value.replace(/%%.+?%%/g, '');
+      // Highlights
+      node.value = node.value.replace(/==(.+?)==/g, '<mark>$1</mark>');
+    });
+    // Convert raw mark strings to actual elements
+    visit(tree, 'text', (node, index, parent) => {
+      if (node.value?.includes('<mark>')) {
+        node.type = 'raw';
       }
     });
   };
