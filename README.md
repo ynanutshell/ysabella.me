@@ -1,6 +1,6 @@
 # Personal Website of Ysabella Nicole Alvarez
 
-This is the source code for [ysabella.me](https://www.ysabella.me), a personal website and digital garden featuring the work and writing of Ysabella Nicole Alvarez, a product designer, aspiring technologist, and middling developer.
+This is the source code for [ysabella.me](https://www.ysabella.me), a personal website and digital garden featuring the work and writing of Ysabella Nicole Alvarez, a product designer, aspiring technologist, and middling web developer.
 
 Built from scratch on [Astro](https://github.com/withastro/astro).
 
