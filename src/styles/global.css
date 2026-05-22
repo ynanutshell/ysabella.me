@@ -687,6 +687,11 @@ article a[target="_blank"]::after {
   mask-image: url("data:image/svg+xml; utf8, %3Csvg viewBox='0 0 5 5' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.353516 4.5L4.35352 0.5M0.353516 0.5L4.35352 0.5L4.35352 4.5' stroke='black' stroke-width='0.6'/%3E%3C/svg%3E");
   mask-size: contain;
   mask-repeat: no-repeat;
+  transition: var(--transition-fast);
+}
+
+article a[target="_blank"]:hover::after {
+  transform: translateY(-1px) translateX(1px);
 }
 
 /* Divider */
