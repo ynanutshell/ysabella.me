@@ -27,8 +27,7 @@ const items = entries
   .filter(e => e.data.type === filter || e.data.subtype === filter || e.data.tags?.includes(filter))
   .sort((a, b) => (b.data.planted?.getTime() ?? 0) - (a.data.planted?.getTime() ?? 0));
 ---
-<Layout {...metadata} activeTab="garden">
-  <article>
+<Layout {...metadata} classes="text" activeTab="garden">
     <header class="column sm">
       <h1>Tags: <span class="emphasis">{filter[0].toUpperCase() + filter.slice(1)}</span> ({items.length})</h1>
     </header>
