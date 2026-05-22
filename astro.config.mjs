@@ -5,17 +5,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://www.ysabella.me',
   output: 'static',
-
-  integrations: [
-    sitemap({
-      serialize(item) {
-        if (item.url.includes('/writing/') || item.url.includes('[slug]')) {
-          return undefined;
-        }
-        return item;
-      },
-    }),
-  ],
+  integrations: [sitemap()],
 
   markdown: {
     shikiConfig: { theme: 'night-owl-light', },
