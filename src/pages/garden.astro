@@ -11,36 +11,34 @@ const published = entries.filter(entry => entry.data.published !== false);
 const writing = published.filter(entry => entry.data.type !== 'bookmark' || !entry.data.type);
 const bookmarks = published.filter(entry => entry.data.type === 'bookmark');
 ---
-<Layout {...metadata} activeTab="garden">
-  <article>
-    <header class="column sm">
-      <h1>The Garden.</h1>
-      <div class="subline">
-        <p>A digital garden is an unstructured collection of thoughts, ideas, and unfinished drafts that is continuously tended to in public with the intent of thinking out loud, sharing process, and documenting growth over time.</p>
-        <p>Ironically, the only plant I’ve barely managed to keep alive is a pencil cactus.</p>
-      </div>
-    </header>
-    {writing.length > 0 && (
-      <section class="column xs" id="writing">
-        <h2><a class="noborder caption label noborder" href="/writing">
-          Writing
-          <svg class="arrow-right" width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 3.35352H8M5 6.35352L8 3.35352L5 0.353516" stroke="currentColor"/>
-          </svg>
-        </a></h2>
-        <Writings entries={writing.slice(0, 6)} />
-      </section>
-    )}
-    {bookmarks.length > 0 && (
-      <section class="column xs" id="bookmarks">
-        <h2><a class="caption label noborder" href="/bookmarks">
-          Bookmarks
-          <svg class="arrow-right" width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 3.35352H8M5 6.35352L8 3.35352L5 0.353516" stroke="currentColor"/>
-          </svg>
-        </a></h2>
-        <Links entries={bookmarks.slice(0, 6)} />
-      </section>
-    )}
-  </article>
+<Layout {...metadata} classes="text" activeTab="garden">
+  <header class="column sm">
+    <h1>The Garden.</h1>
+    <div class="subline">
+      <p>A digital garden is an unstructured collection of thoughts, ideas, and unfinished drafts that is continuously tended to in public with the intent of thinking out loud, sharing process, and documenting growth over time.</p>
+      <p>Ironically, the only plant I’ve barely managed to keep alive is a pencil cactus.</p>
+    </div>
+  </header>
+  {writing.length > 0 && (
+    <section class="column xs" id="writing">
+      <h2><a class="noborder caption label noborder" href="/writing">
+        Writing
+        <svg class="arrow-right" width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 3.35352H8M5 6.35352L8 3.35352L5 0.353516" stroke="currentColor"/>
+        </svg>
+      </a></h2>
+      <Writings entries={writing.slice(0, 6)} />
+    </section>
+  )}
+  {bookmarks.length > 0 && (
+    <section class="column xs" id="bookmarks">
+      <h2><a class="caption label noborder" href="/bookmarks">
+        Bookmarks
+        <svg class="arrow-right" width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 3.35352H8M5 6.35352L8 3.35352L5 0.353516" stroke="currentColor"/>
+        </svg>
+      </a></h2>
+      <Links entries={bookmarks.slice(0, 6)} />
+    </section>
+  )}
 </Layout>

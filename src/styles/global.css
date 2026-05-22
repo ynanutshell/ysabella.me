@@ -449,6 +449,16 @@ main {
   margin-bottom: var(--size-padding-2xl);
 }
 
+.text {
+  display: flex;
+  flex-direction: column;
+  max-width: 75ch;
+  margin: auto;
+  margin-bottom: var(--size-padding-2xl);
+  gap: var(--size-padding-lg);
+  padding: var(--size-padding-lg);
+}
+
 footer {
   display: flex;
   flex-direction: column;
@@ -478,15 +488,6 @@ footer .container {
   justify-content: center;
   height: 100dvh;
   width: 100dvw;
-}
-
-article {
-  display: flex;
-  flex-direction: column;
-  max-width: 75ch;
-  margin: auto;
-  gap: var(--size-padding-lg);
-  padding: var(--size-padding-lg);
 }
 
 .grid {
@@ -673,6 +674,19 @@ article {
     flex-direction: inherit;
     gap: var(--size-padding-md);
   }
+}
+
+article a[target="_blank"]::after {
+  content: '';
+  display: inline-block;
+  margin-left: var(--size-padding-2xs);
+  width: var(--size-padding-xs);
+  height: auto;
+  aspect-ratio: 1/1;
+  background-color: var(--color-secondary);
+  mask-image: url("data:image/svg+xml; utf8, %3Csvg viewBox='0 0 5 5' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.353516 4.5L4.35352 0.5M0.353516 0.5L4.35352 0.5L4.35352 4.5' stroke='black' stroke-width='0.6'/%3E%3C/svg%3E");
+  mask-size: contain;
+  mask-repeat: no-repeat;
 }
 
 /* Divider */
