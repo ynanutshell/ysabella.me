@@ -642,9 +642,7 @@ footer .container {
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
-  row-gap: 0;
-  column-gap: 0;
-  gap: var(--size-padding-sm);
+  gap: var(--size-padding-xs);
 }
 
 .datapoint {
