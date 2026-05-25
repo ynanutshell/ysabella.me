@@ -489,8 +489,10 @@ footer .container {
 
 figure {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: var(--size-padding-sm);
 }
 
 .container {
