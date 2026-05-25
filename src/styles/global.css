@@ -154,6 +154,9 @@ body {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-padding-xl);
   width: 100%;
   height: auto;
   overflow-x: hidden;
@@ -446,7 +449,6 @@ h3:hover .anchor {
 main {
   position: relative;
   justify-content: center;
-  margin-bottom: var(--size-padding-2xl);
 }
 
 .text {
@@ -454,7 +456,6 @@ main {
   flex-direction: column;
   max-width: 75ch;
   margin: auto;
-  margin-bottom: var(--size-padding-2xl);
   gap: var(--size-padding-lg);
   padding: var(--size-padding-lg);
 }
@@ -641,9 +642,7 @@ footer .container {
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
-  row-gap: 0;
-  column-gap: 0;
-  gap: var(--size-padding-sm);
+  gap: var(--size-padding-xs);
 }
 
 .datapoint {

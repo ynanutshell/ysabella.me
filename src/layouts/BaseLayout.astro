@@ -86,8 +86,10 @@ const twitterHandle = "@ysabelladalawa";
     <main class={classes}>
       <slot />
     </main>
-    <NavigationBar activeTab={activeTab} />
-    <Footer />
+    <div>
+      <NavigationBar activeTab={activeTab} />
+      <Footer />
+    </div>
   </body>
 </html>
 
