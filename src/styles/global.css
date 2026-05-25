@@ -533,14 +533,14 @@ article {
   * {
     text-align: inherit;
   }
-
-  a {
-    font-weight: bold;
-  }
 }
 
 .card.sm {
   padding: var(--size-padding-sm);
+
+  a {
+    font-weight: bold;
+  }
 }
 
 .card.md {
