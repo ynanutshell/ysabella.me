@@ -11,8 +11,8 @@ interface MetadataItem {
 
 type Cover = 
   | { type: 'image'; src: string }
-  | { type: 'video'; src: string }
-  | { type: 'lottie'; src: string; loop?: boolean; autoplay?: boolean };
+  | { type: 'video'; src: string; alt?: string }
+  | { type: 'lottie'; src: string; alt?: string; loop?: boolean; autoplay?: boolean };
 
 export interface Props {
   meta: {
@@ -23,9 +23,11 @@ export interface Props {
   data: {
     status: 'shipped' | 'roadmap' | 'development';
     headline: string;
-    subline: string;
-    visual?: Cover;
+    subline?: string;
+    cover?: Cover;
     preview?: string;
+    caption?: string;
+    href?: string;
     alt?: string;
     metadata?: MetadataItem[];
     subheadings?: { depth: number; text: string; slug: string }[];
@@ -34,7 +36,7 @@ export interface Props {
 
 const { meta, data } = Astro.props;
 const { title, description, ogImage } = meta;
-const { headline, subline, visual, preview, alt, metadata = [], subheadings = [] } = data;
+const { headline, subline, cover, preview, caption, href, alt, metadata = [], subheadings = [] } = data;
 
 const siteName = "ysabella nicole alvarez";
 const siteURL = "https://www.ysabella.me";
@@ -142,21 +144,28 @@ const twitterHandle = "@ysabelladalawa";
             ))}
           </dl>
         )}
-        {visual && (
-          <figure class="wide">
-            {visual.type === 'lottie' && (
+        {cover && (
+          <figure class="wide column vertical center">
+            {cover.type === 'lottie' && (
               <Lottie 
-                src={visual.src}
-                loop={visual.loop ?? true}
-                autoplay={visual.autoplay ?? true}
+                src={cover.src}
+                loop={cover.loop ?? true}
+                autoplay={cover.autoplay ?? true}
                 aria-label={alt || null}
               />
             )}
-            {visual.type === 'video' && (
-              <video src={visual.src} autoplay muted loop playsinline poster={preview} />
+            {cover.type === 'video' && (
+              <video src={cover.src} aria-label={alt || null} autoplay muted loop playsinline poster={preview} />
             )}
-            {visual.type === 'image' && (
-              <img src={visual.src} alt={alt || null} />
+            {cover.type === 'image' && (
+              <img src={cover.src} alt={alt || null} />
+            )}
+            {caption && (
+              <figcaption class="caption label">
+                {href ? (
+                  <a href={href} target="_blank" class="caption label">{caption}</a>
+                ) : {caption} }
+              </figcaption>
             )}
           </figure>
         )}

@@ -1,0 +1,59 @@
+---
+import Layout from '../../layouts/WorkLayout.astro';
+
+const meta = {
+  title: "A Figma plugin that cut production time in GCash by a week  — ysabella",
+  description: "Ysabella developed a Figma plugin for GCash, a local FinTech mobile app with over 80 million users, automating asset management and reducing handoff by up to a week.",
+  ogImage: '/opengraph.png',
+};
+
+const src = "https://assets.ysabella.me/cdn-cgi/image/format=webp,quality=100,width=1500";
+
+const data = {
+  status: 'shipped' as const,
+  headline: "Developed a Figma plugin that reduced iconography hand-off by up to a week.",
+  cover: { 
+    type: 'image' as const,
+    src: `${src}/work/gcash/banner.png`,
+    alt: "GCash logo",
+  },
+  metadata: [
+    { label: "Product", value: "Internal Figma plugin" },
+    { label: "Role", value: "Iconography lead"},
+    { label: "Tools", value: ["JavaScript", "Figma"]},
+    { label: "Contribution", value: ["Iconography", "Plugin development", "Workflow optimization"] }
+  ],
+  subheadings: [
+    { depth: 2, text: "challenge", slug: "challenge" },
+    { depth: 2, text: "solution", slug: "solution" }
+  ]
+}
+
+---
+<Layout meta={meta} data={data} >
+  
+  <section class="column sm" id="overview">
+    <div class="column xs">
+      <header>
+        <h3 class="caption label">Challenge</h3>
+        <h2 class="title">Resizing hundreds of icons for developer handoff.</h2>
+      </header>
+      <p>GCash needed to resize over 300+ icons and counting into two additional sizes to simplify developer hand-off. Manually, this would have required me and my team to select each icon, create variants, rescale, and rename them to produce three sizes. The task would have taken weeks.</p>
+    </div>
+  </section>
+  <section class="column sm" id="problem">
+    <div class="column xs">
+      <header>
+         <h3 class="caption label">Solution</h3>
+          <h2 class="title">A Figma plugin that cut down production time by 95%.</h2>
+      </header>
+      <p>I developed a plugin that automated the process, cutting the time required from weeks to minutes and removing repetitive manual work.</p>
+    </div>
+  </section>
+  <section class="card lg note" id="disclaimer">
+    <h3 class="caption label">Disclaimer</h3>
+    <div class="column xs">
+      <p class="subtle">This project is under a confidentiality agreement. Feel free to <a href="mailto:hello@ysabella.me">contact me directly</a> to learn more!</p>
+    </div>
+  </section>
+</Layout>
