@@ -3,19 +3,20 @@ import Layout from '../../layouts/WorkLayout.astro';
 
 const meta = {
   title: "Designed a budget management feature with an adoption rate of one-third of active users – ysabella",
-  description: "Studies have shown that 60% of people don’t really know how much they spent the month before. In this study, Ysabella explores implementing a feature that provides users with more insight and clarity into their spending habits.",
+  description: "Cashmonki was first introduced as a simple expense tracker where users can add and track transactions manually or automatically by scanning receipts. In this study, Ysabella explores implementing a feature that provides users with more insight and clarity into their spending habits.",
   ogImage: '/opengraph.png',
 };
+
+const src = "https://assets.ysabella.me";
 
 const data = {
   status: 'shipped' as const,
   headline: "Designed a budget management feature with an adoption rate of one-third of active users.",
-  subline: "Studies have shown that 60% of people don’t really know how much they spent the month before. In this study, I explored implementing a feature that provides users with more insight and clarity into their spending habits.",
-  type: "project" as const,
-  tags: ["Product design"],
-  image: { 
+  subline: "Studies have shown that 60% of people don’t really know how much they spent the month before. Cashmonki was first introduced as a simple expense tracker where users can add and track transactions manually or automatically by scanning receipts.",
+  visual: { 
     type: 'lottie' as const,
-    src: '/assets/cashmonki.json',
+    src: `${src}/work/cashmonki/header.json`,
+    alt: "Mobile dashboard of a budget tracking feature with dynamic budget calculations across different time periods.",
     loop: true,
     autoplay: true, 
   },
@@ -23,42 +24,102 @@ const data = {
     { label: "Product", value: "iOS mobile application" },
     { label: "Role", value: "Product designer"},
     { label: "Timeline", value: ["November 2025 -", "December 2025"]},
-    { label: "Contribution", value: ["Product design", "Market research", "Feature development"] }
+    { label: "Contribution", value: ["Experience design", "Market research", "Feature development"] }
   ],
   subheadings: [
-    { depth: 2, text: "overview", slug: "overview" },
-    { depth: 2, text: "challenge", slug: "challenge" },
     { depth: 2, text: "problem", slug: "problem" },
     { depth: 2, text: "research", slug: "research" },
     { depth: 2, text: "testing", slug: "testing" },
+    { depth: 2, text: "outcome", slug: "outcome" },
+    { depth: 2, text: "reflections", slug: "reflections" },
   ]
 }
 
 ---
 <Layout meta={meta} data={data} >
-  <section id="overview">
-    <h3 class="caption label">Overview</h3>
-    <h2 class="title">Cashmonki was first introduced as an expense tracker with a twist.</h2>
-    <p>Users can add and track transactions manually or automatically through AI-powered receipt scanning. This low-friction experience set Cashmonki apart from other personal finance tools, but insights were otherwise limited.</p>
+  <div class="row lg">
+      <figure class="card lg">
+        <video src=`${src}/work/cashmonki/manual-entry.mp4` autoplay muted loop playsinline />
+        <ficaption class="small horizontal center">Manual entry</ficaption>
+      </figure>
+      <figure class="card lg">
+        <video src=`${src}/work/cashmonki/automatic-entry.mp4` autoplay muted loop playsinline />
+        <ficaption class="small horizontal center">Automatic entry</ficaption>
+      </figure>
+    </div>
+  <section class="column sm" id="overview">
+    <div class="column xs">
+      <header>
+         <h3 class="caption label">Problem</h3>
+          <h2 class="title">What does it mean to set a budget?</h2>
+      </header>
+      <p>As someone who has tracked personal expenses across spreadsheets and apps, I’ve found that seeing past transactions rarely leads to better financial decisions on its own. We realized the next step was budget management, to move beyond tracking past activity and enable users to plan ahead.</p>
+      <p>While mapping out the specifications for this feature, I realized that "budget management" meant something different to each person. For example, our lead likes to focus on short-term, goal-based budgets, whereas my preference leans towards viewing long-term expenditures and saving patterns.</p>
+    </div>
+    <div class="row lg">
+      <figure class="card lg">
+      </figure>
+    </div>
   </section>
-  <section id="challenge">
-    <h3 class="caption label">Challenge</h3>
-    <h2 class="title">Next on the agenda was a budget management feature.</h2>
-    <p>As someone who has tracked personal expenses across spreadsheets and apps, I’ve found that seeing past transactions rarely leads to better financial decisions on its own.</p>
-    <p>The next step was a budget management feature, to move beyond tracking past activity and enable users to plan ahead.</p>
+  <section class="column sm" id="research">
+    <div class="column xs">
+      <header>
+         <h3 class="caption label">Research</h3>
+          <h2 class="title">Similar apps don’t offer flexibility.</h2>
+      </header>
+      <p>A competitive analysis revealed that most budgeting features are locked into monthly cycles, offering little to no flexibility. I wanted users to define budgets on their own terms: daily, weekly, or long-term.</p>
+    </div>
+    <div class="row lg">
+      <figure class="card lg">
+      </figure>
+    </div>
   </section>
-  <section id="problem">
-    <h3 class="caption label">Problem</h3>
-    <h2 class="title">But what does it mean to set a budget?</h2>
-    <p>While mapping out the specifications for this feature, I realized that "budget management" meant something else to each person. For example, my team lead prefers to focus on short-term, goal-based budgets, whereas I’m more interested in long-term spending patterns.</p>
+  <section class="column sm" id="testing">
+    <div class="column xs">
+      <header>
+         <h3 class="caption label">Testing</h3>
+          <h2 class="title">Iterate, iterate, iterate...</h2>
+      </header>
+      <p>To support different financial goals, I explored budgeting across adjustable time ranges rather than a single fixed cycle.</p>
+    </div>
+    <div class="row lg">
+      <figure class="card lg">
+      </figure>
+      <div class="content">
+        <h4>So iterate I did.</h4>
+        <p>In early explorations, I was met with the concern that although granularity would be nice to have in theory, there was the risk of introducing too much complexity.</p>
+      </div>
+    </div>
+    <div class="row lg">
+      <figure class="card lg">
+      </figure>
+      <div class="content">
+        <h4>Eventually.</h4>
+        <p>I simplified my approach: budgets are manageable directly from the dashboard, applied only to expenses, and recur over a selected period of time.</p>
+      </div>
+    </div>
   </section>
-  <section id="research">
-    <h3 class="caption label">Research</h3>
-    <h2 class="title">Similar apps don't offer flexibility</h2>
-    <p>A competitive analysis revealed that most budgeting features were locked into monthly cycles, offering little to no flexibility. I wanted users to define budgets on their own terms: daily, weekly, or long-term.</p>
+  <section class="column sm" id="outcome">
+    <div class="column xs">
+      <header>
+         <h3 class="caption label">Outcome</h3>
+          <h2 class="title">A fully adaptable budget management feature.</h2>
+      </header>
+      <p>A key challenge I realized was translating budgets across different timeframes. For example, what would a daily budget look like on a weekly or monthly basis? To address this, we implemented adaptive calculations that preserve context across different periods.</p>
+      <p>Although Cashmonki’s budgeting feature is optional and usage is inherently intentional, early launch data shows meaningful engagement with an estimated adoption rate of up to 30% in the first thirty days following launch. </p>
+    </div>
   </section>
-  <section id="testing">
-    <h3 class="caption label">Testing</h3>
-    <h2 class="title">Iterate, iterate, iterate...</h2>
+  <section class="card lg note" id="reflections">
+    <h3 class="caption label">Reflections</h3>
+    <div class="row lg">
+      <div class="column xs">
+        <h4>Clarify the objective early.</h4>
+        <p class="subtle">We had to pull the emergency brake early in the iteration process to clarify goals and identify where experiences diverged. This helped us move forward with a clear solution that worked for multiple perspectives.</p>
+      </div>
+      <div class="column xs">
+        <h4>Scale down to the MVP.</h4>
+        <p class="subtle">This project pushed me to balance thoughtful functionality with practical simplicity by scaling down to the minimum viable product (MVP)—enabling my team to ship quickly and gather insights ASAP.</p>
+      </div>
+    </div>
   </section>
 </Layout>

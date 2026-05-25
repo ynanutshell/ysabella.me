@@ -1,0 +1,57 @@
+---
+import Layout from '../../layouts/WorkLayout.astro';
+
+const meta = {
+  title: "How Grid Magazine was brought to life with an interactive map — ysabella",
+  description: "Ysabella brought The Outliers collection to life through a fully interactive map for Grid Magazine, an independent Philippine-based travel publication. This interactive experience immerses readers in unique destinations, blending editorial storytelling with engaging map-based exploration.",
+  ogImage: '/opengraph.png',
+};
+
+const VidSrc = "https://assets.ysabella.me";
+const ImgSrc = "https://assets.ysabella.me/cdn-cgi/image/format=webp,quality=100,width=1500";
+
+const data = {
+  status: 'shipped' as const,
+  headline: "Bringing The Outliers collection to life through a fully interactive map.",
+  preview: `${ImgSrc}/work/grid/preview.png`,
+  cover: { 
+    type: 'video' as const,
+    src: `${VidSrc}/work/grid/preview.mp4`,
+    alt: "Preview of the Grid Magazine landing page. A cursor clicks through to the collection The Outliers, showing a fullscreen visual of young surfers facing an incoming wave. Scrolling down further shows a dynamic map featuring different locations across the world as each article passes on the right-hand side."
+  },
+  caption: "Browse the collection",
+  href: "https://www.gridmagazine.ph/the-outliers",
+  metadata: [
+    { label: "Product", value: "Webflow-based microsite" },
+    { label: "Role", value: "Web consultant"},
+    { label: "Tools", value: ["Webflow", "JavaScript"]},
+    { label: "Contribution", value: ["Web design", "Content management", "Webflow development"] }
+  ],
+  subheadings: [
+    { depth: 2, text: "overview", slug: "overview" },
+    { depth: 2, text: "challenge", slug: "challenge" }
+  ]
+}
+
+---
+<Layout meta={meta} data={data} >
+  <section class="column sm" id="overview">
+    <div class="column xs">
+      <header>
+        <h3 class="caption label">Overview</h3>
+        <h2 class="title">A collection of stories from Filipinos across the map.</h2>
+      </header>
+      <p>When Grid Magazine prepared to launch The Outliers collection, I stepped in to collate and showcase the rich stories of Filipinos here and across the map. The task was to keep it true to the existing brand and work with design elements already in place in their Webflow setup.</p>
+    </div>
+  </section>
+  <section class="column sm" id="challenge">
+    <div class="column xs">
+      <header>
+         <h3 class="caption label">Outcome</h3>
+          <h2 class="title">Improving existing functionality to add immersion.</h2>
+      </header>
+      <p>I saw this as an opportunity to create a more interactive and engaging experience using the pre-existing map component, connecting readers directly with each story.</p>
+      <p>To achieve this, I assigned a name to each marker and a script that detects when an article hits a certain scroll threshold to trigger panning across to the corresponding location on the map.</p>
+    </div>
+  </section>
+</Layout>

@@ -1,17 +1,18 @@
 ---
 import Lottie from '../components/Lottie.astro';
 
-type MediaType = 
-  | { type: 'video'; src: string }
-  | { type: 'lottie'; src: string; loop?: boolean; autoplay?: boolean };
+type Visual = 
+  | { type: 'image'; src: string; alt?: string }
+  | { type: 'video'; src: string; preview?: string; alt?: string }
+  | { type: 'html'; html: string; classes?: string }
+  | { type: 'lottie'; src: string; alt?: string; loop?: boolean; autoplay?: boolean };
 
 interface Props {
   cards: {
     title: string;
-    image?: string;
-    alt?: string;
-    video?: MediaType;
     href?: string;
+    target?: string;
+    visual: Visual;
     background?: string;
     tags?: string[];
     fit?: string;
@@ -35,6 +36,7 @@ const filtered = filter
       <CardWrapper 
         data-tags={card.tags?.join(',')}
         href={isLink ? card.href : undefined}
+        target={isLink ? card.target : undefined}
         class={`card grid ${card.fit || 'cover'}`}
         style={[
           `grid-column: span ${card.colSpan}`,
@@ -44,88 +46,93 @@ const filtered = filter
       >
         {card.fit !== 'phone' && card.fit !== 'contain' && (
           <>
-            {card.image ? (
-              <img src={card.image} decoding="async" alt={card.alt || null} loading="lazy" />
+            {card.visual.type == 'image' ? (
+              <img src={card.visual.src} alt={card.visual.alt || null} decoding="async" loading="lazy" />
             ) : 
-            card.video ? (
-              <figure class="wide">
-                {card.video.type === 'lottie' && (
-                  <Lottie 
-                    src={card.video.src}
-                    loop={card.video.loop ?? true}
-                    autoplay={card.video.autoplay ?? true}
-                    aria-label={card.alt || null}
-                  />
-                )}
-                {card.video.type === 'video' && (
-                  <video src={card.video.src} autoplay muted loop playsinline poster={card.image} />
-                )}
-              </figure>
+            card.visual.type == 'video' ? (
+              <video src={card.visual.src} aria-label={card.visual.alt || null} poster={card.visual.preview} autoplay muted loop playsinline />
+            ) : 
+            card.visual.type == 'lottie' ? (
+              <Lottie 
+                src={card.visual.src}
+                loop={card.visual.loop ?? true}
+                autoplay={card.visual.autoplay ?? true}
+                aria-label={card.visual.alt || null}
+              />
+            ) :
+            card.visual.type == 'html' ? (
+              <>
+                <div class={`${card.visual.classes || ''}`} set:html={card.visual.html} />
+              </>
             ) : null}
           </>
         )}
         {card.fit === 'contain' && (
           <div class="contained">
-            {card.image ? (
-              <img src={card.image} decoding="async" alt={card.alt || null} loading="lazy" />
+            {card.visual.type === 'image' ? (
+              <img src={card.visual.src} alt={card.visual.alt || null} decoding="async" loading="lazy" />
             ) : 
-            card.video ? (
-              <figure class="wide">
-                {card.video.type === 'lottie' && (
-                  <Lottie 
-                    src={card.video.src}
-                    loop={card.video.loop ?? true}
-                    autoplay={card.video.autoplay ?? true}
-                    aria-label={card.alt || null}
-                  />
-                )}
-                {card.video.type === 'video' && (
-                  <video src={card.video.src} autoplay muted loop playsinline poster={card.image} />
-                )}
-              </figure>
+            card.visual.type === 'video' ? (
+              <video src={card.visual.src} aria-label={card.visual.alt || null} poster={card.visual.preview} autoplay muted loop playsinline />
+            ) : 
+            card.visual.type === 'lottie' ? (
+              <Lottie 
+                src={card.visual.src}
+                loop={card.visual.loop ?? true}
+                autoplay={card.visual.autoplay ?? true}
+                aria-label={card.visual.alt || null}
+              />
+            ) :
+            card.visual.type === 'html' ? (
+              <>
+                <div class={`${card.visual.classes || ''}`} set:html={card.visual.html} />
+              </>
             ) : null}
           </div>
         )}
         {card.fit === 'horizontal' && (
           <div class="horizontal">
-            {card.image ? (
-              <img src={card.image} decoding="async" alt={card.alt || null} loading="lazy" />
+            {card.visual.type === 'image' ? (
+              <img src={card.visual.src} alt={card.visual.alt || null} decoding="async" loading="lazy" />
             ) : 
-            card.video ? (
-              <figure class="wide">
-                {card.video.type === 'lottie' && (
-                  <Lottie 
-                    src={card.video.src}
-                    loop={card.video.loop ?? true}
-                    autoplay={card.video.autoplay ?? true}
-                    aria-label={card.alt || null}
-                  />
-                )}
-                {card.video.type === 'video' && (
-                  <video src={card.video.src} autoplay muted loop playsinline poster={card.image} />
-                )}
-              </figure>
+            card.visual.type === 'video' ? (
+              <video src={card.visual.src} aria-label={card.visual.alt || null} poster={card.visual.preview} autoplay muted loop playsinline />
+            ) : 
+            card.visual.type === 'lottie' ? (
+              <Lottie 
+                src={card.visual.src}
+                loop={card.visual.loop ?? true}
+                autoplay={card.visual.autoplay ?? true}
+                aria-label={card.visual.alt || null}
+              />
+            ) :
+            card.visual.type === 'html' ? (
+              <>
+                <div class={`${card.visual.classes || ''}`} set:html={card.visual.html} />
+              </>
             ) : null}
           </div>
         )}
         {card.fit === 'phone' && (
           <figure class="mockup">
-            {card.image ? (
-              <img class="screen" src={card.image} decoding="async" alt={card.alt || null} loading="lazy" />
+            {card.visual.type === 'image' ? (
+              <img src={card.visual.src} alt={card.visual.alt || null} class="screen" decoding="async" loading="lazy" />
             ) : 
-            card.video ? (
+            card.visual.type === 'video' ? (
+              <video src={card.visual.src} aria-label={card.visual.alt || null} poster={card.visual.preview} class="screen" autoplay muted loop playsinline />
+            ) : 
+            card.visual.type === 'lottie' ? (
+              <Lottie 
+                src={card.visual.src}
+                loop={card.visual.loop ?? true}
+                autoplay={card.visual.autoplay ?? true}
+                aria-label={card.visual.alt || null}
+                class="screen"
+              />
+            ) :
+            card.visual.type === 'html' ? (
               <>
-                {card.video.type === 'lottie' && (
-                  <Lottie 
-                    src={card.video.src}
-                    loop={card.video.loop ?? true}
-                    autoplay={card.video.autoplay ?? true}
-                    aria-label={card.alt || null}
-                  />
-                )}
-                {card.video.type === 'video' && (
-                  <video class="screen" src={card.video.src} autoplay muted loop playsinline poster={card.image} />
-                )}
+                <div class={`screen ${card.visual.classes || ''}`} set:html={card.visual.html} />
               </>
             ) : null}
           </figure>
