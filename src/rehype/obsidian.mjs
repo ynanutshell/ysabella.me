@@ -28,7 +28,7 @@ export function rehypeObsidian() {
       }
       if (node.tagName === 'a' && node.properties?.href) {
         const href = node.properties.href;
-        if (href.startsWith('http') && !href.includes('ysabella.me')) {
+        if (!href.includes('ysabella.me')) {
           node.properties.target = '_blank';
           node.properties.rel = 'noopener noreferrer';
         }
