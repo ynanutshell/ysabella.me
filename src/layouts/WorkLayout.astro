@@ -145,7 +145,7 @@ const twitterHandle = "@ysabelladalawa";
           </dl>
         )}
         {cover && (
-          <figure class="wide column vertical center">
+          <figure>
             {cover.type === 'lottie' && (
               <Lottie 
                 src={cover.src}
@@ -158,7 +158,7 @@ const twitterHandle = "@ysabelladalawa";
               <video src={cover.src} aria-label={alt || null} autoplay muted loop playsinline poster={preview} />
             )}
             {cover.type === 'image' && (
-              <img src={cover.src} alt={alt || null} />
+              <img src={cover.src} alt={alt || null} class="wide" />
             )}
             {caption && (
               <figcaption class="caption label">

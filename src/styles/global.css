@@ -457,10 +457,15 @@ main + * {
 .text {
   display: flex;
   flex-direction: column;
+  width: 100%;
   max-width: 75ch;
   margin: auto;
   gap: var(--size-padding-lg);
   padding: var(--size-padding-lg);
+}
+
+.text.lg {
+  gap: var(--size-padding-xl);
 }
 
 footer {
@@ -480,6 +485,12 @@ footer .container {
   padding: var(--size-padding-xl);
   background-color: var(--color-primary);
   color: var(--color-primary-fg);
+}
+
+figure {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
@@ -934,9 +945,7 @@ button {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-  
   .wide {
-    align-self: center;
     width: 100vw;
   }
 
