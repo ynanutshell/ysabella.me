@@ -156,7 +156,6 @@ body {
 body {
   display: flex;
   flex-direction: column;
-  gap: var(--size-padding-xl);
   width: 100%;
   height: auto;
   overflow-x: hidden;
@@ -449,6 +448,10 @@ h3:hover .anchor {
 main {
   position: relative;
   justify-content: center;
+}
+
+main + * {
+  margin-top: var(--size-padding-2xl);
 }
 
 .text {
