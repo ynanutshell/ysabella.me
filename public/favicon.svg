@@ -1,8 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" fill="none"><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"><rdf:Description><dc:creator>RealFaviconGenerator</dc:creator><dc:source>https://realfavicongenerator.net</dc:source></rdf:Description></rdf:RDF></metadata><path d="M56 0L96 40V96H0V0H56Z" fill="#FF5101"></path><path d="M56 0L56 40H96L56 0Z" fill="url(#paint0_linear_1579_779)"></path><defs>
-<linearGradient id="paint0_linear_1579_779" x1="96" y1="0" x2="56" y2="40" gradientUnits="userSpaceOnUse">
-<stop stop-color="#FCFCFD"></stop>
-<stop offset="0.5" stop-color="#FCFCFD"></stop>
-<stop offset="0.5" stop-color="#FFA65E"></stop>
-<stop offset="1" stop-color="#FFA65E"></stop>
-</linearGradient>
-</defs></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none"><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"><rdf:Description><dc:creator>RealFaviconGenerator</dc:creator><dc:source>https://realfavicongenerator.net</dc:source></rdf:Description></rdf:RDF></metadata><path d="M42.525 35.4593L27.7846 9.92821C25.5755 6.10187 20.6828 4.79086 16.8564 7C13.0301 9.20914 11.7191 14.1019 13.9282 17.9282L32.9127 50.8103C34.5781 53.6949 38.2666 54.6832 41.1512 53.0178C44.0358 51.3524 45.0241 47.6639 43.3587 44.7793L28.8742 19.6914C27.7697 17.7783 25.3233 17.1228 23.4101 18.2273C21.497 19.3319 20.8415 21.7783 21.946 23.6914L32.1864 41.4283" stroke="#FF5101" stroke-width="2" stroke-linecap="round"></path></svg>
