@@ -188,27 +188,27 @@ const twitterHandle = "@ysabelladalawa";
 </html>
 
 <script>
-      const scrollTopBtn = document.querySelector('.scroll-top');
-      if (scrollTopBtn) {
-        window.addEventListener('scroll', () => {
-          scrollTopBtn.classList.toggle('visible', window.scrollY > 300);
-        });
-        scrollTopBtn.addEventListener('click', () => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      }
+  const scrollTopBtn = document.querySelector('.scroll-top');
+  if (scrollTopBtn) {
+    window.addEventListener('scroll', () => {
+      scrollTopBtn.classList.toggle('visible', window.scrollY > 300);
+    });
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 
-      const tocLinks = document.querySelectorAll('.toc a');
-      if (tocLinks.length > 0) {
-        const headings = document.querySelectorAll('h2[id], h3[id]');
-        window.addEventListener('scroll', () => {
-          let current = '';
-          headings.forEach(h => {
-            if (h.getBoundingClientRect().top <= 100) current = h.id;
-          });
-          tocLinks.forEach(link => {
-            link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
-          });
-        });
-      }
-    </script>
+  const tocLinks = document.querySelectorAll('.toc a');
+  if (tocLinks.length > 0) {
+    const headings = document.querySelectorAll('h2[id], h3[id]');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      headings.forEach(h => {
+        if (h.getBoundingClientRect().top <= 100) current = h.id;
+      });
+      tocLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+      });
+    });
+  }
+</script>

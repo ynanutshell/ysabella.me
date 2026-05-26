@@ -1,0 +1,232 @@
+---
+import Layout from '../../layouts/WorkLayout.astro';
+import Lottie from '../../components/Lottie.astro';
+
+const meta = {
+  title: "Designed a budget management feature with an adoption rate of one-third of active users – ysabella",
+  description: "Cashmonki was first introduced as a simple expense tracker where users can add and track transactions manually or automatically by scanning receipts. In this study, Ysabella explores implementing a feature that provides users with more insight and clarity into their spending habits.",
+  ogImage: '/opengraph.png'
+};
+
+const src = "https://assets.ysabella.me";
+
+const data = {
+  status: 'shipped' as const,
+  headline: "Designed a budget management feature with an adoption rate of one-third of active users.",
+  subline: "Studies have shown that 60% of people don’t really know how much they spent the month before. Cashmonki was first introduced as a simple expense tracker where users can add and track transactions manually or by scanning and automatically parsing receipts.",
+  metadata: [
+    { label: "Product", value: "iOS mobile application" },
+    { label: "Role", value: "Product designer"},
+    { label: "Timeline", value: ["November 2025 -", "December 2025"]},
+    { label: "Contribution", value: ["Experience design", "Market research", "Feature development"] }    
+  ],
+  subheadings: [
+    { depth: 2, text: "problem", slug: "problem" },
+    // { depth: 2, text: "research", slug: "research" },
+    { depth: 2, text: "testing", slug: "testing" },
+    { depth: 2, text: "outcome", slug: "outcome" },
+    { depth: 2, text: "reflections", slug: "reflections" },
+  ]
+}
+
+---
+<Layout meta={meta} data={data} >
+  <div class="row lg">
+      <figure class="card lg">
+        <video src=`${src}/work/cashmonki/manual.mp4` autoplay muted loop playsinline />
+        <ficaption class="small horizontal center">Manual entry</ficaption>
+      </figure>
+      <figure class="card lg">
+        <video src=`${src}/work/cashmonki/automatic.mp4` autoplay muted loop playsinline />
+        <ficaption class="small horizontal center">Automatic entry</ficaption>
+      </figure>
+    </div>
+  <section class="column sm" id="problem">
+    <div class="column xs">
+      <header>
+         <h3 class="caption label">Problem</h3>
+          <h2 class="title">What does it mean to set a budget?</h2>
+      </header>
+      <p>I’ve found that seeing past transactions rarely leads to better financial decisions on its own. The next step was budget management, to move beyond tracking past activity and enable users to plan ahead.</p>
+      <p>While mapping out specifications, we realized that “budget management” meant something different to everyone. For example, our lead tends to focus on short-term, goal-based budgets, whereas my preference leans towards viewing long-term expenditures and saving patterns.</p>
+    </div>
+    <div class="row lg">
+      <figure class="card lg stretch">
+        <div class="comparison">
+          <div class="item">
+            <div class="overlap">
+              <figcaption class="small horizontal center">Short-term</figcaption>
+              <div class="circle">
+                <span id="plane">✈️</span>
+                <span id="coffee">☕</span>
+                <span id="food">🍕</span>
+              </div>
+            </div>
+          </div>
+          <span id="middle" class="caption label">?</span>
+          <div class="item">
+            <div class="overlap end">
+              <figcaption class="small horizontal center">Long-term</figcaption>
+              <div class="circle">
+                <span id="house">🏠</span>
+                <span id="car">🚗</span>
+                <span id="college">🎓</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </figure>
+    </div>
+  </section>
+  <!-- <section class="column sm" id="research">
+    <div class="column xs">
+      <header>
+         <h3 class="caption label">Research</h3>
+          <h2 class="title">Similar apps don’t offer flexibility.</h2>
+      </header>
+      <p>A competitive analysis revealed that most budgeting features are locked into monthly cycles, offering little to no flexibility. I wanted users to be able to define budgets on their own terms: daily, weekly, or long-term.</p>
+    </div>
+    <div class="row lg">
+      <figure class="card lg">
+      </figure>
+    </div>
+  </section> -->
+  <section class="column" id="testing">
+    <div class="column xs">
+      <header>
+         <h3 class="caption label">Testing</h3>
+          <h2 class="title">Iteration, iteration, iteration...</h2>
+      </header>
+      <p>To support different financial goals, I explored budgeting across adjustable time ranges rather than a single fixed cycle.</p>
+    </div>
+    <div class="column lg">
+      <div class="row wrap lg end">
+        <div class="card grid">
+          <figure class="card lg">
+            <Lottie 
+              src=`${src}/work/cashmonki/iteration.json``
+              loop={true}
+              autoplay={true}
+            />
+          </figure>
+        </div>
+        <div class="content sm">
+          <h4>So iterate I did.</h4>
+          <p>In early explorations, I was met with the concern that although granularity would be nice to have in theory, there was the risk of introducing too much complexity.</p>
+        </div>
+      </div>
+      <div class="row wrap lg end">
+        <div class="card grid">
+          <figure class="mockup">
+            <video class="screen" src=`${src}/work/cashmonki.mp4` autoplay muted loop playsinline />
+          </figure>
+        </div>
+        <div class="content sm">
+          <h4>Eventually...</h4>
+          <p>I simplified my approach: budgets are manageable directly from the dashboard, applied only to expenses and not income for the time being, and recur over a selected period of time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="column sm" id="outcome">
+    <div class="column xs">
+      <header>
+         <h3 class="caption label">Outcome</h3>
+          <h2 class="title">A fully adaptable budget management feature.</h2>
+      </header>
+      <p>A key challenge I realized was translating budgets across different timeframes. For example, what would a daily budget look like on a weekly or monthly basis? To address this, we implemented adaptive calculations that preserve context across different periods.</p>
+      <p>Although Cashmonki’s budgeting feature is optional and usage is inherently intentional, early launch data shows meaningful engagement with an estimated adoption rate of up to 30% in the first thirty days following launch.</p>
+    </div>
+  </section>
+  <section class="card lg note" id="reflections">
+    <h3 class="caption label">Reflections</h3>
+    <div class="row start wrap lg">
+      <div class="column xs">
+        <h4>Clarify the objective early.</h4>
+        <p class="subtle">We had to pull the emergency brake during the iteration process to clarify goals and identify where experiences diverged. This helped me move forward with a solution that worked for multiple perspectives.</p>
+      </div>
+      <div class="column xs">
+        <h4>Scale down to the MVP.</h4>
+        <p class="subtle">This project pushed me to balance thoughtful functionality with practical simplicity by scaling down to the minimum viable product (MVP)—enabling my team to ship quickly and gather insights ASAP.</p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .comparison {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .comparison .item {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    max-width: none;
+  }
+
+  .overlap {
+    display: flex;
+    flex-direction: column;
+    justify-self: flex-start;
+    align-self: flex-start;
+    gap: var(--size-padding-sm);
+    width: 120%;
+    height: 100%;
+  }
+  
+  .overlap.end {
+    justify-self: flex-end;
+    align-self: flex-end;
+  }
+
+  .circle {
+    flex-grow: 1;
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: 100%;
+    border: 1px dashed var(--color-border-2nd);
+
+    span {
+      position: absolute;
+      font-size: calc(var(--size-heading-lg) * 1.5);
+    }
+  }
+
+  #plane {
+    top: 12%;
+    left: 40%;
+  }
+
+  #coffee {
+    top: 40%;
+    left: 18%;
+  }
+
+  #food {
+    top: 68%;
+    left: 40%;
+  }
+
+  #house {
+    top: 12%;
+    right: 35%;
+  }
+
+  #car {
+    top: 35%;
+    right: 18%;
+  }
+
+  #college {
+    top: 65%;
+    right: 30%;
+  }
+
+  #middle {
+    margin-top: var(--size-padding-lg);
+    font-size: var(--size-type-body);
+  }
+</style>

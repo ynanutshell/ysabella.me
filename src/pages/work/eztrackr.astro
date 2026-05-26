@@ -1,0 +1,131 @@
+---
+import Layout from '../../layouts/WorkLayout.astro';
+import Lottie from '../../components/Lottie.astro';
+
+const meta = {
+  title: "Helping eztrackr scale with a collaborative design system  — ysabella",
+  description: "Ysabella built a design system and clear, scalable workspace to streamline cross-team collaboration for Eztrackr, a web-based dashboard helping job hunters keep track of their applications all in one place.",
+  ogImage: '/opengraph.png'  
+}
+
+const src = "https://assets.ysabella.me/cdn-cgi/image/format=webp,quality=100,width=1500";
+
+const raw = "https://assets.ysabella.me"
+
+const data = {
+  status: 'roadmap' as const,
+  headline: "Building consistency through a design system and better cross-team collaboration.",
+  subline: "Eztrackr is a kanban-style web application for tracking job opportunities built on comprehensive, data-intensive dashboards. My task was to establish a clear workspace structure and design system to ease development handoff and maintain consistency as the platform grows.",
+  cover: {
+    type: 'image' as const,
+    src: `${src}/work/eztrackr/banner.png`,
+    alt: "Desktop dashboard for Eztrackr, a tracking board for job hunters tracking their applications. The dashboard is focused on a resume, with a tab bar currently displaying the following tabs: Personal Details, Education, Professional Summary, Experience Skills, and More. Currently on the Experience tab, the user has the option to fill in and reorganize their work experience or select a toggle to sort by date."
+  },
+  metadata: [
+    { label: "Product", value: "Web dashboard application" },
+    { label: "Role", value: "Product designer" },
+    { label: "Timeline", value: ["July 2025 -", "August 2025"]},
+    { label: "Contribution", value: ["Product design", "Design system", "Workflow optimization"] }
+  ],
+  subheadings: [
+    { depth: 2, text: "problem", slug: "problem" },
+    { depth: 2, text: "solution", slug: "solution" },
+    { depth: 2, text: "reflections", slug: "reflections" }
+  ]
+}
+---
+<Layout meta={meta} data={data} >
+  <section class="column sm" id="problem">
+    <div class="column xs">
+      <header>
+         <h3 class="caption label">Problem</h3>
+          <h2 class="title">How do we maintain consistency across a growing interface?</h2>
+      </header>
+      <p>Eztrackr spans dozens of user flows and hundreds of components, with more continuously being added. With a small design and engineering team and new features launching rapidly, not having a unified design system in place meant the risk of visual drift and confusion during handoff.</p>
+    </div>
+    <figure class="card lg stretch">
+      <Lottie 
+        src=`${raw}/work/eztrackr/problem.json``
+        loop={true}
+        autoplay={true}
+      />
+      <figcaption class="small">Interpretation of lacking structure</figcaption>
+    </figure>
+  </section>
+  <section class="column lg" id="solution">
+    <div class="column xs">
+      <header>
+         <h3 class="caption label">Solution</h3>
+          <h2 class="title">A scalable design system built to support growth.</h2>
+      </header>
+      <p>My focus was on establishing structure early. To create a product that could scale without friction, I started with the foundational building blocks, ensuring everything from typographic scale to color tokens was properly defined.</p>
+      <p>Essentially, I focused on a few key areas that would have the most impact:</p>
+    </div>
+    <figure class="card lg stretch">
+      <div class="stack column md">
+        <div class="row">
+          <div class="card lg block caption label">Screens</div>
+        </div>
+        <div class="row">
+          <div class="card lg block caption label">Components</div>
+          <div class="card lg block caption label">Patterns</div>
+        </div>
+        <div class="row">
+          <div class="card lg block caption label">Spacing</div>
+          <div class="card lg block caption label">Typography</div>
+          <div class="card lg block caption label">Colors</div>
+        </div>
+      </div>
+      <figcaption class="small">Building blocks of a design system</figcaption>
+    </figure>
+    <div class="row lg wrap">
+      <div class="card lg vertical stretch">
+        <h4>Style guidelines.</h4>
+        <p>I defined typography styles and hundreds of color tokens to reduce duplication and inconsistencies.</p>
+      </div>
+      <div class="card lg vertical stretch">
+        <h4>Work structure.</h4>
+        <p>I grouped flows and screens by status to make progress visible, clarify ownership, and improve developer handoff.</p>
+      </div>
+      <div class="card lg vertical stretch">
+        <h4>Responsiveness.</h4>
+        <p>I adapted comprehensive dashboards to mobile, with hierarchy and legibility preserved on smaller screens.</p>
+      </div>
+    </div>
+    <div class="column xs">
+      <p>By investing early in a strong design system along with a clear workspace structure, the team was able to scale a complex product without losing clarity or momentum. With these foundations in place, features like theming become straightforward and a matter of adding instead of fully refactoring.</p>
+    </div>
+  </section>
+  <section class="card lg note" id="reflections">
+    <h3 class="caption label">Reflections</h3>
+    <div class="row start wrap lg">
+      <div class="column xs">
+        <h4>Set standards early.</h4>
+        <p class="subtle">I’ve found it helps to build a standard set of tokens and components as a reusable foundation. From there, it’s only a matter of adapting them to each new project.</p>
+      </div>
+      <div class="column xs">
+        <h4>When in doubt, get help.</h4>
+        <p class="subtle">Things can slip through the cracks. Figma’s color selection, scripts, and third-party plugins came in handy for tracking down raw values and standardizing them.</p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .stack {
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .stack .row {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .block {
+    display: flex;
+    flex-basis: 30%;
+    background-color: var(--color-background-300);
+  }
+</style>
