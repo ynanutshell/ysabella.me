@@ -9,7 +9,7 @@ export default defineConfig({
   markdown: {
     shikiConfig: { theme: 'night-owl-light', },
     remarkPlugins: [
-      () => (file) => {
+      () => (tree, file) => {
         file.data.wikilinks = file.data.wikilinks || {};
       },
       ['remark-wiki-link', {
