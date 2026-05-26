@@ -87,16 +87,16 @@
 
   /* Min and max font-sizes for each header type */  
   --h1-min-size: 1.6;
-  --h1-max-size: 2.0;
+  --h1-max-size: 1.8;
 
   --h2-min-size: 1.4;
-  --h2-max-size: 1.8;
+  --h2-max-size: 1.6;
 
   --h3-min-size: 1.2;
-  --h3-max-size: 1.6;
+  --h3-max-size: 1.4;
 
   --h4-min-size: 1.14;
-  --h4-max-size: 1.4;
+  --h4-max-size: 1.2;
 
   /* Font scaling calculations */  
   --h1-slope: calc((var(--h1-max-size) - var(--h1-min-size)) / (var(--screen-max-width) - var(--screen-min-width)));
