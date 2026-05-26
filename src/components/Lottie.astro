@@ -1,34 +1,36 @@
 ---
-export interface Props {
+interface Props {
   src: string;
-  loop?: boolean;
-  autoplay?: boolean;
   class?: string;
-  style?: string;
+  autoplay?: boolean;
+  loop?: boolean;
 }
 
-const { src, loop = true, autoplay = true, class: className, style } = Astro.props;
-const id = 'lottie-' + Math.random().toString(36).slice(2, 8);
+const { src, class: className, autoplay = true, loop = true } = Astro.props;
 ---
-
-<div id={id} class={className} style={style} data-lottie-src={src} data-lottie-loop={loop} data-lottie-autoplay={autoplay}></div>
+<div
+  class={`lottie-container ${className ?? ''}`}
+  data-src={src}
+  data-autoplay={String(autoplay)}
+  data-loop={String(loop)}
+></div>
 
 <script>
-  import lottie from 'lottie-web';
+  const lottieScript = document.createElement('script');
+  lottieScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js';
+  
+  lottieScript.onload = () => {
+    const container = document.querySelector('.lottie-container');
+    if (!(container instanceof HTMLElement)) return;
 
-  function init() {
-    document.querySelectorAll<HTMLDivElement>('[data-lottie-src]:not([data-lottie-loaded])').forEach(el => {
-      el.setAttribute('data-lottie-loaded', 'true');
-      lottie.loadAnimation({
-        container: el,
-        renderer: 'svg',
-        loop: el.dataset.lottieLoop !== 'false',
-        autoplay: el.dataset.lottieAutoplay !== 'false',
-        path: el.dataset.lottieSrc,
-      });
+    const animation = (window as any).lottie.loadAnimation({
+      container,
+      renderer: 'svg',
+      loop: container.dataset.loop === 'true',
+      autoplay: container.dataset.autoplay === 'true',
+      path: container.dataset.src,
     });
-  }
-
-  init();
-  document.addEventListener('astro:page-load', init);
+  };
+  
+  document.head.appendChild(lottieScript);
 </script>

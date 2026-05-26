@@ -6,11 +6,10 @@ export default defineConfig({
   site: 'https://www.ysabella.me',
   output: 'static',
   integrations: [sitemap()],
-
   markdown: {
     shikiConfig: { theme: 'night-owl-light', },
     remarkPlugins: [
-      () => (tree, file) => {
+      () => (file) => {
         file.data.wikilinks = file.data.wikilinks || {};
       },
       ['remark-wiki-link', {
