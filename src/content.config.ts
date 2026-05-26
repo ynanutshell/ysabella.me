@@ -7,7 +7,6 @@ const gardenCollection = defineCollection({
   loader: glob({ 
     pattern: '**/*.md', 
     base: GARDEN_PATH,
-    ignore: ['templates/**'],
   }),
 });
 
