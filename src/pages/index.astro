@@ -2,14 +2,12 @@
 import { getPageMetadata } from '../utils/seo';
 import Layout from '../layouts/BaseLayout.astro';
 import Work from '../sections/work.astro';
-import Navbar from '../components/NavigationBar.astro';
 import SmallCard from "../components/SmallCard.astro";
 
 const metadata = getPageMetadata('work');
 const message = "welcome to my digital world";
 const status = "Open to projects<br>from Q2 2026";
 ---
-<header><Navbar activeTab="work" classes="top" /></header>
 <Layout {...metadata} activeTab="work">
   <section id="hero" class="full-screen stack">
     <div class="stack">

@@ -1,24 +1,27 @@
 ---
 export interface Props {
+  type?: 'back' | 'scroll-top';
   href?: string;
   target?: '_blank' | '_self';
   class?: string;
 }
 
 const { 
+  type,
   href,
   target = '_self',
   class: className,
   ...rest 
 } = Astro.props;
 
-const Tag = href ? 'a' : 'button';
+const Tag = (href || type === 'back') ? 'a' : 'button';
 ---
 
 {Tag === 'a' ? (
   <a 
     href={href}
     target={target}
+    data-back-link={type === 'back' ? '' : undefined}
     {...rest}
     class={`btn noborder ${className || ''}`}
     rel={target === '_blank' ? 'noopener noreferrer' : undefined}

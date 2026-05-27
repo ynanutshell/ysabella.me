@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import ArrowLeftIcon from '../components/icons/ArrowLeft.astro';
+import ArrowUpIcon from '../components/icons/ArrowUp.astro';
 import Layout from '../layouts/BaseLayout.astro';
 import LinkButton from '../components/LinkButton.astro';
 import TOC from '../components/TOC.astro';
@@ -29,19 +31,14 @@ export interface Props {
 const { metadata, data } = Astro.props;
 const { headline, subline, cover, alt, plantedDate, lastTendedDate, minRead, type, subtype, tags = [], subheadings = [] } = data;
 ---
-<Layout {...metadata} activeTab="garden">
+<Layout {...metadata} classes="scroll" activeTab="garden">
   <article class="text">
-    <nav id="top-nav">
-      <LinkButton class="backlink" href="/garden">
-        <svg class="arrow-left" width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M8.70715 3.35352H0.707153M3.70715 6.35352L0.707153 3.35352L3.70715 0.353516" stroke="#7D89B0"/>
-        </svg>
-        <span>back to garden</span>
-      </LinkButton>
-      {subheadings.length > 0 && (
+    {subheadings.length > 0 && (
         <TOC subheadings={subheadings} />
       )}
-    </nav>
+      <LinkButton type="back" href="/writing" aria-label="Back" class="back-link floating hide-on-idle">
+        <ArrowLeftIcon />
+      </LinkButton>
     <header class="column content">
       <dl class="metadata row">
         {plantedDate && (
@@ -55,7 +52,7 @@ const { headline, subline, cover, alt, plantedDate, lastTendedDate, minRead, typ
           </dl>
         )}
         {lastTendedDate && (
-          <span class="divider" aria-hidden="true" />
+          <span class="divider flex" aria-hidden="true" />
           <dl class="datapoint row">
             <dt class="item">Last Tended</dt>
             <dd class="small item emphasis">
@@ -65,11 +62,12 @@ const { headline, subline, cover, alt, plantedDate, lastTendedDate, minRead, typ
             </dd>
           </dl>
         )}
-        <span class="divider" aria-hidden="true" />
+        <span class="divider flex" aria-hidden="true" />
         <dl class="datapoint row">
-          <dd class="small item">{minRead} min read</dd>
+          <dt class="item">Read Time</dt>
+          <dd class="small item emphasis">{minRead} min</dd>
         </dl>
-        </div>
+        </div> 
       </dl>
       <div class="column content xs">
         <h1>{headline}</h1>
@@ -96,6 +94,9 @@ const { headline, subline, cover, alt, plantedDate, lastTendedDate, minRead, typ
       ))}
       </dl>
     </div>
+    <LinkButton  aria-label="Scroll to top" class="scroll-top floating">
+      <ArrowUpIcon />
+    </LinkButton>
   </article>
 </Layout>
 
@@ -123,13 +124,62 @@ const { headline, subline, cover, alt, plantedDate, lastTendedDate, minRead, typ
 </style>
 
 <script>
-  const scrollTopBtn = document.querySelector('.scroll-top');
-  if (scrollTopBtn) {
+  /* Table of contents */
+  const tocLinks = document.querySelectorAll('#toc a');
+  if (tocLinks.length > 0) {
+    const headings = document.querySelectorAll('h2[id], h3[id]');
     window.addEventListener('scroll', () => {
-      scrollTopBtn.classList.toggle('visible', window.scrollY > 300);
+      let current = '';
+      headings.forEach(h => {
+        if (h.getBoundingClientRect().top <= 100) current = h.id;
+      });
+      tocLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+      });
+    });
+  }
+
+  /* Back link */
+  const backLink = document.querySelector('[data-back-link]');
+  if (backLink && document.referrer) {
+    backLink.setAttribute('href', document.referrer);
+    console.log(document.referrer);
+  }
+
+  /* Scroll to top */
+  const scrollTopBtn = document.querySelector('.scroll-top');
+
+  if (scrollTopBtn) {
+    const footer = document.querySelector('footer');
+
+    window.addEventListener('scroll', () => {
+      const bottom = footer
+        ? window.scrollY + window.innerHeight >= footer.offsetTop - 10 : false;
+
+      scrollTopBtn.classList.toggle('visible', window.scrollY > 10 && !bottom);
     });
     scrollTopBtn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  /* Hide floating elements when idle */
+  let scrollTimeout: ReturnType<typeof setTimeout>;
+  const idleElements = document.querySelectorAll<HTMLElement>('.hide-on-idle');
+  const TOC = document.querySelector('#toc details') as HTMLDetailsElement | null;
+
+  if (idleElements.length > 0) {
+    const showAndReset = () => {
+      idleElements.forEach(el => el.classList.add('visible'));
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        if (TOC?.open) return; // Don't hide if TOC is open
+        idleElements.forEach(el => el.classList.remove('visible'));
+      }, 1500);
+    };
+
+    ['scroll', 'click', 'touchstart', 'keydown', 'mousemove'].forEach(event => {
+      window.addEventListener(event, showAndReset);
     });
   }
 </script>

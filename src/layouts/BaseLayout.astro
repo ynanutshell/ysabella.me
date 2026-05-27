@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Navbar from '../components/NavigationBar.astro';
 import Footer from '../sections/footer.astro';
 
 interface Props {
@@ -83,6 +84,7 @@ const twitterHandle = "@ysabelladalawa";
     )}
   </head>
   <body>
+    <header><Navbar activeTab={activeTab} classes="top" /></header>
     <main class={classes}>
       <slot />
     </main>

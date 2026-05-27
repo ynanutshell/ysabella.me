@@ -15,7 +15,7 @@ const { subheadings } = Astro.props;
 ---
 
 {subheadings.length > 0 && (
-  <Dropdown label="contents">
+  <Dropdown id="toc" class="hide-on-idle" label="contents">
     <ul>
       {subheadings.map((subheading, i) => (
         <li class="dropdown item">

@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import ArrowLeftIcon from '../components/icons/ArrowLeft.astro';
+import ArrowUpIcon from '../components/icons/ArrowUp.astro';
 import Layout from '../layouts/BaseLayout.astro';
 import LinkButton from '../components/LinkButton.astro';
 import Lottie from '../components/Lottie.astro';
@@ -39,17 +41,12 @@ const { headline, subline, cover, preview, caption, href, details = [], subheadi
 ---
 <Layout {...metadata} activeTab="work">
   <article class="text">
-    <nav id="top-nav">
-      <LinkButton class="backlink" href="/#work">
-        <svg class="arrow-left" width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M8.70715 3.35352H0.707153M3.70715 6.35352L0.707153 3.35352L3.70715 0.353516" stroke="#7D89B0"/>
-        </svg>
-        <span>back to work</span>
-      </LinkButton>
-      {subheadings.length > 0 && (
-        <TOC subheadings={subheadings} />
-      )}
-    </nav>
+    {subheadings.length > 0 && (
+      <TOC subheadings={subheadings} />
+    )}
+    <LinkButton type="back" href="/#work" aria-label="Back" class="back-link floating hide-on-idle">
+      <ArrowLeftIcon />
+    </LinkButton>
     <header class="column md">
       <div class="column content">
         <div class="status">
@@ -112,20 +109,34 @@ const { headline, subline, cover, preview, caption, href, details = [], subheadi
     <div class="column content lg">
       <slot />
     </div>
+    <LinkButton  aria-label="Scroll to top" class="scroll-top floating">
+      <ArrowUpIcon />
+    </LinkButton>
   </article>
 </Layout>
 
 <script>
-  const scrollTopBtn = document.querySelector('.scroll-top');
-  if (scrollTopBtn) {
-    window.addEventListener('scroll', () => {
-      scrollTopBtn.classList.toggle('visible', window.scrollY > 300);
-    });
-    scrollTopBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+  /* Hide floating elements when idle */
+  let scrollTimeout: ReturnType<typeof setTimeout>;
+  const idleElements = document.querySelectorAll<HTMLElement>('.hide-on-idle');
+  const TOC = document.querySelector('#toc details') as HTMLDetailsElement | null;
+
+  if (idleElements.length > 0) {
+    const showAndReset = () => {
+      idleElements.forEach(el => el.classList.add('visible'));
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        if (TOC?.open) return; // Don't hide if TOC is open
+        idleElements.forEach(el => el.classList.remove('visible'));
+      }, 1500);
+    };
+
+    ['scroll', 'click', 'touchstart', 'keydown', 'mousemove'].forEach(event => {
+      window.addEventListener(event, showAndReset);
     });
   }
 
+  /* Table of contents */
   const tocLinks = document.querySelectorAll('.toc a');
   if (tocLinks.length > 0) {
     const headings = document.querySelectorAll('h2[id], h3[id]');
@@ -137,6 +148,30 @@ const { headline, subline, cover, preview, caption, href, details = [], subheadi
       tocLinks.forEach(link => {
         link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
       });
+    });
+  }
+
+  /* Back link */
+  const backLink = document.querySelector('[data-back-link]');
+  if (backLink && document.referrer) {
+    backLink.setAttribute('href', document.referrer);
+    console.log(document.referrer);
+  }
+
+  /* Scroll to top */
+  const scrollTopBtn = document.querySelector('.scroll-top');
+
+  if (scrollTopBtn) {
+    const footer = document.querySelector('footer');
+
+    window.addEventListener('scroll', () => {
+      const bottom = footer
+        ? window.scrollY + window.innerHeight >= footer.offsetTop - 10 : false;
+
+      scrollTopBtn.classList.toggle('visible', window.scrollY > 10 && !bottom);
+    });
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 </script>

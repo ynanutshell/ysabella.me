@@ -1,7 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import { getPageMetadata } from '../../utils/seo';
-import Filter from '../../components/Filter.astro';
+// import Filter from '../../components/Filter.astro';
+import ArrowLeftIcon from '../../components/icons/ArrowLeft.astro';
 import Layout from '../../layouts/BaseLayout.astro';
 import LinkButton from '../../components/LinkButton.astro';
 import Writings from '../../sections/writing.astro';
@@ -18,7 +19,7 @@ const items = entries
   .filter(e => !active || [e.data.type, e.data.subtype].filter(Boolean).includes(active))
   .sort((a, b) => (b.data.planted?.getTime() ?? 0) - (a.data.planted?.getTime() ?? 0));
 
-const filterMap = [
+/* const filterMap = [
   { label: 'notes', value: 'notes' },
   { label: 'ideas', value: 'ideas' },
   { label: 'thoughts', value: 'thoughts' },
@@ -29,7 +30,7 @@ const filters = filterMap.map(f => ({
   label: f.label,
   value: f.value,
   count: entries.filter(e => (e.data.type === f.value || e.data.subtype === f.value) && e.data.published !== false).length,
-}));
+})); */
 ---
 <Layout {...metadata} classes="text" activeTab="garden">
   <header class="column sm">
@@ -41,10 +42,8 @@ const filters = filterMap.map(f => ({
   {entries.length > 0 && (
     <section class="column sm" id="writing">
       <div class="row stretch apart">
-        <LinkButton class="backlink" href="/garden">
-          <svg class="arrow-left" width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8.70715 3.35352H0.707153M3.70715 6.35352L0.707153 3.35352L3.70715 0.353516" stroke="#7D89B0"/>
-          </svg>
+        <LinkButton aria-label="Back" class="back-link" href="/garden">
+          <ArrowLeftIcon />
           <span>back to garden</span>
         </LinkButton>
         <!-- <Filter filters={filters} active={active} /> -->
@@ -55,3 +54,11 @@ const filters = filterMap.map(f => ({
     </section>
   )}
 </Layout>
+
+<script>
+  const backLink = document.querySelector('[data-back-link]');
+  if (backLink && document.referrer) {
+    backLink.setAttribute('href', document.referrer);
+    console.log(document.referrer);
+  }
+</script>

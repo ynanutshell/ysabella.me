@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { getPageMetadata } from '../../utils/seo';
+import ArrowLeftIcon from '../../components/icons/ArrowLeft.astro';
 import Layout from '../../layouts/BaseLayout.astro';
 import LinkButton from '../../components/LinkButton.astro';
 import Writings from '../../sections/writing.astro';
@@ -34,11 +35,9 @@ const items = entries
     {entries.length > 0 && (
       <section class="column sm" id="writing">
         <div class="row stretch apart">
-          <LinkButton class="backlink" href="/writing">
-            <svg class="arrow-left" width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8.70715 3.35352H0.707153M3.70715 6.35352L0.707153 3.35352L3.70715 0.353516" stroke="#7D89B0"/>
-            </svg>
-            <span>back to writing</span>
+          <LinkButton type="back" href="/writing" aria-label="Back" class="back-link">
+            <ArrowLeftIcon />
+            <span>back</span>
           </LinkButton>
         </div>
         {items.length > 0 && (
@@ -53,3 +52,11 @@ const items = entries
     color: var(--color-foreground-300);
   }
 </style>
+
+<script>
+  const backLink = document.querySelector('[data-back-link]');
+  if (backLink && document.referrer) {
+    backLink.setAttribute('href', document.referrer);
+    console.log(document.referrer);
+  }
+</script>
