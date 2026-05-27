@@ -1,21 +1,22 @@
 ---
 import '../styles/global.css';
+import Layout from '../layouts/BaseLayout.astro';
 import LinkButton from '../components/LinkButton.astro';
 import Lottie from '../components/Lottie.astro';
 import TOC from '../components/TOC.astro';
 
-interface MetadataItem {
+interface DetailItem {
   label: string;
   value: string | string[];
 }
 
 type Cover = 
-  | { type: 'image'; src: string }
+  | { type: 'image'; src: string; alt?: string }
   | { type: 'video'; src: string; alt?: string }
   | { type: 'lottie'; src: string; alt?: string; loop?: boolean; autoplay?: boolean };
 
 export interface Props {
-  meta: {
+  metadata: {
     title: string;
     description: string;
     ogImage?: string;
@@ -28,164 +29,91 @@ export interface Props {
     preview?: string;
     caption?: string;
     href?: string;
-    alt?: string;
-    metadata?: MetadataItem[];
+    details?: DetailItem[];
     subheadings?: { depth: number; text: string; slug: string }[];
   };
 }
 
-const { meta, data } = Astro.props;
-const { title, description, ogImage } = meta;
-const { headline, subline, cover, preview, caption, href, alt, metadata = [], subheadings = [] } = data;
-
-const siteName = "ysabella nicole alvarez";
-const siteURL = "https://www.ysabella.me";
-const author = "Ysabella Nicole Alvarez";
-const twitterHandle = "@ysabelladalawa";
+const { metadata, data } = Astro.props;
+const { headline, subline, cover, preview, caption, href, details = [], subheadings = [] } = data;
 ---
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- Primary Meta Tags -->
-    <title>{title}</title>
-    <meta name="title" content={title} />
-    <meta name="description" content={description} />
-    <meta name="author" content={author} />
-    
-    <!-- Robots -->
-    <meta name="robots" content="index, follow" />
-    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
-    <link rel="canonical" href={ new URL(Astro.url.pathname, siteURL).toString()} />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content={ new URL(Astro.url.pathname, siteURL).toString()} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:site_name" content={siteName} />
-    <meta property="og:locale" content="en_US" />
-    {ogImage && <meta property="og:image" content={new URL(ogImage, siteURL).toString()} />}
-    {ogImage && <meta property="og:image:width" content="1200" />}
-    {ogImage && <meta property="og:image:height" content="630" />}
-    {ogImage && <meta property="og:image:alt" content={title} />}
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content={twitterHandle} />
-    <meta name="twitter:creator" content={twitterHandle} />
-    <meta name="twitter:url" content={ new URL(Astro.url.pathname, siteURL).toString()} />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    {ogImage && <meta name="twitter:image" content={new URL(ogImage, siteURL).toString()} />}
-    {ogImage && <meta name="twitter:image:alt" content={title} />}
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
-
-    <!-- Preconnect -->
-    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
-    {import.meta.env.PROD && (
-
-      <!-- Analytics -->
-      <script 
-        defer 
-        src="https://analytics.ysabella.me/script.js" 
-        data-website-id="717fb694-5754-4a02-83e7-31af6d33c492"
-      ></script>
-    )}
-  </head>
-
-  <body>
-    <article class="text">
-      <nav id="top-nav">
-        <LinkButton class="backlink" href="/#work">
-          <svg class="arrow-left" width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8.70715 3.35352H0.707153M3.70715 6.35352L0.707153 3.35352L3.70715 0.353516" stroke="#7D89B0"/>
-          </svg>
-          <span>back to work</span>
-        </LinkButton>
-        {subheadings.length > 0 && (
-          <TOC subheadings={subheadings} />
-        )}
-      </nav>
-      <header class="column md">
-        <div class="column content">
-          <div class="status">
-            <span class=`indicator ${data.status}` />
-            <span class="caption label">
-              {data.status === 'shipped'  && ('shipped')}
-              {data.status === 'development' && ('in development')}
-              {data.status === 'roadmap' && ('on the roadmap')}
-            </span>
-          </div>
-          <h1>{headline}</h1>
-          <p class="subline">{subline}</p>
+<Layout {...metadata} activeTab="work">
+  <article class="text">
+    <nav id="top-nav">
+      <LinkButton class="backlink" href="/#work">
+        <svg class="arrow-left" width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8.70715 3.35352H0.707153M3.70715 6.35352L0.707153 3.35352L3.70715 0.353516" stroke="#7D89B0"/>
+        </svg>
+        <span>back to work</span>
+      </LinkButton>
+      {subheadings.length > 0 && (
+        <TOC subheadings={subheadings} />
+      )}
+    </nav>
+    <header class="column md">
+      <div class="column content">
+        <div class="status">
+          <span class=`indicator ${data.status}` />
+          <span class="caption label">
+            {data.status === 'shipped'  && ('shipped')}
+            {data.status === 'development' && ('in development')}
+            {data.status === 'roadmap' && ('on the roadmap')}
+          </span>
         </div>
-        {metadata.length > 0 && (
-          <dl class="metadata">
-            {metadata.map(item => (
-              <div class="datapoint">
-                <dt>{item.label}</dt>
-                <dd class="item">
-                  {Array.isArray(item.value) 
-                    ? item.value.map((v, i) => (
-                        <p class="item">
-                          {v}
-                        </p>
-                      ))
-                    : item.value
-                  }
-                </dd>
-              </div>
-            ))}
-          </dl>
-        )}
-        {cover && (
-          <figure>
-            {cover.type === 'lottie' && (
-              <Lottie 
-                src={cover.src}
-                loop={cover.loop ?? true}
-                autoplay={cover.autoplay ?? true}
-                aria-label={alt || null}
-                class="wide"
-              />
-            )}
-            {cover.type === 'video' && (
-              <video src={cover.src} aria-label={alt || null} class="wide" autoplay muted loop playsinline poster={preview} />
-            )}
-            {cover.type === 'image' && (
-              <img src={cover.src} alt={alt || null} class="wide" />
-            )}
-            {caption && (
-              <figcaption class="caption label">
-                {href ? (
-                  <a href={href} target="_blank" class="caption label">{caption}</a>
-                ) : {caption} }
-              </figcaption>
-            )}
-          </figure>
-        )}
-      </header>
-      <div class="column content lg">
-        <slot />
+        <h1>{headline}</h1>
+        <p class="subline">{subline}</p>
       </div>
-      <nav id="bottom-nav">
-        <LinkButton class="backlink" href="/#work">
-          <svg class="arrow-left" width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8.70715 3.35352H0.707153M3.70715 6.35352L0.707153 3.35352L3.70715 0.353516" stroke="#7D89B0"/>
-          </svg>
-          <span>back to work</span>
-        </LinkButton>
-        <LinkButton class="scroll-top" aria-label="Scroll to top">scroll to top</LinkButton>
-      </nav>
-    </article>
-  </body>
-</html>
+      {details.length > 0 && (
+        <dl class="metadata">
+          {details.map(item => (
+            <div class="datapoint">
+              <dt>{item.label}</dt>
+              <dd class="item">
+                {Array.isArray(item.value) 
+                  ? item.value.map((v, i) => (
+                      <p class="item">
+                        {v}
+                      </p>
+                    ))
+                  : item.value
+                }
+              </dd>
+            </div>
+          ))}
+        </dl>
+      )}
+      {cover && (
+        <figure>
+          {cover.type === 'lottie' && (
+            <Lottie 
+              src={cover.src}
+              loop={cover.loop ?? true}
+              autoplay={cover.autoplay ?? true}
+              aria-label={cover.alt || null}
+              class="wide"
+            />
+          )}
+          {cover.type === 'video' && (
+            <video src={cover.src} aria-label={cover.alt || null} class="wide" autoplay muted loop playsinline poster={preview} />
+          )}
+          {cover.type === 'image' && (
+            <img src={cover.src} alt={cover.alt || null} class="wide" />
+          )}
+          {caption && (
+            <figcaption class="caption label">
+              {href ? (
+                <a href={href} target="_blank" class="caption label">{caption}</a>
+              ) : {caption} }
+            </figcaption>
+          )}
+        </figure>
+      )}
+    </header>
+    <div class="column content lg">
+      <slot />
+    </div>
+  </article>
+</Layout>
 
 <script>
   const scrollTopBtn = document.querySelector('.scroll-top');

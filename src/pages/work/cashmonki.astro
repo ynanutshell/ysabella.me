@@ -14,7 +14,7 @@ const data = {
   status: 'shipped' as const,
   headline: "Designed a budget management feature with an adoption rate of one-third of active users.",
   subline: "Studies have shown that 60% of people don’t really know how much they spent the month before. Cashmonki was first introduced as a simple expense tracker where users can add and track transactions manually or by scanning and automatically parsing receipts.",
-  metadata: [
+  details: [
     { label: "Product", value: "iOS mobile application" },
     { label: "Role", value: "Product designer"},
     { label: "Timeline", value: ["November 2025 -", "December 2025"]},
@@ -30,7 +30,7 @@ const data = {
 }
 
 ---
-<Layout meta={meta} data={data} >
+<Layout metadata={meta} data={data} >
   <div class="row lg">
       <figure class="card lg">
         <video src=`${src}/work/cashmonki/manual.mp4` autoplay muted loop playsinline />

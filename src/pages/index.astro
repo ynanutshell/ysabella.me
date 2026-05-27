@@ -2,14 +2,16 @@
 import { getPageMetadata } from '../utils/seo';
 import Layout from '../layouts/BaseLayout.astro';
 import Work from '../sections/work.astro';
+import Navbar from '../components/NavigationBar.astro';
 import SmallCard from "../components/SmallCard.astro";
 
 const metadata = getPageMetadata('work');
 const message = "welcome to my digital world";
 const status = "Open to projects<br>from Q2 2026";
 ---
+<header><Navbar activeTab="work" classes="top" /></header>
 <Layout {...metadata} activeTab="work">
-  <header id="hero" class="full-screen">
+  <section id="hero" class="full-screen stack">
     <div class="stack">
       <div id="portrait">
         <div id="dialogue">
@@ -98,17 +100,13 @@ const status = "Open to projects<br>from Q2 2026";
         <Fragment set:html={status}>
       </SmallCard>
     </div>
-  </header>
+  </section>
   <section id="work">
     <Work />
   </section>
 </Layout>
 
 <style is:global>
-  .stack {
-    position: relative;
-  }
-
   /* Portrait Card */ 
   #portrait {
     display: flex;
@@ -166,10 +164,6 @@ const status = "Open to projects<br>from Q2 2026";
   #title {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-    flex-grow: 1;
     padding: var(--size-padding-xl);
     color: var(--color-secondary-fg);
     background-color: var(--color-secondary);

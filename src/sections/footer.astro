@@ -1,10 +1,14 @@
 ---
 import { getCommit } from '../utils/commit';
+import Navbar from '../components/NavigationBar.astro';
 import SmallCard from "../components/SmallCard.astro";
 
 const commit = await getCommit();
 const src = "https://assets.ysabella.me/cdn-cgi/image/format=webp,quality=100,width=1500";
+
+const { activeTab } = Astro.props;
 ---
+<Navbar activeTab={activeTab} classes="footer" />
 <footer>
   <div class="container">
     <p class="caption">designed and built with a lot of overthinking and late nights</p>
@@ -77,80 +81,3 @@ const src = "https://assets.ysabella.me/cdn-cgi/image/format=webp,quality=100,wi
     </div>
   </div>
 </footer>
-
-<style is:global>
-  footer .container > * {
-    color: var(--color-primary-fg);
-    text-align: center;
-    text-wrap: pretty;
-  }
-
-  .portrait {
-    position: absolute;
-    right: 8vw;
-    bottom: 4vh;
-    transform: rotate3d(0, 0, 1, -8deg);
-  }
-
-  /* Cards */
-  #mail {
-    bottom: 65%;
-    transform: rotate3d(0,0,1,-6deg);
-  }
-
-  #linkedin {
-    left: 12%;
-    top: 65%;
-    transform: rotate3d(0, 0, 1, 4deg);
-    z-index: 1;
-  }
-
-  /* Disclaimer and additional things */
-  #additional {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-  }
-
-  .right {
-    justify-content: flex-end;
-  }
-  
-  .social {
-    margin: unset;
-    vertical-align: middle;
-    height: auto;
-    width: var(--size-type-body);
-    color: var(--color-border-3rd);
-  }
-
-  .social:hover {
-    color: var(--color-foreground-200);
-  }
-
-  @media (max-width: 768px) {
-    footer {
-      gap: var(--size-padding-md);
-    }
-
-    #additional {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-flow: column;
-      gap: var(--size-padding-xs);
-    }
-
-    #socials {
-      order: 3;
-    }
-
-    #copyright {
-      order: 2;
-    }
-
-    #misc {
-      order: 1;
-    }
-  }
-</style>

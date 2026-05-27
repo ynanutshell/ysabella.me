@@ -1,7 +1,6 @@
 ---
 import '../styles/global.css';
 import Footer from '../sections/footer.astro';
-import NavigationBar from '../components/NavigationBar.astro';
 
 interface Props {
   title: string;
@@ -87,23 +86,6 @@ const twitterHandle = "@ysabelladalawa";
     <main class={classes}>
       <slot />
     </main>
-    <NavigationBar activeTab={activeTab} />
-    <Footer />
+    <Footer activeTab={activeTab} />
   </body>
 </html>
-
-<script>
-  const nav = document.getElementById('navbar');
-  const footer = document.querySelector('footer');
-
-  if (nav && footer) {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        nav.classList.toggle('over-footer', entry.isIntersecting);
-      },
-      { threshold: 0 }
-    );
-
-    observer.observe(footer);
-  }
-</script>
