@@ -101,7 +101,7 @@ const { headline, subline, cover, alt, plantedDate, lastTendedDate, minRead, typ
 </Layout>
 
 <style is:global>
-  h2 {
+  .content h2 {
     color: var(--color-foreground-300);
     font-family: var(--font-mono);
     font-size: var(--size-type-caption);
@@ -109,15 +109,15 @@ const { headline, subline, cover, alt, plantedDate, lastTendedDate, minRead, typ
     letter-spacing: 8%;
   }
 
-  h2:not(.callout-title h2), blockquote {
+  .content h2:not(.callout-title h2), blockquote {
     margin-top: var(--size-padding-sm);
   }
 
-  h3 {
+  .content h3 {
     font-size: var(--size-heading-md);
   }
   
-  img {
+  .content img {
     max-height: 30rem;
     width: 100%;
   }
