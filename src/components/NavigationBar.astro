@@ -1,10 +1,11 @@
 ---
 interface Props {
+  type?: 'top' | 'footer';
   activeTab?: string;
   classes: string;
 }
 
-const { activeTab, classes } = Astro.props;
+const { type, activeTab, classes } = Astro.props;
 
 const tabs = [
   { href: "/", label: "work" },
@@ -15,6 +16,7 @@ const tabs = [
 ];
 ---
 <nav aria-label="Site Menu" id="navbar" class={classes} >
+  {type === 'top' && (<span class="small tab">[</span>)}
   {tabs.map((tab) => (
     <a 
       class={`noborder tab ${activeTab === tab.label ? 'active' : ''}`}
@@ -24,4 +26,5 @@ const tabs = [
       {tab.label}
     </a>
   ))}
+  {type === 'top' && (<span class="small tab">]</span>)}
 </nav>
