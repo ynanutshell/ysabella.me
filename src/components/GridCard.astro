@@ -34,6 +34,7 @@ const filtered = filter
     
     return (
       <CardWrapper 
+        aria-label="Project card"
         data-tags={card.tags?.join(',')}
         href={isLink ? card.href : undefined}
         target={isLink ? card.target : undefined}
@@ -50,7 +51,7 @@ const filtered = filter
               <img src={card.visual.src} alt={card.visual.alt || null} decoding="async" loading="lazy" />
             ) : 
             card.visual.type == 'video' ? (
-              <video src={card.visual.src} aria-label={card.visual.alt || null} poster={card.visual.preview} autoplay muted loop playsinline />
+              <video src={card.visual.src} aria-label={card.visual.alt || null} poster={card.visual.preview} preload="none" autoplay="visible" muted loop playsinline />
             ) : 
             card.visual.type == 'lottie' ? (
               <Lottie 
@@ -73,7 +74,7 @@ const filtered = filter
               <img src={card.visual.src} alt={card.visual.alt || null} decoding="async" loading="lazy" />
             ) : 
             card.visual.type === 'video' ? (
-              <video src={card.visual.src} aria-label={card.visual.alt || null} poster={card.visual.preview} autoplay muted loop playsinline />
+              <video src={card.visual.src} aria-label={card.visual.alt || null} poster={card.visual.preview} preload="none" autoplay="visible" muted loop playsinline />
             ) : 
             card.visual.type === 'lottie' ? (
               <Lottie 
@@ -96,7 +97,7 @@ const filtered = filter
               <img src={card.visual.src} alt={card.visual.alt || null} decoding="async" loading="lazy" />
             ) : 
             card.visual.type === 'video' ? (
-              <video src={card.visual.src} aria-label={card.visual.alt || null} poster={card.visual.preview} autoplay muted loop playsinline />
+              <video src={card.visual.src} aria-label={card.visual.alt || null} poster={card.visual.preview} preload="none" autoplay="visible" muted loop playsinline />
             ) : 
             card.visual.type === 'lottie' ? (
               <Lottie 
@@ -119,7 +120,7 @@ const filtered = filter
               <img src={card.visual.src} alt={card.visual.alt || null} class="screen" decoding="async" loading="lazy" />
             ) : 
             card.visual.type === 'video' ? (
-              <video src={card.visual.src} aria-label={card.visual.alt || null} poster={card.visual.preview} class="screen" autoplay muted loop playsinline />
+              <video src={card.visual.src} aria-label={card.visual.alt || null} poster={card.visual.preview} class="screen" preload="none" autoplay="visible" muted loop playsinline />
             ) : 
             card.visual.type === 'lottie' ? (
               <Lottie 

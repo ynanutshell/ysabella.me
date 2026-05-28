@@ -91,7 +91,7 @@ const { headline, subline, cover, preview, caption, href, details = [], subheadi
             />
           )}
           {cover.type === 'video' && (
-            <video src={cover.src} aria-label={cover.alt || null} class="wide" autoplay muted loop playsinline poster={preview} />
+            <video src={cover.src} aria-label={cover.alt || null} class="wide" preload="none" autoplay="visible" muted loop playsinline poster={preview} />
           )}
           {cover.type === 'image' && (
             <img src={cover.src} alt={cover.alt || null} class="wide" />

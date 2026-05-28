@@ -33,11 +33,11 @@ const data = {
 <Layout metadata={meta} data={data} >
   <div class="row lg">
       <figure class="card lg">
-        <video src=`${src}/work/cashmonki/manual.mp4` autoplay muted loop playsinline />
+        <video src=`${src}/work/cashmonki/manual.mp4` preload="none" autoplay="visible" muted loop playsinline />
         <ficaption class="small horizontal center">Manual entry</ficaption>
       </figure>
       <figure class="card lg">
-        <video src=`${src}/work/cashmonki/automatic.mp4` autoplay muted loop playsinline />
+        <video src=`${src}/work/cashmonki/automatic.mp4` preload="none" autoplay="visible" muted loop playsinline />
         <ficaption class="small horizontal center">Automatic entry</ficaption>
       </figure>
     </div>
@@ -118,7 +118,7 @@ const data = {
       <div class="row wrap lg end">
         <div class="card grid">
           <figure class="mockup">
-            <video class="screen" src=`${src}/work/cashmonki.mp4` autoplay muted loop playsinline />
+            <video class="screen" src=`${src}/work/cashmonki.mp4` preload="none" autoplay="visible" muted loop playsinline />
           </figure>
         </div>
         <div class="content sm">
