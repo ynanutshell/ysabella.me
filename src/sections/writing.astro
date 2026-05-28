@@ -49,7 +49,7 @@ const clean = (text: string) =>
         <div class="description">
           <h3>{entry.data.title}</h3>
           {(entry.data.description || entry.body) && (
-            <p class="subline">{clean(entry.data.description || entry.body)}</p>
+            <p class="subline subtle">{clean(entry.data.description || entry.body)}</p>
           )}
         </div>
       </div>

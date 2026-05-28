@@ -443,6 +443,7 @@ pre, .astro-code {
     flex-direction: column;
     gap: var(--size-padding-sm);
     font-family: var(--font-body);
+    color: var(--color-foreground-200);
     line-height: 1.5;
   }
 }
