@@ -67,17 +67,17 @@ const { activeTab } = Astro.props;
         </svg>
       </a>
     </div>
-    <dl id="misc" class="row sm right">
-      <dd><a class="small" href="https://analytics.ysabella.me/share" target="_blank">Analytics</a></dd>
+    <div id="misc" class="row sm right">
+      <a class="small" href="https://analytics.ysabella.me/share" target="_blank">Analytics</a>
       <span class="divider" />
-      <dd><a class="small" href="https://github.com/ynanutshell/ysabella.me" target="_blank">Source</a></dd>
+      <a class="small" href="https://github.com/ynanutshell/ysabella.me" target="_blank">Source</a>
       {commit !== 'unknown' && (
         <span class="divider" />
-        <div class="row sm">
+        <dl class="row sm">
           <dt>Last commit:</dt>
           <dd><a class="small" href={`https://github.com/ynanutshell/ysabella.me/commit/${commit}`} target="_blank">{commit.slice(0, 7)}</a></dd>
-        </div>
+        </dl>
       )}
-    </dl>
+    </div>
   </div>
 </footer>
