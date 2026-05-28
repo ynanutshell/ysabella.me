@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import { getPageMetadata } from '../../utils/seo';
 import ArrowLeftIcon from '../../components/icons/ArrowLeft.astro';
 import Layout from '../../layouts/BaseLayout.astro';
-import LinkButton from '../../components/LinkButton.astro';
 import Writings from '../../sections/writing.astro';
 
 export async function getStaticPaths() {
@@ -35,10 +34,10 @@ const items = entries
     {entries.length > 0 && (
       <section class="column sm" id="writing">
         <div class="row stretch apart">
-          <LinkButton type="back" href="/writing" aria-label="Back" class="back-link">
+          <a class="noborder caption label back-link" aria-label="Back" href="/writing" data-back-link>
             <ArrowLeftIcon />
-            <span>back</span>
-          </LinkButton>
+            Back
+          </a>
         </div>
         {items.length > 0 && (
           <Writings entries={items} limit={4} />
@@ -59,4 +58,11 @@ const items = entries
     backLink.setAttribute('href', document.referrer);
     console.log(document.referrer);
   }
+  
+  backLink?.addEventListener('click', (e) => {
+    if (window.history.length > 1 && document.referrer) {
+      e.preventDefault();
+      window.history.back();
+    }
+  });
 </script>

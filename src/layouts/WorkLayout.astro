@@ -158,6 +158,13 @@ const { headline, subline, cover, preview, caption, href, details = [], subheadi
     console.log(document.referrer);
   }
 
+  backLink?.addEventListener('click', (e) => {
+    if (window.history.length > 1 && document.referrer) {
+      e.preventDefault();
+      window.history.back();
+    }
+  });
+
   /* Scroll to top */
   const scrollTopBtn = document.querySelector('.scroll-top');
 

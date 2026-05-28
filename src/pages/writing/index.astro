@@ -4,7 +4,7 @@ import { getPageMetadata } from '../../utils/seo';
 // import Filter from '../../components/Filter.astro';
 import ArrowLeftIcon from '../../components/icons/ArrowLeft.astro';
 import Layout from '../../layouts/BaseLayout.astro';
-import LinkButton from '../../components/LinkButton.astro';
+// import LinkButton from '../../components/LinkButton.astro';
 import Writings from '../../sections/writing.astro';
 
 const metadata = getPageMetadata('garden');
@@ -42,11 +42,15 @@ const filters = filterMap.map(f => ({
   {entries.length > 0 && (
     <section class="column sm" id="writing">
       <div class="row stretch apart">
-        <LinkButton aria-label="Back" class="back-link" href="/garden">
+        <a class="noborder caption label back-link" aria-label="Back" href="/garden" data-back-link>
+          <ArrowLeftIcon />
+          Back
+        </a>
+        <!-- <LinkButton aria-label="Back" class="back-link" href="/garden">
           <ArrowLeftIcon />
           <span>back to garden</span>
         </LinkButton>
-        <!-- <Filter filters={filters} active={active} /> -->
+        <Filter filters={filters} active={active} /> -->
       </div>
       {items.length > 0 && (
         <Writings entries={items} limit={8} />
@@ -61,4 +65,11 @@ const filters = filterMap.map(f => ({
     backLink.setAttribute('href', document.referrer);
     console.log(document.referrer);
   }
+
+  backLink?.addEventListener('click', (e) => {
+    if (window.history.length > 1 && document.referrer) {
+      e.preventDefault();
+      window.history.back();
+    }
+  });
 </script>

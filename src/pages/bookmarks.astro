@@ -22,10 +22,14 @@ const bookmarks = published.filter(entry => entry.data.type === 'bookmark');
   {bookmarks.length > 0 && (
     <section class="column sm" id="bookmarks">
       <div class="row stretch apart">
-        <LinkButton type="back" href="/garden" aria-label="Back" class="back-link">
+        <a class="noborder caption label back-link" aria-label="Back" href="/garden" data-back-link>
+          <ArrowLeftIcon />
+          Back
+        </a>
+        <!-- <LinkButton type="back" href="/garden" aria-label="Back" class="back-link">
           <ArrowLeftIcon />
           <span>back</span>
-        </LinkButton>
+        </LinkButton> -->
       </div>
       <Links entries={bookmarks.slice(0, 100)} />
     </section>
@@ -38,4 +42,11 @@ const bookmarks = published.filter(entry => entry.data.type === 'bookmark');
     backLink.setAttribute('href', document.referrer);
     console.log(document.referrer);
   }
+
+  backLink?.addEventListener('click', (e) => {
+    if (window.history.length > 1 && document.referrer) {
+      e.preventDefault();
+      window.history.back();
+    }
+  });
 </script>

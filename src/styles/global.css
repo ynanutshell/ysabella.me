@@ -227,22 +227,29 @@ a {
   text-decoration: none;
 
   svg {
-    margin: 0;
-    margin-top: 2%;
+    width: var(--base-size-100);
+    stroke-width: 0.05rem;
+    aspect-ratio: 1/1;
+    margin-top: 3%;
     transition: var(--transition-fast);
   }
 }
 
-a:hover {
+a:hover:not(.btn) {
   text-decoration: underline;
   text-decoration-color: var(--color-primary);
   text-underline-offset: 0.2em;
+
+  .arrow-left {
+    color: var(--color-primary);
+    transform: translateX(-0.1rem);
+  }
 
   .arrow-right {
     color: var(--color-primary);
     transform: translateX(0.1rem);
   }
-}
+  }
 
 a.noborder:hover {
   text-decoration: inherit;
@@ -655,11 +662,14 @@ footer #additional {
 }
 
 footer .social {
-  margin: unset;
-  vertical-align: middle;
-  height: auto;
-  width: var(--size-type-body);
   color: var(--color-border-3rd);
+  aspect-ratio: 1/1;
+  font-size: unset;
+
+  svg {
+    width: var(--size-padding-md);
+    margin: unset;
+  }
 }
 
 footer .social:hover {
