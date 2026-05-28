@@ -23,7 +23,7 @@ const headings = (entry.body?.match(/^#{2,3}\s+(.+)$/gm) || []).map(line => {
 const minRead = Math.max(1, Math.ceil((entry.body?.split(/\s+/).filter(Boolean).length ?? 0) / 130));
 
 const meta = {
-  title: `${entry.data.title} — ysabella`,
+  title: `${entry.data.title} — ysabella nicole alvarez`,
   description: entry.data.description || entry.body
     ?.split('\n')
     .filter(l => l.trim() && !l.startsWith('#') && !l.startsWith('!') && !l.startsWith('['))

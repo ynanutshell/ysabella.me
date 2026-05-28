@@ -16,15 +16,15 @@ export function getPageMetadata(
       ogImage: '/opengraph.png',
     },
     'garden': {
-      title: "digital garden of ysabella",
+      title: "digital garden — ysabella nicole alvarez",
       description: "A collection of (likely unfinished) notes, thoughts, and explorations Ysabella is slowly tending to over time.",
     },
     'about': {
-      title: "about ysabella",
+      title: "about — ysabella nicole alvarez",
       description: "Ysabella is a digital designer and aspiring technologist with a deep-rooted interest in digital spaces–from the day she first booted up a computer: from roaming questionable, online worlds at an all-too-young age to carving out her own slice of the internet on BlogSpot, custom MySpace pages, and restyling phpBB themes.",
     },
     'reading': {
-      title: "reading — ysabella",
+      title: "reading — ysabella nicole alvarez",
       description: "A collection of stories, comics, and books that Ysabella is currently or has previously been reading.",
     },
   };
