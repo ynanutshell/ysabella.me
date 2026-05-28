@@ -21,7 +21,7 @@
   --color-background-300: var(--color-neutral-800);
   
   /* Foreground Colors */
-  --color-foreground-100: var(--color-black);
+  --color-foreground-100: var(--color-neutral-100);
   --color-foreground-200: var(--color-neutral-200);
   --color-foreground-300: var(--color-neutral-300);
 
@@ -70,7 +70,7 @@
   --base-size-640: 4em;
 
   /* Padding */
-  --size-padding-2xl: clamp(2rem, 3vw, 5rem);;
+  --size-padding-2xl: clamp(2.5rem, 3vw, 5rem);;
   --size-padding-xl: clamp(1.5rem, 2vw, 4rem);
   --size-padding-lg: clamp(1rem, 1.5vw, 3rem);
   --size-padding-md: clamp(0.875rem, 1vw, 1.2rem);
@@ -135,7 +135,7 @@
   --size-heading-md: clamp(var(--h2-min), var(--h2-mid), var(--h2-max));
   --size-heading-sm: clamp(var(--h3-min), var(--h3-mid), var(--h3-max));
   --size-heading-xs: clamp(var(--h4-min), var(--h4-mid), var(--h4-max));
-  --size-type-body: clamp(1rem, 0.25rem + 0.8vw, 1.125rem); 
+  --size-type-body: clamp(1rem, 1rem + 0.1vw, 1.2rem); 
   --size-type-caption: clamp(0.75rem, 0.2rem + 0.6vw, 0.875rem);
   --size-type-small: clamp(0.625rem, 0.15rem + 0.4vw, 0.75rem);
 
@@ -173,7 +173,7 @@ body {
   --scroll-behavior: smooth;
   scroll-behavior: smooth;
   padding-bottom: env(safe-area-inset-bottom);
-  color: var(--color-foreground-200);
+  color: var(--color-foreground-100);
   background: var(--color-background-100);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -181,7 +181,7 @@ body {
 
 /* Typography */
 h1, h2, h3, h4, h5 {
-  color: var(--color-foreground-100);
+  color: var(--color-black);
   font-family: var(--font-heading);
   font-weight: normal;
   line-height: 1.4;
@@ -368,7 +368,7 @@ blockquote {
 .subline {
   display: flex;
   flex-direction: column;
-  color: var(--color-foreground-300);
+  color: var(--color-foreground-200);
   gap: var(--size-padding-sm);
 
   p {
@@ -482,7 +482,7 @@ main + * {
   max-width: 75ch;
   margin: auto;
   margin-top: var(--size-padding-2xl);
-  gap: var(--size-padding-lg);
+  gap: var(--size-padding-md);
   padding: var(--size-padding-lg);
 }
 
@@ -891,7 +891,7 @@ footer .social:hover {
 #navbar {
   display: flex;
   flex-direction: row;
-  gap: var(--size-padding-xs);
+  gap: var(--size-padding-2xs);
   z-index: 1;
 }
 
@@ -917,11 +917,11 @@ footer .social:hover {
   transition: var(--transition-md);
 }
 
-#navbar.top .tab.active {
+#navbar.top a.tab.active {
   color: var(--color-foreground-100);
 }
 
-#navbar.top .tab:hover {
+#navbar.top a.tab:hover {
   color: var(--color-primary);
   margin-bottom: calc(-1 * (var(--base-size-80)));
 }
@@ -930,18 +930,19 @@ footer .social:hover {
 #navbar.footer {
   align-items: flex-end;
   margin-left: var(--size-padding-lg);
+  gap: var(--size-padding-sm);
 }
-#navbar.footer .tab {
+#navbar.footer a.tab {
   background-color: var(--color-primary-bg);
   color: var(--color-primary);
 }
 
-#navbar.footer .tab.active {
+#navbar.footer a.tab.active {
   background-color: var(--color-primary);
   color: var(--color-primary-bg);
 }
 
-#navbar.footer .tab:hover {
+#navbar.footer tab:hover {
   padding-bottom: var(--base-size-200);
   margin-top: calc(-1 * (var(--base-size-80)));
 }
@@ -978,7 +979,7 @@ footer .social:hover {
 .metadata {
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(14ch,1fr));
-  gap: var(--size-padding-xl);
+  gap: var(--size-padding-lg);
 }
 
 .metadata.row {
@@ -1007,7 +1008,7 @@ footer .social:hover {
 .content {
   display: flex;
   flex-direction: column;
-  gap: var(--size-padding-sm);
+  gap: var(--size-padding-md);
 
   header {
     display: inherit;
