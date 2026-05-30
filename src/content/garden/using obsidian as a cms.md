@@ -13,7 +13,7 @@ tags:
   - website
   - writing
 planted: 2026-05-20T10:52:00
-tended: 2026-05-31T06:21:40+08:00
+tended: 2026-05-31T06:24:58+08:00
 ---
 I started using [Obsidian](https://obsidian.md/) again early this year, now that I’m fully indoctrinated into the Apple ecosystem and syncing across devices is as easy as storing everything in iCloud. Since then, I very quickly played with the idea of publishing some of my thoughts to a [[on starting a digital garden|digital garden]].
 
@@ -161,4 +161,4 @@ Astro handles most Markdown conversion and formatting straight out of the box, e
 [^1]: Steph Ango (CEO of Obsidian, coincidentally) writes about the philosophy “[file over app](https://stephango.com/file-over-app)”.
 [^2]: Obsidian has an entire page listing the [limitations and potential risks of using symlinks](https://obsidian.md/help/symlinks).
 [^3]: I particularly appreciated [this breakdown](https://stackoverflow.com/a/18791647) on how Git treats symbolic links.
-[^4]: Borrowed the idea of keeping track of a source from [Luke Mitchell](https://interroban.gg/colophon/post/via/).
+[^4]: An idea borrowed from [Luke Mitchell](https://interroban.gg/colophon/post/via/).
