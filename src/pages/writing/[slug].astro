@@ -20,7 +20,9 @@ const headings = (entry.body?.match(/^#{2,3}\s+(.+)$/gm) || []).map(line => {
   const slug = text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
   return { depth, text, slug };
 });
-const minRead = Math.max(1, Math.ceil((entry.body?.split(/\s+/).filter(Boolean).length ?? 0) / 130));
+const minRead = Math.max(1, Math.ceil((entry.body?.split(/\s+/).filter(Boolean).length ?? 0) / 200));
+
+const src = "https://assets.ysabella.me/garden"
 
 const meta = {
   title: `${entry.data.title} — ysabella nicole alvarez`,
@@ -30,13 +32,14 @@ const meta = {
     .slice(0, 2)
     .join(' ')
     .slice(0, 157) + '...',
-  ogImage: entry.data.ogImage || '/opengraph.png',
+  ogImage: `${src}/${entry.data.cover}` || '/opengraph.png',
 };
 
 const data = {
   headline: entry.data.title,
   subline: entry.data.description,
   cover: entry.data.cover,
+  alt: entry.data.alt,
   type: entry.data.type,
   subtype: entry.data.subtype,
   plantedDate: entry.data.planted || undefined,
