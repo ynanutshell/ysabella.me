@@ -32,23 +32,26 @@ const data = {
 ---
 <Layout metadata={meta} data={data} >
   <div class="row lg">
-      <figure class="card lg">
-        <video src=`${src}/work/cashmonki/manual.mp4` preload="none" autoplay="visible" muted loop playsinline />
-        <ficaption class="small horizontal center">Manual entry</ficaption>
-      </figure>
-      <figure class="card lg">
-        <video src=`${src}/work/cashmonki/automatic.mp4` preload="none" autoplay="visible" muted loop playsinline />
-        <ficaption class="small horizontal center">Automatic entry</ficaption>
+    <div class="card grid phone">
+      <figure class="mockup">
+        <video class="screen" src=`${src}/work/cashmonki/manual.mp4` preload="none" autoplay="visible" muted loop playsinline />
+        <figcaption class="small horizontal center">Manual entry</ficaption>
       </figure>
     </div>
+    <div class="card grid phone">
+      <figure class="mockup">
+        <video class="screen" src=`${src}/work/cashmonki/automatic.mp4` preload="none" autoplay="visible" muted loop playsinline />
+        <figcaption class="small horizontal center">Automatic entry</ficaption>
+      </figure>
+    </div>
+  </div>
   <section class="column sm" id="problem">
     <div class="column xs">
       <header>
          <h3 class="caption label">Problem</h3>
           <h2 class="title">What does it mean to set a budget?</h2>
       </header>
-      <p>I’ve found that seeing past transactions rarely leads to better financial decisions on its own. The next step was budget management, to move beyond tracking past activity and enable users to plan ahead.</p>
-      <p>While mapping out specifications, we realized that “budget management” meant something different to everyone. For example, our lead tends to focus on short-term, goal-based budgets, whereas my preference leans towards viewing long-term expenditures and saving patterns.</p>
+      <p>While mapping out specifications to expand our simple expense tracker's functionality, we realized that “budget management” meant something different to everyone. For example, our lead tends to focus on short-term, goal-based budgets, whereas my preference leans towards viewing long-term expenditures and saving patterns.</p>
     </div>
     <div class="row lg">
       <figure class="card lg stretch">
@@ -154,6 +157,10 @@ const data = {
 </Layout>
 
 <style>
+  .card.grid:hover .mockup {
+    transform: unset;
+  }
+
   .comparison {
     display: flex;
     justify-content: space-between;
