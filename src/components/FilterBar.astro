@@ -14,13 +14,13 @@ const { tags } = Astro.props;
       <span class="divider" aria-hidden="true" />
     ))}
     {tags.map(tag => (
-      <button class="filter" data-filter={tag.toLowerCase()}>
+      <button aria-hidden="true" tabindex="-1" class="filter" data-filter={tag.toLowerCase()}>
         {tag}
       </button>
       <span class="divider" aria-hidden="true" />
     ))}
     {tags.map(tag => (
-      <button class="filter" data-filter={tag.toLowerCase()}>
+      <button aria-hidden="true" tabindex="-1" class="filter" data-filter={tag.toLowerCase()}>
         {tag}
       </button>
       <span class="divider" aria-hidden="true" />
