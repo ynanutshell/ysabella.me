@@ -4,18 +4,162 @@ slug:
 title: Using Obsidian as a CMS
 description:
 type: notes
-subtype:
-cover:
+subtype: setup
+cover: obsidian-as-cms.png
+alt: Onboarding dashboard of the Obsidian app, featuring a quickstart button and multiple methods to create or open a vault.
 tags:
-  - obsidian
   - cms
+  - obsidian
+  - website
   - writing
 planted: 2026-05-20T10:52:00
-tended: 2026-05-21T18:59:52+08:00
+tended: 2026-05-31T05:35:57+08:00
 ---
-I started using Obsidian earlier in the year and very quickly played with the idea of publishing some of my personal notes to a digital garden—from unfinished drafts, working notes, and bookmarks of interesting finds. This entry is a work-in-progress on the technical side of starting a digital garden and how I went about setting up Obsidian as a CMS. Here are some of the points I'll try to include:
+I started using [Obsidian](https://obsidian.md/) again early this year, now that I’m fully indoctrinated into the Apple ecosystem and syncing across devices is as easy as storing everything in iCloud. Since then, I very quickly played with the idea of publishing some of my thoughts to a [[on starting a digital garden|digital garden]].
 
-- For a long time, I've been drawn to the idea of using a note taking tool as a personal knowledge base and content management system, from back when I used [TiddlyWiki](https://tiddlywiki.com/) for gaming notes and then when I hosted the first iteration of my online portfolio on [Notion](https://ynanutshell.com).
-- **Syncing through iCloud.** I tried [symlinks](https://macsecurity.net/view/541-create-remove-symlink-mac), [hard links](https://web.archive.org/web/20071018024615/http://www.mikerubel.org/computers/rsync_snapshots/), and finally a prebuild script to keep content synced between iCloud and production.
-- **Community plugins** to achieve automatic timestamp updates and word count tracking: I tried [Templater](obsidian://show-plugin?id=templater-obsidian) and [Dataview](obsidian://show-plugin?id=dataview) and ended up going with [Update time on edit](obsidian://show-plugin?id=update-time-on-edit) and chained expressions to handle particulars like word count and reading time when I do need them.
-- **Setting up templates via core plugins.** I set up a keyboard shortcut for easy access: <kbd>⌘</kbd> + <kbd>\\</kbd>, but actually using my templates for the first time was a little confusing. I tried inserting a template as a new note with the `Templates: Insert Template` command, then I settled with manually duplicating templates and dragging them out of my **templates** folder, before I finally realized I need a new note to insert a template into; today I learned.
+I've been drawn to the idea of using one form of note taking software or another as a content management system for a while. From back when I made a public [TiddlyWiki](https://tiddlywiki.com/) for my personal gaming notes and when I hosted the first iteration of my online portfolio on [Notion](https://ynanutshell.com). 
+
+## Selection Criteria
+There are a few considerations that I kept in mind when choosing between platforms to write on and, eventually, to build a kind-of-CMS from. It's safe to say this extends to how I decide on software in general!
+### No subscription models.
+It's important to me that I'm not forced into a subscription plan to retain access to basic functionality and (more importantly) my own content. If times are lean, subscriptions are the very first thing I cut down on and they're generally just a pain to keep track of. I've made it a point to simply look for alternatives if something is locked behind monthly payments.
+
+When it comes to supporting software I do use and enjoy, my preference leans towards: one-time purchases, flexible donations, or regional/accessible pricing. Ultimately, having multiple ways to support makes *being* able to support easier.
+
+### Customization and flexibility.
+I'm a big fan of tools that allow for a full range of customization and flexibility. This usually includes features like exposed properties, theming, and add-ons to expand (or go beyond) existing functionality. Whole communities are built on being able to personalize to individual style and different use cases!
+
+### File ownership.
+This ties in with not being locked [[using obsidian as a cms#No subscription models|behind a subscription]]. Any content I create and serve through an external service, I should have the option to pull out at any time—without having to file a request that takes an indefinite amount of time. Hard pass to vendor lock-in and obscure formats. Files should always be in a universal format I can still use outside of a service[^1].
+
+Obsidian has more or less met a lot of the criteria above for me! Plus points for having a mobile app that has all the functionality of the desktop apps. Sometimes, it's just easier to jot something down from a smaller screen, with no room for distractions.
+
+## My personal setup
+… is rather lean and basic. I haven't fully explored customizing beyond setting up a space I'm happy with, but that could change over time! I currently have three vaults for different purposes:
+
+<div class="row start wrap">
+	<div class="card column lg vertical stretch">
+		<h4>Personal</h4>
+		<p class="subtle">This vault holds my ideas, writing exercises, and daily journal entries, though I admittedly haven't done a great job maintaining the habit.</p>
+	</div>
+	<div class="card column lg vertical stretch">
+		<h4>Professional</h4>
+		<p class="subtle">Most of my work notes (e.g. case studies, job search, and old projects) are still stored in Notion, but I'm in the process of slowly migrating over.</p>
+	</div>
+	<div class="card column lg vertical stretch">
+		<h4>Garden</h4>
+		<p class="subtle">This vault is what my CMS is built out of! It stores all the content from <a aria-label="Link to garden" href="/garden">my digital garden</a>, along with unpublished drafts I'm still working on.</p>
+	</div>
+</div>
+
+I’ve set up a few small community plugins that I like, all of which are still subject to change, mostly to keep my writing experience clean and intuitive.
+<div class="row start wrap">
+	<div class="card column lg vertical stretch">
+		<div class="datapoint">
+			<a href="https://github.com/automattic/harper-obsidian-plugin"><h4>Harper</h4></a>
+			<p class="caption">By <a class="emphasis" href="https://github.com/automattic">Elijah Potter</a></p>
+		</div>
+		<p>Private grammar checking engine that runs offline and directly within Obsidian.</p>
+	</div>
+	<div class="card column lg vertical stretch">
+		<div class="datapoint">
+			<a href="https://github.com/hasanyilmaz/hide-sidebars"><h4>Hide Sidebars</h4></a>
+			<p class="caption">By <a class="emphasis" href="https://github.com/hasanyilmaz">@hasanyilmaz</a></p>
+		</div>
+		<p>Auto-hide controls for sidebars that makes me happy as a Zen browser user.</p>
+	</div>
+</div>
+<div class="row start wrap">
+	<div class="card column lg vertical stretch">
+		<div class="datapoint">
+			<a href="https://github.com/coignard/obsidian-scroller"><h4>Scroller</h4></a>
+			<p class="caption">By <a class="emphasis" href="https://github.com/coignard">René Coignard</a></p>
+		</div>
+		<p>Simple typewriter/focus mode plugin that dims text outside my current focus.</p>
+	</div>
+	<div class="card column lg vertical stretch">
+		<div class="datapoint">
+			<a href="https://github.com/mgmeyers/obsidian-smart-typography"><h4>Smart Typography</h4></a>
+			<p class="caption">By <a class="emphasis" href="https://github.com/mgmeyers">@mgmeyers</a></p>
+		</div>
+		<p>Automatically converts quotes, dashes, and multiple periods.</p>
+	</div>
+</div>
+<div class="row start wrap">
+	<div class="card column lg vertical stretch">
+		<div class="datapoint">
+			<a href="https://github.com/beaussan/update-time-on-edit-obsidian"><h4>Update time on edit</h4></a>
+			<p class="caption">By <a class="emphasis" href="https://github.com/beaussan">@beaussan</a></p>
+		</div>
+		<p>Exposes the modified time of each file so I can refer to it through the frontmatter.</p>
+	</div>
+</div>
+
+ I did explore a couple more advanced plugins, like [Templater](obsidian://show-plugin?id=templater-obsidian) and [Dataview](obsidian://show-plugin?id=dataview),  to expose file timestamps and word count. But I ended up simplifying with [Update time on edit](obsidian://show-plugin?id=update-time-on-edit) and chained expressions to handle particulars like word count when I do need them, directly within my Astro setup.
+ 
+## As a Content Management System
+I did hit a few snags while setting up Obsidian as a CMS. There are a few tricks that have worked for me, but my setup is definitely still a work-in-progress. I'm continuously figuring it out as I write more entries into my humble garden and notice anything out of place.
+
+### Syncing content.
+I went through a number of different methods in order to keep my content synced between my garden vault (stored in iCloud) and local working directory. Initially, I tried a simple `Make Alias` via the macOS context menu, but neither Obsidian nor VS Code (my choice of code editor) could even recognize it as a directory.
+
+#### Symbolic links.
+Next, I looked into setting up a [symbolic link](https://en.wikipedia.org/wiki/Symbolic_link) (or symlink), which has limitations and is generally not recommended[^2], but I have seen a few working instances with the [same](https://www.ssp.sh/brain/add-external-folders-git-blog-book-to-my-obsidian-vault-via-symlink/) [exact](https://www.mandalivia.com/obsidian/obsidian-with-astro-for-personal-site/#step-4-connecting-obsidian-to-astro-with-symlinks) [purpose](https://bryanhogan.com/blog/astro-obsidian) in mind. I ended up trying it in both directions, which looked something like the syntax below.
+
+```
+ln -s [cloud-based vault path] [local repo path]
+```
+
+I added a symlink of my vault `iCloud/Obsidian/garden` to my working directory `src/content` first, which does make all the linked content fully viewable and editable in VS Code. Unfortunately, Git only checks it out as a small, flat file[^3] and not the full directory from my vault.
+
+```
+ln -s [local repo path] [cloud-based vault path]
+```
+I then tried reversing the logic: transfer the vault over to my working directory and leave a symlink in its place. I didn’t think this one through lol. I ended up learning *while* I was out that I couldn’t access my vault on my phone, thanks to all the actual data being on my computer.
+
+> [!NOTE] A small note
+> Alternatively, I considered storing my entire working directory as an iCloud-based vault to avoid having to sync them altogether. A [quick search](https://discussions.apple.com/thread/253527805) warns against mixing git with cloud-based version control, so that dissolved the thought.
+
+#### RSync script.
+Eventually, I landed on setting up an `rsync` script that syncs all the relevant files from my vault and ignores the rest, like templates and plugins.
+```json
+rsync -av --delete --exclude='.obsidian/' --exclude='plugins/' --exclude='templates/' --include='*/' --include='*.md' --exclude='*' \"$GARDEN_PATH/\" src/content/garden/
+```
+It’s hacky and not the most convenient method. It also means I can’t push content changes directly from my phone. But it does the job reliably and I’m usually wrapping up any writing on my computer anyway, because of style reworks I make along the way.
+
+### Custom properties and templates.
+My properties are pretty standard and similar to other Obsidian publishing setups, but I have a couple of templates for different content types: writing and bookmarks.
+#### Writing
+- **`Published`** A toggle I use to filter out entries that should and shouldn’t be visible.
+- **`Slug`** Optional field for instances where I want to set a custom slug.
+- **`Title`** The headline seen at the head of the article. This also dictates the OpenGraph title.
+- **`Description`** Optional field to describe the body of content. Otherwise, the first 160 characters are pulled from the start of the entry.
+- **`Type`** Currently identifies `bookmarks` against anything else automatically categorized under `writing`.
+- **`Subtype`** Category that further distinguishes entries beyond `type`.
+- **`Cover`** Both the header image above and OpenGraph image are pulled from this property.
+- **`Tags`** Any further identifiers or categories I can think of go here.
+- **`Planted`** This is updated by the plugin `Update time on edit` once on initial file creation. Set to my local timezone (GMT+8).
+- **`Tended`** This is updated by the plugin `Update time on edit` when any changes are made to the file. Set to my local timezone (GMT+8)
+#### Bookmarks
+- **`Published`** See above.
+- **`Title`** Generally the title of the bookmarked link.
+- **`Type`** Identifies `bookmarks` against any type of `writing`.
+- **`Subtype`** Sets the bookmark category, shown at the end of the line.
+- **`URL`** Where the bookmark links towards.
+- **`Via`**[^4] Optional field to provide the original source of the bookmark.
+- **`Source`** Adds a link to the source label `Via`. 
+- **`Planted`** Not shown in list, but nice to have.
+- **`Tended`** Not shown in list, but nice to have.
+
+I set up a keyboard shortcut for easy access to both templates and any more I make to <kbd>⌘</kbd> + <kbd>\\</kbd>. 
+
+Though, funnily enough, actually using templates for the first time was a little confusing. I first tried inserting a template as a new note with the `Templates: Insert Template` command, which seemingly did nothing. Then I settled with manually duplicating templates and dragging them out of my **templates** folder, which didn’t seem right. Then I finally realized I needed a note to actually *insert* a template into.
+### Parsing Markdown to HTML.
+Astro handles most Markdown conversion and formatting straight out of the box, except for a couple of things like wikilinks. Otherwise, it’s mostly a matter of me accounting for edge cases I haven’t found the need to style yet… until I do. That usually ends up looking like me writing this entry and, on the side, restyling footnotes as I go. 
+
+Overall, I’m pretty happy with my digital garden setup so far. I’ll keep chipping away at it, which means this entry will likely be updated over time as I go.
+
+[^1]: Steph Ango (CEO of Obsidian, coincidentally) writes about the philosophy “[file over app](https://stephango.com/file-over-app)”.
+[^2]: Obsidian has an entire page listing the [limitations and potential risks of using symlinks](https://obsidian.md/help/symlinks).
+[^3]: I particularly appreciated [this breakdown](https://stackoverflow.com/a/18791647) on how Git treats symbolic links.
+[^4]: Borrowed the idea of keeping track of a source from [Luke Mitchell](https://interroban.gg/colophon/post/via/).
