@@ -20,9 +20,8 @@ const { subheadings } = Astro.props;
       {subheadings.map((subheading, i) => (
         <li class="dropdown item">
           <a aria-label={subheading.text} class={`row stretch apart depth-${subheading.depth}`} href={`#${subheading.slug.replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-')}`}>
-            {subheading.text.toLowerCase()}
-            <span>{i + 1}</span>
-            </a>
+            {subheading.text.toLowerCase().replace('.', '')}
+          </a>
         </li>
       ))}
     </ul>
