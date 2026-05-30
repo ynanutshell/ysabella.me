@@ -258,12 +258,19 @@ a.noborder:hover {
 ol, ul {
   margin-left: var(--base-size-200);
 
-  li {
-    margin-left: var(--size-padding-sm);
-    line-height: 1.5;
+  div {
+    margin-left: var(--size-padding-xs);
   }
 
-  li + li, li li {
+  li {
+    margin-left: var(--size-padding-sm);
+
+    p {
+
+    }
+  }
+
+  li + li {
     margin-block-start: var(--size-padding-2xs);
   }
 
@@ -277,16 +284,6 @@ ul {
   list-style-type: square;
 }
 
-ul li {
-  display: list-item;
-
-  div {
-    display: inline-block;
-    vertical-align: top;
-    margin-left: var(--size-padding-xs);
-  }
-}
-
 ul li::marker {
   color: var(--color-primary);
   font-family: var(--font-mono);
@@ -297,20 +294,12 @@ ol {
   list-style-type: decimal-leading-zero;
 }
 
-ol li {
-  display: list-item;
-
-  div {
-    margin-left: var(--size-padding-xs);
-  }
-}
-
 ol li::marker {
   color: var(--color-foreground-300);
   
 }
 
-.bookmark + .bookmark, .bookmark .bookmark {
+.bookmark + .bookmark {
   margin-block-start: var(--size-padding-xs);
 }
 
@@ -422,9 +411,6 @@ pre, .astro-code {
 .content .footnotes {
   gap: var(--size-padding-xs); 
   
-  ol li div {
-    display: flex;
-  }
 }
 
 .data-footnote-backref {
