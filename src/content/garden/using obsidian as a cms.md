@@ -13,7 +13,7 @@ tags:
   - website
   - writing
 planted: 2026-05-20T10:52:00
-tended: 2026-05-31T06:24:58+08:00
+tended: 2026-05-31T06:30:18+08:00
 ---
 I started using [Obsidian](https://obsidian.md/) again early this year, now that I’m fully indoctrinated into the Apple ecosystem and syncing across devices is as easy as storing everything in iCloud. Since then, I very quickly played with the idea of publishing some of my thoughts to a [[on starting a digital garden|digital garden]].
 
@@ -156,7 +156,7 @@ I set up a keyboard shortcut for easy access to both templates and any more I mi
 I first tried inserting a template as a new note with the `Templates: Insert Template` command, which seemingly did nothing. Then I settled with manually duplicating templates and dragging them out of my **templates** folder, which didn’t seem right. Then I finally realized I needed a note to actually *insert* a template into.
 
 ### Parsing Markdown to HTML.
-Astro handles most Markdown conversion and formatting straight out of the box, except for things like wikilinks. Otherwise, it’s mostly a matter of me accounting for edge cases I haven’t found the need to style yet… until I do. That usually ends up looking like me writing this entry and, on the side, restyling footnotes as I go. Overall, I’m pretty happy with my digital garden setup so far. 
+Astro handles most Markdown conversion and formatting straight out of the box, except for things like wikilinks. Otherwise, it’s mostly a matter of me accounting for edge cases I haven’t found the need to style yet… until I do. That usually ends up looking like me writing this entry and, on the side, restyling footnotes as I go, which is something I’ll continue to chip away at over time.
 
 [^1]: Steph Ango (CEO of Obsidian, coincidentally) writes about the philosophy “[file over app](https://stephango.com/file-over-app)”.
 [^2]: Obsidian has an entire page listing the [limitations and potential risks of using symlinks](https://obsidian.md/help/symlinks).
