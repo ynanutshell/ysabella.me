@@ -1,6 +1,6 @@
 {
-  "name": "MyWebSite",
-  "short_name": "MySite",
+  "name": "ysabella.me",
+  "short_name": "ysabella.me",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -15,7 +15,5 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#FCFCFD",
-  "background_color": "#FCFCFD",
   "display": "standalone"
 }
