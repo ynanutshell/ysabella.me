@@ -401,7 +401,7 @@ a .emphasis:hover {
 }
 
 /* Markdown Content */
-pre, .astro-code {
+pre, .astro-code, figure[data-rehype-pretty-code-fragment] {
   padding: var(--size-padding-sm) var(--size-padding-md);
   background-color: var(--color-background-200) !important;
 
@@ -412,6 +412,16 @@ pre, .astro-code {
     font-family: var(--font-mono);
     font-size: var(--size-type-caption);
     tab-size: 2;
+  }
+
+  pre {
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  code {
+    white-space: pre-wrap;
+    word-break: break-word;
   }
 }
 
