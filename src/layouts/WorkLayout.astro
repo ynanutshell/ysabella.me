@@ -60,26 +60,7 @@ const { headline, subline, cover, preview, caption, href, details = [], subheadi
         <h1>{headline}</h1>
         <p class="subline">{subline}</p>
       </div>
-      {details.length > 0 && (
-        <dl class="metadata">
-          {details.map(item => (
-            <div class="datapoint">
-              <dt>{item.label}</dt>
-              <dd class="item">
-                {Array.isArray(item.value) 
-                  ? item.value.map((v, i) => (
-                      <p class="item">
-                        {v}
-                      </p>
-                    ))
-                  : item.value
-                }
-              </dd>
-            </div>
-          ))}
-        </dl>
-      )}
-      {cover && (
+            {cover && (
         <figure>
           {cover.type === 'lottie' && (
             <Lottie 
@@ -104,6 +85,25 @@ const { headline, subline, cover, preview, caption, href, details = [], subheadi
             </figcaption>
           )}
         </figure>
+      )}
+      {details.length > 0 && (
+        <dl class="metadata">
+          {details.map(item => (
+            <div class="datapoint">
+              <dt>{item.label}</dt>
+              <dd class="item">
+                {Array.isArray(item.value) 
+                  ? item.value.map((v, i) => (
+                      <p class="item">
+                        {v}
+                      </p>
+                    ))
+                  : item.value
+                }
+              </dd>
+            </div>
+          ))}
+        </dl>
       )}
     </header>
     <div class="column content lg">
