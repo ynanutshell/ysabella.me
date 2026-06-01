@@ -23,7 +23,7 @@ const clean = (text: string) =>
 ---
 <div class="column">
   {displayed.map(entry => (
-    <a class="noborder card lg" href={`/writing/${(entry.data.slug || entry.id).toLowerCase()}`}>
+    <a class="noborder card lg" href={`/writing/${(entry.data.slug || entry.id.split('/').pop()).toLowerCase()}`}>
       {entry.data.image && (
         <img 
           src={entry.data.image} 

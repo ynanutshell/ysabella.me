@@ -33,13 +33,16 @@ const { headline, subline, cover, alt, plantedDate, lastTendedDate, minRead, typ
 const src = "https://assets.ysabella.me/cdn-cgi/image/format=webp,quality=100,width=1200/garden";
 ---
 <Layout {...metadata} classes="scroll" activeTab="garden">
+  {subheadings.length > 0 && (
+    <TOC subheadings={subheadings} />
+  )}
+  <LinkButton type="back" href="/writing" aria-label="Back" class="back-link floating hide-on-idle">
+    <ArrowLeftIcon />
+  </LinkButton>
+  <LinkButton  aria-label="Scroll to top" class="scroll-top floating">
+    <ArrowUpIcon />
+  </LinkButton>
   <article class="text">
-    {subheadings.length > 0 && (
-      <TOC subheadings={subheadings} />
-    )}
-    <LinkButton type="back" href="/writing" aria-label="Back" class="back-link floating hide-on-idle">
-      <ArrowLeftIcon />
-    </LinkButton>
     {cover && (
       <figure>
         <img class="wide" src=`${src}/${cover}` alt={alt} decoding="async" loading="lazy"/>
@@ -82,7 +85,7 @@ const src = "https://assets.ysabella.me/cdn-cgi/image/format=webp,quality=100,wi
         )}
       </div>
     </header>
-    <div class="column sm content">
+    <div class="column content">
       <slot />
     </div>
     <span class="divider stretch" aria-hidden="true" />
@@ -95,9 +98,6 @@ const src = "https://assets.ysabella.me/cdn-cgi/image/format=webp,quality=100,wi
       ))}
       </dl>
     </div>
-    <LinkButton  aria-label="Scroll to top" class="scroll-top floating">
-      <ArrowUpIcon />
-    </LinkButton>
   </article>
 </Layout>
 

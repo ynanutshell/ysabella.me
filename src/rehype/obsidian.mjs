@@ -3,11 +3,14 @@ import { visit } from 'unist-util-visit';
 export function rehypeObsidian() {
   return (tree) => {
     visit(tree, 'element', (node) => {
+      // Heading anchors
       if (node.tagName === 'h2' || node.tagName === 'h3') {
-        const text = node.children.find(c => c.type === 'text')?.value || '';
+        const text = node.children
+          .filter(c => c.type === 'text' || c.type === 'raw')
+          .map(c => c.value || '')
+          .join('');
         const id = text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
         node.properties = { ...node.properties, id };
-        
         node.children.push({
           type: 'element',
           tagName: 'a',
@@ -15,25 +18,18 @@ export function rehypeObsidian() {
           children: [{ type: 'text', value: '#' }],
         });
       }
+      // Footnote backref icon
       if (node.properties?.className === 'data-footnote-backref' ||
           (Array.isArray(node.properties?.className) && node.properties?.className.includes('data-footnote-backref'))) {
         node.children = [{
           type: 'raw',
-          value: 
-            `<svg width="10" height="9" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M0.707153 3.5H6.70715V0M3.20715 6L0.707153 3.5L3.20715 1" stroke="currentColor"/>
-            </svg>`
+          value: `<svg width="10" height="9" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.707153 3.5H6.70715V0M3.20715 6L0.707153 3.5L3.20715 1" stroke="currentColor"/>
+          </svg>`
         }];
       }
-      if (node.tagName === 'a' && node.properties?.href) {
-        const href = node.properties.href;
-        if (!href.includes('ysabella.me') && !href.startsWith('/') && !href.startsWith('#')) {
-          node.properties.target = '_blank';
-          node.properties.rel = 'noopener noreferrer';
-        }
-      }
+      // Div around li content
       if (node.tagName === 'li' && node.children.length > 0) {
-        console.log('wrapping li');
         node.children = [{
           type: 'element',
           tagName: 'div',

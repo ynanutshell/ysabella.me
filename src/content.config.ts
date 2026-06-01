@@ -5,7 +5,7 @@ const GARDEN_PATH = import.meta.env.GARDEN_PATH || 'src/content/garden';
 
 const gardenCollection = defineCollection({
   loader: glob({ 
-    pattern: '**/*.md', 
+    pattern: '{garden,bookmarks}/**/*.md', 
     base: GARDEN_PATH,
   }),
 });

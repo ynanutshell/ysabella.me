@@ -1,5 +1,11 @@
 import { defineConfig } from 'astro/config';
+import remarkSectionize from 'remark-sectionize';
+import remarkSmartypants from 'remark-smartypants';
+import rehypeExternalLinks from 'rehype-external-links';
+import remarkReferenceLinks from 'remark-reference-links';
 import { rehypeObsidian } from './src/rehype/obsidian.mjs';
+import rehypePrettyCode from 'rehype-pretty-code';
+import remarkCodeTitles from 'remark-code-titles';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
@@ -7,21 +13,28 @@ export default defineConfig({
   output: 'static',
   integrations: [sitemap()],
   markdown: {
-    shikiConfig: { theme: 'night-owl-light', },
+    syntaxHighlight: false,
     remarkPlugins: [
-      () => (tree, file) => {
-        file.data.wikilinks = file.data.wikilinks || {};
-      },
       ['remark-wiki-link', {
         hrefTemplate: (permalink) => '/writing/' + permalink.toLowerCase().replace(/\s+/g, '-').replace(/_/g, '-'),
-          aliasDivider: '|',
-          wikiLinkClassName: 'wiki-link',
-          newClassName: 'new-wiki-link',
-          permalinks: [],
-          pageResolver: (name) => [name],
+        aliasDivider: '|',
       }],
+      remarkSmartypants,
+      remarkReferenceLinks,
+      remarkCodeTitles,
+      remarkSectionize,
       'remark-callout',
     ],
-    rehypePlugins: [rehypeObsidian],
+    rehypePlugins: [
+      [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }],
+      [rehypePrettyCode, { 
+        theme: {
+          light: 'night-owl-light',
+          dark: 'night-owl',
+        },
+        keepBackground: false,
+      }],
+      rehypeObsidian,
+    ]
   },
 });
