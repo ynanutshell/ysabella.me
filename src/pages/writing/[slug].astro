@@ -7,7 +7,7 @@ export async function getStaticPaths() {
   return entries
     .filter(entry => entry.data.published !== false && entry.data.type !== 'bookmark')
     .map(entry => ({
-      params: { slug: (entry.data.slug || entry.id).toLowerCase() },
+      params: { slug: (entry.data.slug || entry.id.split('/').pop()).toLowerCase() },
       props: { entry },
     }));
 }
@@ -27,8 +27,11 @@ const src = "https://assets.ysabella.me/garden"
 const meta = {
   title: `${entry.data.title} — ysabella nicole alvarez`,
   description: entry.data.description || entry.body
-    ?.split('\n')
-    .filter(l => l.trim() && !l.startsWith('#') && !l.startsWith('!') && !l.startsWith('['))
+    ?.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')  // Strip markdown links
+    .replace(/\[\[([^\]]+)\]\]/g, '$1')         // Strip wikilinks
+    .replace(/[#*`>|-]/g, '')                    // Strip formatting
+    .split('\n')
+    .filter(l => l.trim() && !l.startsWith('#'))
     .slice(0, 2)
     .join(' ')
     .slice(0, 157) + '...',
@@ -49,6 +52,5 @@ const data = {
   minRead,
 };
 ---
-<GardenLayout metadata={meta} data={data}>
-  <div class="column content" set:html={html} />
+<GardenLayout metadata={meta} data={data} set:html={html}>
 </GardenLayout>
