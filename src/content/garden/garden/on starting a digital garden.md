@@ -10,7 +10,7 @@ tags:
   - garden
   - website
 planted: 2026-05-18T22:22:00+08:00
-tended: 2026-05-31T05:40:09+08:00
+tended: 2026-06-02T00:09:33+08:00
 ---
 I’m a little late to the party, but this string of words is the first in my attempt to keep a digital garden! I've come across a number of different variations but the general consensus of what a ["digital garden"](https://danielsieger.com/blog/2021/05/30/digital-gardens.html) is seems to be somewhere between a thought dump, personal wiki, and experimental knowledge base that is growing and evolving continuously, reminiscent of personal sites from the early 90s to 00s.
 ## My Personal Take
@@ -24,7 +24,7 @@ Over time, I’ll try to add to this list as I deep dive further into the rabbit
 - [Utsob Roy's hermitage](https://hermitage.utsob.me/)
 
 > [!NOTE] ## Cultivate your own garden
-> If you're interested in digital gardening, I took down a few notes on the technicalities of my experience [[using Obsidian as a CMS]], but my approach is very bare-bones in its current state. I'm slowly still fleshing out how content is translated from Markdown to HTML as I go. Better people than me have [collated dozens of resources](https://github.com/MaggieAppleton/digital-gardeners) to help others get started.
+> If you're interested in digital gardening, I took down a few notes on the technicalities of my experience [[using obsidian as a cms]], but my approach is very bare-bones in its current state. I'm slowly still fleshing out how content is translated from Markdown to HTML as I go. Better people than me have [collated dozens of resources](https://github.com/MaggieAppleton/digital-gardeners) to help others get started.
 > 
 > Previously, I used [TiddlyWiki](https://tiddlywiki.com/) for notes on game mechanics (lol) and I appreciated the low barrier to entry and active community. For those already familiar with it, [Notion](https://www.notion.so/) offers a few features like bidirectional linking that are pretty conducive to building a personal knowledge base.
 > 
