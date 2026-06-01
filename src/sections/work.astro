@@ -2,20 +2,20 @@
 import FilterBar from '../components/FilterBar.astro';
 import GridCard from '../components/GridCard.astro';
 
-const VidSrc = "https://assets.ysabella.me"
-const ImgSrc = "https://assets.ysabella.me/cdn-cgi/image/format=webp,quality=100,width=800";
+const VidSrc = "https://assets.ysabella.me/work"
+const ImgSrc = "https://assets.ysabella.me/cdn-cgi/image/format=webp,quality=100,width=800/work";
 
 const cards = [
   {
     title: "Cashmonki",
     visual: {
       type: 'video' as const,
-      src: `${VidSrc}/work/cashmonki.mp4`,
+      src: `${VidSrc}/cashmonki.mp4`,
       alt: "Mobile dashboard of an expense and budget tracking application. Currently focused on budgets, navigation tabs organize budgets by time range: daily, weekly, monthly, quarterly, etc. An overview displays current spending against the total budget for the selected current time period, with a breakdown of the expenses by category."
     },
     href: "/work/cashmonki",
     tags: ["interaction design", "ux design", "ui design", "product design"],
-    background: "#542EFF",
+    background: "light-dark(#542EFF, #3E39A6)",
     fit: "phone",
     colSpan: 1,
     rowSpan: 2
@@ -23,11 +23,11 @@ const cards = [
   {
     title: "GCash",
     visual: { 
-      type: 'video' as const,
-      src: `${VidSrc}/work/gcash.mp4`,
+      type: 'lottie' as const,
+      src: `${VidSrc}/gcash.json`,
       alt: "Looping animation of GCash logo being drawn into view."
     },
-    background: "#FFF",
+    background: "light-dark(#FFF, #002cb8)",
     href: "/work/gcash",
     fit: "contain",
     tags: ["low-code development", "design systems"],
@@ -38,7 +38,7 @@ const cards = [
     title: "Grid Magazine",
     visual: { 
       type: 'video' as const,
-      src: `${VidSrc}/work/grid.mp4?v=2`,
+      src: `${VidSrc}/grid.mp4`,
       alt: "A video panning across a stylized digital map to highlighted pins in the Philippines, Malibu, Hong Kong, and Mongolia."
     },
     href: "/work/grid",
@@ -50,7 +50,7 @@ const cards = [
     title: "TinyFast",
     visual: {
       type: 'image' as const,
-      src: `${ImgSrc}/work/tinyfast.png`,
+      src: `${ImgSrc}/tinyfast.png`,
       alt: "Conceptual redesign of TinyFast's hero section, with the headline 'Shrink Big Files. Instantly.'. Focusing on the product's interface, the design incorporates a liquid glass finish, and large files being compressed into smaller ones after being processed."
     },
     href: "https://www.figma.com/proto/qN1Q961P4cNBrx9zZEfH37/Personal-Design-Exercises?node-id=254-327&viewport=79%2C409%2C0.16&t=6MWpM9NoKy1At8eO-9&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=254%3A327&show-proto-sidebar=1&page-id=254%3A176",
@@ -65,12 +65,12 @@ const cards = [
     title: "Eztrackr",
     visual: {
       type: 'image' as const,
-      src: `${ImgSrc}/work/eztrackr.png`,
+      src: `${ImgSrc}/eztrackr.png`,
       alt: "Mobile dashboard of Eztrackr, a dashboard for tracking job applications. The dashboard is focused on a resume, with a scrollable navigation bar currently displaying the following tabs: Personal Details, Education, and Professional Summary. On the Professional Summary tab, the user has the option to enhance their summary with AI. Below, a chart visualizes the match rate of the user's resume against a job description, with the current match rate at 50%."
     },
     href: "/work/eztrackr",
     tags: ["design systems", "product design", "ux design"],
-    background: "#6001D2",
+    background: "light-dark(#6001D2, #4A01A0)",
     fit: "phone",
     colSpan: 1,
     rowSpan: 2
@@ -79,11 +79,11 @@ const cards = [
     title: "Momentum",
     visual: {
       type: 'image' as const,
-      src: `${ImgSrc}/work/momentum.png`,
+      src: `${ImgSrc}/momentum.png`,
       alt: "Hero section for Momentum, a community-based platform focusing on accountability. The headline reads 'Stay on track, together.', centered around visual elements of an open book, calendar, daily planner, and a list of goals on a sticky note.",
     },
     tags: ["ui design", "web design", "branding and identity"],
-    background: "#FFF3E4",
+    background: "light-dark(#F2E8CF, #6C584C)",
     fit: "contain",
     colSpan: 1,
     rowSpan: 1
@@ -92,12 +92,12 @@ const cards = [
     title: "BlogFox",
     visual: {
       type: 'image' as const,
-      src: `${ImgSrc}/work/blogfox.png`,
+      src: `${ImgSrc}/blogfox.png`,
       alt: "Brand identity for the YouTube to blog post conversion platform, Blogfox. The design features a fox with a quill pen head, symbolizing the transformation of video content into written form."
 
     },
     tags: ["branding and identity"],
-    background: "#FFFFFF",
+    background: "light-dark(#FFFF, #3C096C)",
     fit: "contain",
     colSpan: 1,
     rowSpan: 1
@@ -106,11 +106,11 @@ const cards = [
     title: "Olifant",
     visual: {
       type: 'image' as const,
-      src: `${ImgSrc}/work/olifant.png`,
+      src: `${ImgSrc}/olifant.png`,
       alt: "Brand identity for Olifant, a platform that takes the guesswork out of language learning by connecting you with like-minded learners. The design features the side profile of an elephant, or a chat bubble, symbolizing memory and learning, along with borderless communication."
     },
     tags: ["branding and identity"],
-    background: "#3033FF",
+    background: "light-dark(#086375, #344E41)",
     fit: "contain",
     colSpan: 1,
     rowSpan: 1
@@ -119,9 +119,9 @@ const cards = [
     title: "Artaku",
     visual: { 
       type: 'video' as const, 
-      src: `${VidSrc}/work/artaku.mp4` 
+      src: `${VidSrc}/artaku.mp4` 
     },
-    background: "#F7F7F7",
+    background: "light-dark(#BC4749, #074776)",
     fit: "phone",
     tags: ["branding and identity", "ui design"],
     colSpan: 1,
@@ -131,13 +131,13 @@ const cards = [
     title: "RealRoots",
     visual: {
       type: 'image' as const,
-      src: `${ImgSrc}/work/realroots.png`,
+      src: `${ImgSrc}/realroots.png`,
       alt: "Conceptual redesign of RealRoots' hero section, with the headline 'Real friendship, guaranteed'. Focusing on fostering community, polaroids featuring different groups of women are scattered across the design, captioned with quotes from users."
     },
     href: "https://www.figma.com/proto/qN1Q961P4cNBrx9zZEfH37/Personal-Design-Exercises?node-id=254-452&viewport=79%2C409%2C0.16&t=6MWpM9NoKy1At8eO-9&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=254%3A452&show-proto-sidebar=1&page-id=254%3A176",
     target: "_blank",
     tags: ["ui design", "web design"],
-    background: "#FFF3E4",
+    background: "light-dark(#A7C957, #3C553B)",
     fit: "contain",
     colSpan: 1,
     rowSpan: 1,
@@ -146,13 +146,13 @@ const cards = [
     title: "Paste",
     visual: {
       type: 'image' as const,
-      src: `${ImgSrc}/work/paste.png`,
+      src: `${ImgSrc}/paste.png`,
       alt: "Conceptual redesign of Paste's hero section, with the headline 'Limitless clipboard'. Focusing on the product's key features, the design incorporates a vibrant color palette and dynamic, floating elements straight from Paste's interface over a render of the app on a MacBook screen."
     },
     href: "https://www.figma.com/proto/qN1Q961P4cNBrx9zZEfH37/Personal-Design-Exercises?node-id=254-239&viewport=79%2C409%2C0.16&t=6MWpM9NoKy1At8eO-9&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=254%3A239&show-proto-sidebar=1&page-id=254%3A176",
     target: "_blank",
     tags: ["ui design", "web design"],
-    background: "#FF950E",
+    background: "light-dark(#FF950E, #C27A00)",
     fit: "contain",
     colSpan: 1,
     rowSpan: 1,
@@ -161,11 +161,11 @@ const cards = [
     title: "Mematic",
     visual: {
       type: 'image' as const,
-      src: `${ImgSrc}/work/mematic.png`,
+      src: `${ImgSrc}/mematic.png`,
       alt: "Brand identity for Mematic, a meme creation app. The design features a smiley with a winking sparkle for an eye."
     },
     tags: ["branding and identity"],
-    background: "#FF0077",
+    background: "light-dark(#FF0077, #C0045C)",
     fit: "contain",
     colSpan: 1,
     rowSpan: 1

@@ -1,4 +1,7 @@
 ---
+import SunIcon from './icons/Sun.astro';
+import MoonIcon from './icons/Moon.astro';
+
 interface Props {
   type?: 'top' | 'footer';
   activeTab?: string;
@@ -26,5 +29,33 @@ const tabs = [
       {tab.label}
     </a>
   ))}
+  {type === 'top' && (
+    <button class="button small tab" id="theme-toggle" aria-label="Toggle light/dark mode">
+      <SunIcon aria-hidden="true" />
+      <MoonIcon aria-hidden="true" />
+    </button>
+  )}
   {type === 'top' && (<span class="small tab">]</span>)}
 </nav>
+
+<script>
+  const html = document.documentElement;
+  const toggle = document.getElementById('theme-toggle');
+
+  function updateLabel() {
+    const isDark = getComputedStyle(html).colorScheme === 'dark';
+    if (toggle) toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+  }
+  
+  const saved = localStorage.getItem('color-scheme') || 
+    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  html.style.colorScheme = saved;
+  
+  toggle?.addEventListener('click', () => {
+    const next = html.style.colorScheme === 'dark' ? 'light' : 'dark';
+    html.style.colorScheme = next;
+    localStorage.setItem('color-scheme', next);
+    updateLabel();
+    window.dispatchEvent(new CustomEvent('themechange'));
+  });
+</script>

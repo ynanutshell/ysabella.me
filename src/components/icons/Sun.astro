@@ -1,0 +1,7 @@
+---
+const { class: className, ...rest } = Astro.props;
+---
+<svg class={`sun ${className || ''}`} viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" {...rest}>
+  <path id="ellipse" d="M8.5 6C8.5 7.38071 7.38071 8.5 6 8.5C4.61929 8.5 3.5 7.38071 3.5 6C3.5 4.61929 4.61929 3.5 6 3.5C7.38071 3.5 8.5 4.61929 8.5 6Z" stroke="currentColor" stroke-linecap="square"/>
+  <path id="rays" d="M6 2V1M3 3L2.29289 2.29289M9 3L9.70711 2.29289M3 9L2.29289 9.70711M9 9L9.70711 9.70711M6 11V10M2 6H1M10 6H11" stroke="currentColor" stroke-linecap="square" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,6 @@
+---
+const { class: className, ...rest } = Astro.props;
+---
+<svg class={`moon ${className || ''}`} viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" {...rest}>
+  <path id="ellipse" fill-rule="evenodd" clip-rule="evenodd" d="M4.35352 2C4.12646 2.50195 4 3.05957 4 3.64648C4 5.85547 5.79089 7.64648 8 7.64648C8.58691 7.64648 9.14429 7.52051 9.64648 7.29297C9.0188 8.68066 7.62219 9.64648 6 9.64648C3.79089 9.64648 2 7.85547 2 5.64648C2 4.02441 2.9657 2.62793 4.35352 2Z" stroke="currentColor" stroke-linejoin="round"/>
+</svg>

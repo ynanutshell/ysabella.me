@@ -19,18 +19,35 @@ const { src, class: className, autoplay = true, loop = true } = Astro.props;
   const lottieScript = document.createElement('script');
   lottieScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js';
   
-  lottieScript.onload = () => {
-    const container = document.querySelector('.lottie-container');
-    if (!(container instanceof HTMLElement)) return;
+  function getLottieSrc(baseSrc: string = '') {
+    const darkMode = getComputedStyle(document.documentElement).colorScheme === 'dark';
+    if (!darkMode) return baseSrc;
+    return baseSrc.replace('.json', '-dark.json');
+  }
 
-    const animation = (window as any).lottie.loadAnimation({
+  async function initLottie() {
+  const containers = document.querySelectorAll<HTMLElement>('.lottie-container');
+  for (const container of containers) {
+    const existing = (window as any).lottie?.getRegisteredAnimations?.()?.find(
+      (a: any) => a.wrapper === container
+    );
+    if (existing) existing.destroy();
+
+    let src = getLottieSrc(container.dataset.src);
+    (window as any).lottie.loadAnimation({
       container,
       renderer: 'svg',
       loop: container.dataset.loop === 'true',
       autoplay: container.dataset.autoplay === 'true',
-      path: container.dataset.src,
+      path: src,
     });
-  };
-  
-  document.head.appendChild(lottieScript);
+  }
+}
+
+lottieScript.onload = initLottie;
+document.head.appendChild(lottieScript);
+
+const observer = new MutationObserver(initLottie);
+observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'data-theme'] });
+window.addEventListener('themechange', initLottie);
 </script>

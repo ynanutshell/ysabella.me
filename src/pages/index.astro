@@ -114,7 +114,7 @@ const status = "Open to projects<br>from Q2 2026";
     width: 12.5em;
     max-width: 40%;
     padding: var(--size-padding-lg);
-    background-color: var(--color-primary-bg);
+    background-color: var(--color-primary-fg);
     transform: rotate3d(0,0,1,-6deg);
     z-index: 1;
   }
@@ -122,7 +122,7 @@ const status = "Open to projects<br>from Q2 2026";
   #portrait svg {
     width: 100%;
     height: auto;
-    color: var(--color-primary);
+    color: var(--color-primary-bg);
   }
 
   #dialogue {
@@ -135,7 +135,7 @@ const status = "Open to projects<br>from Q2 2026";
     transform: rotate3d(0, 0, 1, 6deg);
 
     * {
-      color: var(--color-primary);
+      color: var(--color-primary-highlight);
     }
     
     #message {
@@ -164,7 +164,7 @@ const status = "Open to projects<br>from Q2 2026";
     flex-direction: column;
     padding: var(--size-padding-xl);
     color: var(--color-secondary-fg);
-    background-color: var(--color-secondary);
+    background-color: var(--color-secondary-bg);
     transform: rotate3d(0,0,1,2deg);
 
     h1 {
@@ -180,7 +180,7 @@ const status = "Open to projects<br>from Q2 2026";
 
     span:hover {
       background-color: var(--color-tertiary);
-      color: var(--color-secondary);
+      color: var(--color-secondary-bg);
     }
 
     .stroke {
@@ -204,7 +204,7 @@ const status = "Open to projects<br>from Q2 2026";
     right: 0;
     border-width: 0 var(--size-padding-md) var(--size-padding-md) 0;
     border-style: solid;
-    border-color: rgba(from var(--color-primary-bg) r g b / 0.6 ) var(--color-background-100);
+    border-color: rgba(from var(--color-primary-fg) r g b / 0.6 ) var(--color-background-100);
   }
 
   @media (max-width: 768px) {
