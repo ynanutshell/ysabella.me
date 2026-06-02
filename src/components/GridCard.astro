@@ -5,7 +5,7 @@ type Visual =
   | { type: 'image'; src: string; alt?: string }
   | { type: 'video'; src: string; preview?: string; alt?: string }
   | { type: 'html'; html: string; classes?: string }
-  | { type: 'lottie'; src: string; alt?: string; loop?: boolean; autoplay?: boolean };
+  | { type: 'lottie'; src: string; darkSrc?: string, alt?: string; loop?: boolean; autoplay?: boolean };
 
 interface Props {
   cards: {
