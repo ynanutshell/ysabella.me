@@ -26,8 +26,9 @@ const { src, darkSrc, class: className, autoplay = true, loop = true } = Astro.p
     return darkMode && darkSrc ? darkSrc : baseSrc;
   }
 
-  lottieScript.onload = () => {
+  function initAllLotties() {
     document.querySelectorAll<HTMLElement>('.lottie-container').forEach(container => {
+      container.innerHTML = '';
       const src = getLottieSrc(container.dataset.src, container.dataset.srcDark);
       (window as any).lottie.loadAnimation({
         container,
@@ -37,6 +38,11 @@ const { src, darkSrc, class: className, autoplay = true, loop = true } = Astro.p
         path: src,
       });
     });
+  }
+
+  lottieScript.onload = () => {
+    initAllLotties();
+    window.addEventListener('themechange', initAllLotties);
   };
 
   document.head.appendChild(lottieScript);
