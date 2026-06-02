@@ -15,7 +15,7 @@ interface DetailItem {
 type Cover = 
   | { type: 'image'; src: string; alt?: string }
   | { type: 'video'; src: string; alt?: string }
-  | { type: 'lottie'; src: string; alt?: string; loop?: boolean; autoplay?: boolean };
+  | { type: 'lottie'; src: string; darkSrc: string, alt?: string; loop?: boolean; autoplay?: boolean };
 
 export interface Props {
   metadata: {
@@ -65,6 +65,7 @@ const { headline, subline, cover, preview, caption, href, details = [], subheadi
           {cover.type === 'lottie' && (
             <Lottie 
               src={cover.src}
+              darkSrc={cover.darkSrc || undefined}
               loop={cover.loop ?? true}
               autoplay={cover.autoplay ?? true}
               aria-label={cover.alt || null}
