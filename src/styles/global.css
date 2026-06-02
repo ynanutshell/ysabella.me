@@ -43,10 +43,10 @@
   --color-tertiary-fg: var(--color-black);
 
   /* System Colors */
-  --color-error: #FF6060;
-  --color-pending: #FFF026;
-  --color-success: #60FF70;
-  --color-warning: #FFA52F;
+  --color-error: light-dark(#FF6060, #C04444);
+  --color-pending: light-dark(#FFF026, #DAA520);
+  --color-success: light-dark(#60FF70, #69A197);
+  --color-warning: light-dark(#FFA52F, #D97A2B);
 
   /* Shadows */
   --color-shadow-sm: 0 1px 2px rgb(from var(--color-neutral-400) r g b / 0.1);
@@ -955,7 +955,6 @@ footer .social:hover {
 #navbar {
   display: flex;
   flex-direction: row;
-  gap: var(--size-padding-2xs);
   z-index: 1;
 }
 
@@ -1018,12 +1017,11 @@ footer .social:hover {
   display: flex;
   flex-direction: row; 
   align-items: center;
-  gap: var(--size-padding-sm);
+  gap: var(--size-padding-xs);
 }
 
 .indicator {
   display: block;
-  margin-top: 0.2rem;
   width: 0.4rem;
   height: 0.4rem;
   border-radius: var(--size-padding-sm);
@@ -1400,8 +1398,8 @@ button {
     display: inline; 
   }
 
-  .astro-code,
-  .astro-code span {
+  [data-rehype-pretty-code-figure],
+  [data-rehype-pretty-code-figure] span {
     color: var(--shiki-dark) !important;
   }
 }
@@ -1415,8 +1413,8 @@ button {
     display: inline; 
   }
 
-  .astro-code,
-  .astro-code span {
+  [data-rehype-pretty-code-figure],
+  [data-rehype-pretty-code-figure] span {
     color: var(--shiki-light);
   }
 }

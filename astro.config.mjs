@@ -29,8 +29,8 @@ export default defineConfig({
       [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }],
       [rehypePrettyCode, { 
         theme: {
-          light: 'night-owl-light',
-          dark: 'night-owl',
+          light: 'material-theme-lighter',
+          dark: 'material-theme-darker',
         },
         keepBackground: false,
       }],
