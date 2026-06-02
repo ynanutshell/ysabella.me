@@ -13,7 +13,7 @@ tags:
   - website
   - writing
 planted: 2026-05-20T10:52:00
-tended: 2026-06-02T03:44:23+08:00
+tended: 2026-06-03T00:02:06+08:00
 ---
 I started using [Obsidian](https://obsidian.md/) again early this year, now that I’m fully indoctrinated into the Apple ecosystem and syncing across devices is as easy as storing everything in iCloud. Since then, I very quickly played with the idea of publishing some of my thoughts to a [[on starting a digital garden|digital garden]].
 
@@ -31,7 +31,7 @@ But, I’m cheap and willing to put in the extra legwork to not shell out if I d
 I'm a big fan of tools that allow for a full range of customization and flexibility. This usually includes features like exposed properties, theming, and add-ons to expand (or go beyond) existing functionality. Whole communities are built on being able to personalize to individual style and different use cases!
 
 ### File ownership.
-This ties into not being locked [[using obsidian as a cms#No subscription models|behind a subscription]]. Any content I create and serve through an external service, I should have the option to pull out at any time—without having to file a request that takes an indefinite amount of time. This serves two purposes: reusability and accessibility. Files should always be in a universal format that is usable outside of any one service[^1].
+This ties into not being locked [[using obsidian as a cms#No subscription models|behind a subscription]]. Any content I create and serve through an external service, I should have the option to pull out at any time—without having to file a request that takes an indefinite amount of time. In the same vein, files should always be in a universal format that is usable outside of any one service[^1].
 
 Obsidian has more or less met a lot of the criteria above for me! Plus points for a mobile app that has all the functionality of the desktop app. Sometimes, it's just easier to jot something down from a smaller screen, with no room for distractions.
 
@@ -80,15 +80,6 @@ I’ve installed a few small community plugins, mostly to keep my writing experi
 	</div>
 	<div class="card column lg vertical stretch">
 		<div class="datapoint">
-			<a href="https://github.com/mgmeyers/obsidian-smart-typography"><h4>Smart Typography</h4></a>
-			<p class="caption">By <a class="emphasis" href="https://github.com/mgmeyers">@mgmeyers</a></p>
-		</div>
-		<p>Automatically converts quotes, dashes, and multiple periods.</p>
-	</div>
-</div>
-<div class="row start wrap">
-	<div class="card column lg vertical stretch">
-		<div class="datapoint">
 			<a href="https://github.com/beaussan/update-time-on-edit-obsidian"><h4>Update time on edit</h4></a>
 			<p class="caption">By <a class="emphasis" href="https://github.com/beaussan">@beaussan</a></p>
 		</div>
@@ -102,63 +93,69 @@ I’ve installed a few small community plugins, mostly to keep my writing experi
 Full disclaimer that my setup is still a bit of a mess and work-in-progress, which works for me because that gives me full control over layout and styling. My goal is to slowly and continuously build it out over time, as I write more entries into my modest garden and notice anything out of place along the way. With that said, I did hit a few snags while setting up Obsidian as a CMS, but there are a few tricks that have worked for me.
 
 ### Syncing content.
-I went through a number of different methods in order to keep my content synced between my garden vault (stored in iCloud) and local working directory. Initially, I tried a simple `Make Alias` via the macOS context menu, but neither Obsidian nor VS Code (my choice of code editor) recognized it as a valid file.
+I went through a few different methods in order to keep content synced between my garden vault (stored in iCloud) and local working directory. Initially, I tried a simple `Make Alias` via the macOS context menu, but neither Obsidian nor VS Code (my choice of code editor) recognized it as a valid file.
 
 #### Symbolic links.
-Next, I looked into [symbolic links](https://en.wikipedia.org/wiki/Symbolic_link) (or symlinks), which has limitations and is generally not recommended[^2], but I have seen a few working instances with the [same](https://www.ssp.sh/brain/add-external-folders-git-blog-book-to-my-obsidian-vault-via-symlink/) [exact](https://www.mandalivia.com/obsidian/obsidian-with-astro-for-personal-site/#step-4-connecting-obsidian-to-astro-with-symlinks) [purpose](https://bryanhogan.com/blog/astro-obsidian) in mind. My attempts looked something like:
+Next, I looked into [symbolic links](https://en.wikipedia.org/wiki/Symbolic_link) (or symlinks), which has limitations and is generally not recommended[^2]. However, I have seen a few working instances with the [same](https://www.ssp.sh/brain/add-external-folders-git-blog-book-to-my-obsidian-vault-via-symlink/) [exact](https://www.mandalivia.com/obsidian/obsidian-with-astro-for-personal-site/#step-4-connecting-obsidian-to-astro-with-symlinks) [purpose](https://bryanhogan.com/blog/astro-obsidian) in mind. My attempts in this area went something like:
 
-```json
-ln -s <cloud-based vault path> <local repo path>
+```javascript
+ln -s [cloud-based vault path] [local repo path]
 ```
 
-I added a symlink of my vault `iCloud/Obsidian/garden` to my working directory `src/content` first, which does allow linked content to be fully viewable and editable in VS Code. Unfortunately, Git only checks it out as a small, flat file[^3] and not the full directory from my vault.
+First, I added a symlink of my vault `iCloud/Obsidian/garden` to my working directory `src/content`, which does allow linked content to be fully viewable and editable in VS Code. Unfortunately, Git only checks it out as a small, flat file[^3] and not the full directory from my vault.
 
-```json
-ln -s <local repo path> <cloud-based vault path>
+```javascript
+ln -s [local repo path] [cloud-based vault path]
 ```
-I then tried reversing the logic: transfer the vault over to my working directory and leave a symlink in its place. I didn’t think this one through lol. I ended up learning *while* I was out that I couldn’t access my vault on my phone, thanks to all the actual data being on my computer.
+I then tried reversing the logic: transfer the vault over to my working directory and leave a symlink in its place. I didn’t think this one through <span class="subtle">lol</span>. I ended up learning *while* I was out that I couldn’t access my vault on my phone, thanks to all the actual data being on my computer.
 
 > [!NOTE] A small note
 > Alternatively, I considered storing my entire working directory as an iCloud-based vault to avoid having to sync them altogether. A [quick search](https://discussions.apple.com/thread/253527805) warns against mixing git with cloud-based version control, so that dissolved the thought.
 
 #### rsync script.
 Eventually, I landed on setting up an `rsync` script that syncs content from my vault while ignoring Obsidian-specific configuration, like templates and plugins.
-```json
+```javascript
 rsync -av --delete --exclude='.obsidian/' --exclude='plugins/' --exclude='templates/' --include='*/' --include='*.md' --exclude='*' \"$GARDEN_PATH/\" src/content/garden/
 ```
 It’s hacky and not the most convenient method. It also means I can’t push content changes directly from my phone. But it does the job reliably and I’m usually wrapping up any writing on my computer anyway, because of styling I have to tweak along the way.
 
+
 ### Custom properties and templates
 My properties are set up pretty similarly to standard Obsidian-published setups. I might rework things or add more over time as I move away from something blog-like and towards a truer garden setup. For now, I have templates for two different content types I have so far: writing and bookmarks.
 
-#### Writing
-- **`Published`** A toggle I use to filter out entries that should or shouldn’t be visible on my site.
-- **`Slug`** Optional field for instances where I want to set a custom slug.
-- **`Title`** The headline seen at the head of the article. This also dictates the OpenGraph title.
-- **`Description`** Optional field to describe the body of content. Otherwise, the first 160 characters are pulled from the start of the entry.
-- **`Type`** Categorizes the entry. Also serves to filter out `bookmarks`.
-- **`Subtype`** Further distinguishes entries beyond `type`.
-- **`Cover`** Both the header image above and OpenGraph image are pulled from this property.
-- **`Tags`** Any further identifiers or categories I can think of go here.
-- **`Planted`** This is updated by the plugin `Update time on edit` once on initial file creation. Set to my local timezone (GMT+8).
-- **`Tended`** This is updated by the plugin `Update time on edit` when any changes are made to the file. Set to my local timezone (GMT+8).
-#### Bookmarks
-- **`Published`** See above.
-- **`Title`** Generally the title taken from the bookmarked link.
-- **`Type`** Identifies `bookmarks` against anything else that would fall under `writing`.
-- **`Subtype`** Sets the bookmark category, shown at the end of the line.
-- **`URL`** Where the bookmark links to.
-- **`Via`**[^4] Optional field to provide the original source.
-- **`Source`** Adds a link to the source label `Via`. 
-- **`Planted`** Not shown, but nice to have.
-- **`Tended`** Not shown, but nice to have.
+#### Writing Template
+<table>
+<tr><th class="caption label">Published</th><td>A toggle I use to filter out entries that should or shouldn’t be visible on my site.</td></tr>
+<tr><th class="caption label">Slug</th><td>Optional field for instances where I want to set a custom slug.</td></tr>
+<tr><th class="caption label">Title</th><td>The headline seen at the head of the article. This also dictates the OpenGraph title.</td></tr>
+<tr><th class="caption label">Description</th><td>Optional field to describe the body of content. Otherwise, the first 160 characters are pulled from the start of the entry.</td></tr>
+<tr><th class="caption label">Type</th><td>Categorizes the entry. Also serves to filter out <span class="mono">bookmarks</span>.</td></tr>
+<tr><th class="caption label">Subtype</th><td>Further distinguishes entries beyond <span class="mono">type</span>.</td></tr>
+<tr><th class="caption label">Cover</th><td>Both the header image above and OpenGraph image are pulled from this property.</td></tr>
+<tr><th class="caption label">Tags</th><td>Any further identifiers or categories I can think of go here.</td></tr>
+<tr><th class="caption label">Planted</th><td>This is updated by the plugin <span class="mono">Update time on edit</span> once on initial file creation. Set to my local timezone (GMT+8).</td></tr>
+<tr><th class="caption label">Tended</th><td>This is updated by the plugin <span class="mono">Update time on edit</span> when any changes are made to the file. Set to my local timezone (GMT+8).</td></tr>
+</table>
+
+#### Bookmark Template
+<table>
+<tr><th class="caption label">Published</th><td>See above</td></tr>
+<tr><th class="caption label">Title</th><td>Generally the title taken from the bookmarked link.</td></tr>
+<tr><th class="caption label">Type</th><td>Identifies <span class="mono">bookmarks</span> against anything else that would fall under <span class="mono">writing</span>.</td></tr>
+<tr><th class="caption label">Subtype</th><td>Sets the bookmark category, shown at the end of the line.</td></tr>
+<tr><th class="caption label">URL</th><td>Where the bookmark links to.</td></tr>
+<tr><th class="caption label">Via</th><td>Optional field to provide the original source.[^4]</td></tr>
+<tr><th class="caption label">Source</th><td>Optional field to add a link to <span class="mono">via</span>.</td></tr>
+<tr><th class="caption label">Planted</th><td>Not shown, but nice to have.</td></tr>
+<tr><th class="caption label">Tended</th><td>Not shown, but nice to have.</td></tr>
+</table>
 
 I set up a keyboard shortcut for easy access to both templates and any more I might add: <kbd>⌘</kbd> + <kbd>\\</kbd>. Funnily enough, actually using templates for the first time was a little confusing. 
 
 I first tried inserting a template as a new note with the `Templates: Insert Template` command, which seemingly did nothing. Then I settled with manually duplicating templates and dragging them out of my **templates** folder, which didn’t seem right. Then I finally realized I needed a note to actually *insert* a template into.
 
 ### Parsing Markdown to HTML.
-Astro handles most Markdown conversion and formatting straight out of the box, except for a few things like wikilinks that I had to filter for manually. Otherwise, it’s mostly a matter of me accounting for edge cases I haven’t found the need to style yet… until I do. That usually ends up looking like me writing this entry and, on the side, restyling footnotes as I go, which is something I’ll continue to do over time.
+Astro handles most Markdown formatting straight out of the box, but I did run into a few issues with raw syntax making it through (like comments and wikilinks). Fortunately, there seems to be a [remark](https://github.com/remarkjs/awesome-remark) or [rehype](https://github.com/rehypejs/awesome-rehype) plugin for just about anything. Otherwise, it has mostly been a matter of me accounting for edge cases I haven’t found the need to style yet… until I do. That usually ends up looking like me writing this entry and, on the side, restyling footnotes as I go, which is something I’ll continue to do over time.
 
 [^1]: Steph Ango (CEO of Obsidian, coincidentally) writes about the philosophy “[file over app](https://stephango.com/file-over-app)”.
 [^2]: Obsidian has an entire page listing the [limitations and potential risks of using symlinks](https://obsidian.md/help/symlinks).
