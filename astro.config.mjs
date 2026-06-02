@@ -1,11 +1,13 @@
 import { defineConfig } from 'astro/config';
+import remarkCallout from 'remark-callout';
+import remarkCodeTitles from 'remark-code-titles';
+import remarkReferenceLinks from 'remark-reference-links';
 import remarkSectionize from 'remark-sectionize';
 import remarkSmartypants from 'remark-smartypants';
+import { remarkFootnotes, stripUserContent } from './src/remark/footnotes.mjs';
 import rehypeExternalLinks from 'rehype-external-links';
-import remarkReferenceLinks from 'remark-reference-links';
-import { rehypeObsidian } from './src/rehype/obsidian.mjs';
 import rehypePrettyCode from 'rehype-pretty-code';
-import remarkCodeTitles from 'remark-code-titles';
+import { headingAnchors, wrapListItems, obsidianHighlights, addMissingFootnotes } from './src/rehype/obsidian.mjs';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
@@ -19,22 +21,27 @@ export default defineConfig({
         hrefTemplate: (permalink) => '/writing/' + permalink.toLowerCase().replace(/\s+/g, '-').replace(/_/g, '-'),
         aliasDivider: '|',
       }],
-      remarkSmartypants,
-      remarkReferenceLinks,
+      remarkCallout,
       remarkCodeTitles,
+      remarkReferenceLinks,
       remarkSectionize,
-      'remark-callout',
+      remarkSmartypants,
+      remarkFootnotes,
     ],
     rehypePlugins: [
+      stripUserContent,
       [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }],
       [rehypePrettyCode, { 
         theme: {
-          light: 'material-theme-lighter',
-          dark: 'material-theme-darker',
+          light: 'vitesse-light',
+          dark: 'vitesse-dark',
         },
         keepBackground: false,
       }],
-      rehypeObsidian,
+      headingAnchors,
+      obsidianHighlights,
+      wrapListItems,
+      addMissingFootnotes
     ]
   },
 });
