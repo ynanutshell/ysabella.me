@@ -1,16 +1,18 @@
 ---
 interface Props {
   src: string;
+  darkSrc?: string;
   class?: string;
   autoplay?: boolean;
   loop?: boolean;
 }
 
-const { src, class: className, autoplay = true, loop = true } = Astro.props;
+const { src, darkSrc, class: className, autoplay = true, loop = true } = Astro.props;
 ---
 <div
   class={`lottie-container ${className ?? ''}`}
   data-src={src}
+  data-src-dark={darkSrc || null}
   data-autoplay={String(autoplay)}
   data-loop={String(loop)}
 ></div>
@@ -19,35 +21,23 @@ const { src, class: className, autoplay = true, loop = true } = Astro.props;
   const lottieScript = document.createElement('script');
   lottieScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js';
   
-  function getLottieSrc(baseSrc: string = '') {
+  function getLottieSrc(baseSrc: string = '', darkSrc: string = '') {
     const darkMode = getComputedStyle(document.documentElement).colorScheme === 'dark';
-    if (!darkMode) return baseSrc;
-    return baseSrc.replace('.json', '-dark.json');
+    return darkMode && darkSrc ? darkSrc : baseSrc;
   }
 
-  async function initLottie() {
-  const containers = document.querySelectorAll<HTMLElement>('.lottie-container');
-  for (const container of containers) {
-    const existing = (window as any).lottie?.getRegisteredAnimations?.()?.find(
-      (a: any) => a.wrapper === container
-    );
-    if (existing) existing.destroy();
-
-    let src = getLottieSrc(container.dataset.src);
-    (window as any).lottie.loadAnimation({
-      container,
-      renderer: 'svg',
-      loop: container.dataset.loop === 'true',
-      autoplay: container.dataset.autoplay === 'true',
-      path: src,
+  lottieScript.onload = () => {
+    document.querySelectorAll<HTMLElement>('.lottie-container').forEach(container => {
+      const src = getLottieSrc(container.dataset.src, container.dataset.srcDark);
+      (window as any).lottie.loadAnimation({
+        container,
+        renderer: 'svg',
+        loop: container.dataset.loop === 'true',
+        autoplay: container.dataset.autoplay === 'true',
+        path: src,
+      });
     });
-  }
-}
+  };
 
-lottieScript.onload = initLottie;
-document.head.appendChild(lottieScript);
-
-const observer = new MutationObserver(initLottie);
-observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'data-theme'] });
-window.addEventListener('themechange', initLottie);
+  document.head.appendChild(lottieScript);
 </script>
