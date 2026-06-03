@@ -27,9 +27,9 @@
   --color-foreground-300: light-dark(var(--color-neutral-300), var(--color-neutral-700));
 
   /* Border Colors */
-  --color-border-1st: light-dark(var(--color-neutral-800), var(--color-neutral-100));
-  --color-border-2nd: light-dark(var(--color-neutral-600), var(--color-neutral-200));
-  --color-border-3rd: light-dark(var(--color-neutral-400), var(--color-neutral-300));
+  --color-border-1st: light-dark(var(--color-neutral-700), var(--color-neutral-200));
+  --color-border-2nd: light-dark(var(--color-neutral-600), var(--color-neutral-300));
+  --color-border-3rd: light-dark(var(--color-neutral-500), var(--color-neutral-400));
 
   /* Theme Colors */
   --color-primary-bg: light-dark(#FF5101, #DC4804);
@@ -326,7 +326,7 @@ kbd {
   align-items: center;
   padding: 0.05rem var(--size-padding-2xs);
   background-color: var(--color-background-200);
-  border: 0.08rem solid var(--color-border-2nd);
+  border: 0.08rem solid var(--color-border-1st);
   border-radius: var(--size-padding-2xs);
   font-family: var(--font-mono);
   font-size: var(--size-type-caption);
