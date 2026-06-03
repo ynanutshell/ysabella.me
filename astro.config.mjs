@@ -7,7 +7,7 @@ import remarkSmartypants from 'remark-smartypants';
 import { remarkFootnotes, stripUserContent } from './src/remark/footnotes.mjs';
 import rehypeExternalLinks from 'rehype-external-links';
 import rehypePrettyCode from 'rehype-pretty-code';
-import { headingAnchors, wrapListItems, obsidianHighlights, addMissingFootnotes } from './src/rehype/obsidian.mjs';
+import { headingAnchors, wrapListItems, obsidianHighlights, addMissingFootnotes, replaceFootnoteIcons } from './src/rehype/obsidian.mjs';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
@@ -15,21 +15,21 @@ export default defineConfig({
   output: 'static',
   integrations: [sitemap()],
   markdown: {
+    footnotes: false,
     syntaxHighlight: false,
     remarkPlugins: [
+      remarkFootnotes,
       ['remark-wiki-link', {
         hrefTemplate: (permalink) => '/writing/' + permalink.toLowerCase().replace(/\s+/g, '-').replace(/_/g, '-'),
         aliasDivider: '|',
-      }],
+       }],
       remarkCallout,
       remarkCodeTitles,
-      remarkReferenceLinks,
+      // remarkReferenceLinks,
       remarkSectionize,
       remarkSmartypants,
-      remarkFootnotes,
     ],
     rehypePlugins: [
-      stripUserContent,
       [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }],
       [rehypePrettyCode, { 
         theme: {
@@ -40,8 +40,9 @@ export default defineConfig({
       }],
       headingAnchors,
       obsidianHighlights,
-      wrapListItems,
-      addMissingFootnotes
+      addMissingFootnotes,
+      replaceFootnoteIcons,
+      stripUserContent,
     ]
   },
 });
