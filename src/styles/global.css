@@ -231,7 +231,6 @@ a {
     width: var(--base-size-100);
     stroke-width: 0.05rem;
     aspect-ratio: 1/1;
-    margin-top: 3%;
     transition: var(--transition-fast);
   }
 }
@@ -472,6 +471,16 @@ pre, figure[data-rehype-pretty-code-fragment] {
 
 [data-footnote-ref]::after {
   content: ']';
+}
+
+:target {
+  scroll-margin-top: var(--size-padding-xl);
+  animation: target-fade 2s ease-out;
+}
+
+@keyframes target-fade {
+  0% { background-color: var(--color-primary-subtle); }
+  100% { background-color: transparent; }
 }
 
 .task-list-item {

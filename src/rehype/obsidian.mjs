@@ -36,54 +36,60 @@ export function obsidianHighlights() {
   };
 }
 
-export function wrapListItems() {
+export function addMissingFootnotes() {
   return (tree) => {
+    const footnoteMap = {};
+
+    // Parse raw HTML nodes for footnote references
+    visit(tree, 'raw', (node) => {
+      if (node.value?.includes('fnref-')) {
+        const matches = node.value.matchAll(/<a[^>]*href="#fn-(\w+)"[^>]*data-footnote-text="([^"]*)"[^>]*>/g);
+        for (const match of matches) {
+          footnoteMap[match[1]] = decodeURIComponent(match[2]);
+        }
+      }
+    });
+
     visit(tree, 'element', (node) => {
-      if (node.tagName === 'li' && node.children.length > 0) {
-        node.children = [{
-          type: 'element',
-          tagName: 'div',
-          properties: {},
-          children: node.children,
-        }];
+      if (node.tagName === 'section' && node.properties?.dataFootnotes !== undefined) {
+        const ol = node.children.find(n => n.tagName === 'ol');
+        if (ol) {
+          for (const [id, text] of Object.entries(footnoteMap)) {
+            if (!ol.children.some(li => li.properties?.id === `fn-${id}`) && text) {
+              const html = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+              ol.children.push({
+                type: 'element',
+                tagName: 'li',
+                properties: { id: `fn-${id}` },
+                children: [{
+                  type: 'element', tagName: 'p',
+                  children: [
+                    { type: 'raw', value: html },
+                    { type: 'raw', value: ` <a href="#fnref-${id}" class="data-footnote-backref" data-footnote-backref aria-label="Back to reference ${id}"><svg viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.707153 3.5H6.70715V0M3.20715 6L0.707153 3.5L3.20715 1" stroke="currentColor"/>
+          </svg></a>` },
+                  ],
+                }],
+              });
+            }
+          }
+        }
       }
     });
   };
 }
 
-export function addMissingFootnotes() {
+export function replaceFootnoteIcons() {
   return (tree) => {
-    // This runs AFTER Astro builds the footnotes section
     visit(tree, 'element', (node) => {
       if (node.properties?.className === 'data-footnote-backref' ||
-          (Array.isArray(node.properties?.className) && node.properties?.className.includes('data-footnote-backref'))) {
+        (Array.isArray(node.properties?.className) && node.properties?.className.includes('data-footnote-backref'))) {
         node.children = [{
           type: 'raw',
-          value: `<svg class="footnote-icon" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+          value: `<svg viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M0.707153 3.5H6.70715V0M3.20715 6L0.707153 3.5L3.20715 1" stroke="currentColor"/>
           </svg>`
         }];
-      }
-      
-      if (node.tagName === 'section' && node.properties?.dataFootnotes !== undefined) {
-        const ol = node.children.find(n => n.tagName === 'ol');
-        if (ol && !ol.children.some(li => li.properties?.id === 'fn-4')) {
-          ol.children.push({
-            type: 'element',
-            tagName: 'li',
-            properties: { id: 'fn-4' },
-            children: [{
-              type: 'element', tagName: 'div',
-              children: [{
-                type: 'element', tagName: 'p',
-                children: [
-                  { type: 'raw', value: 'An idea borrowed from Luke Mitchell.' },
-                  { type: 'raw', value: ' <a href="#fnref-4" class="data-footnote-backref" data-footnote-backref="" aria-label="Back to reference 4"><svg class="footnote-icon" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.707153 3.5H6.70715V0M3.20715 6L0.707153 3.5L3.20715 1" stroke="currentColor"/></svg></a>' },
-                ],
-              }],
-            }],
-          });
-        }
       }
     });
   };
