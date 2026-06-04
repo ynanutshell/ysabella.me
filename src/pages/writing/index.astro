@@ -7,7 +7,6 @@ import Layout from '../../layouts/BaseLayout.astro';
 // import LinkButton from '../../components/LinkButton.astro';
 import Writings from '../../sections/writing.astro';
 
-const metadata = getPageMetadata('garden');
 const entries = await getCollection('garden');
 
 const request = Astro.request;
@@ -18,6 +17,12 @@ const items = entries
   .filter(e => e.data.published !== false && e.data.type !== 'bookmark')
   .filter(e => !active || [e.data.type, e.data.subtype].filter(Boolean).includes(active))
   .sort((a, b) => (b.data.planted?.getTime() ?? 0) - (a.data.planted?.getTime() ?? 0));
+
+const metadata = {
+  title: `writing - ysabella nicole alvarez`,
+  description: "A collection of (likely unfinished) notes, thoughts, and explorations Ysabella is slowly tending to over time.",
+  ogImage: '/opengraph.png'
+};
 
 /* const filterMap = [
   { label: 'notes', value: 'notes' },

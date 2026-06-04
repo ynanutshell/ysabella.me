@@ -3,14 +3,19 @@ import { getCollection } from 'astro:content';
 import { getPageMetadata } from '../utils/seo';
 import ArrowLeftIcon from '../components/icons/ArrowLeft.astro';
 import Layout from '../layouts/BaseLayout.astro';
-import LinkButton from '../components/LinkButton.astro';
+// import LinkButton from '../components/LinkButton.astro';
 import Links from '../sections/links.astro';
 
-const metadata = getPageMetadata('garden');
 const entries = await getCollection('garden');
 
 const published = entries.filter(entry => entry.data.published !== false);
 const bookmarks = published.filter(entry => entry.data.type === 'bookmark');
+
+const metadata = {
+  title: `bookmarks - ysabella nicole alvarez`,
+  description: "A log of things on the internet that Ysabella finds interesting—mostly for future reference, for when she inevitably has to hunt down an article, resource, or site from eons ago.",
+  ogImage: '/opengraph.png'
+};
 ---
 <Layout {...metadata} classes="text" activeTab="garden">
   <header class="column sm">
