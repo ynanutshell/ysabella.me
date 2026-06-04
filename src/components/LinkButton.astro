@@ -36,3 +36,34 @@ const Tag = (href || type === 'back') ? 'a' : 'button';
     <slot />
   </button>
 )}
+
+<script>
+  /* Back link */
+  const backLink = document.querySelector('[data-back-link]');
+  if (backLink && document.referrer) {
+    backLink.setAttribute('href', document.referrer);
+    console.log(document.referrer);
+  }
+  
+  backLink?.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.history.back();
+  });
+
+  /* Scroll to top */
+  const scrollTopBtn = document.querySelector('.scroll-top');
+
+  if (scrollTopBtn) {
+    const footer = document.querySelector('footer');
+
+    window.addEventListener('scroll', () => {
+      const bottom = footer
+        ? window.scrollY + window.innerHeight >= footer.offsetTop - 10 : false;
+
+      scrollTopBtn.classList.toggle('visible', window.scrollY > 10 && !bottom);
+    });
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+</script>

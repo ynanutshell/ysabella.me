@@ -132,54 +132,8 @@ const { headline, subline, cover, preview, caption, href, details = [], subheadi
       }, 1500);
     };
 
-    ['scroll', 'click', 'touchstart', 'keydown', 'mousemove'].forEach(event => {
+    ['scroll'].forEach(event => {
       window.addEventListener(event, showAndReset);
-    });
-  }
-
-  /* Table of contents */
-  const tocLinks = document.querySelectorAll('.toc a');
-  if (tocLinks.length > 0) {
-    const headings = document.querySelectorAll('h2[id], h3[id]');
-    window.addEventListener('scroll', () => {
-      let current = '';
-      headings.forEach(h => {
-        if (h.getBoundingClientRect().top <= 100) current = h.id;
-      });
-      tocLinks.forEach(link => {
-        link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
-      });
-    });
-  }
-
-  /* Back link */
-  const backLink = document.querySelector('[data-back-link]');
-  if (backLink && document.referrer) {
-    backLink.setAttribute('href', document.referrer);
-    console.log(document.referrer);
-  }
-
-  backLink?.addEventListener('click', (e) => {
-    if (window.history.length > 1 && document.referrer) {
-      e.preventDefault();
-      window.history.back();
-    }
-  });
-
-  /* Scroll to top */
-  const scrollTopBtn = document.querySelector('.scroll-top');
-
-  if (scrollTopBtn) {
-    const footer = document.querySelector('footer');
-
-    window.addEventListener('scroll', () => {
-      const bottom = footer
-        ? window.scrollY + window.innerHeight >= footer.offsetTop - 10 : false;
-
-      scrollTopBtn.classList.toggle('visible', window.scrollY > 10 && !bottom);
-    });
-    scrollTopBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 </script>

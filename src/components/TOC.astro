@@ -43,6 +43,18 @@ const { subheadings } = Astro.props;
   const sections = document.querySelectorAll('section[id]');
   const details = document.querySelector('#toc details') as HTMLDetailsElement | null;
 
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const hash = link.getAttribute('href') || '';
+      const target = document.querySelector(hash);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        history.replaceState(null, '', hash);
+      }
+    });
+  });
+
   window.addEventListener('scroll', () => {
     let current = '';
     sections.forEach(section => {
@@ -57,5 +69,18 @@ const { subheadings } = Astro.props;
 
   if (details) {
     details.open = window.matchMedia('(min-width: 1200px)').matches;
+  }
+
+  if (tocLinks.length > 0) {
+    const headings = document.querySelectorAll('h2[id], h3[id]');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      headings.forEach(h => {
+        if (h.getBoundingClientRect().top <= 100) current = h.id;
+      });
+      tocLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+      });
+    });
   }
 </script>
