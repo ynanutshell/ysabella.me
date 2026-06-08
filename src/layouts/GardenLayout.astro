@@ -93,9 +93,9 @@ const src = "https://assets.ysabella.me/cdn-cgi/image/format=webp,quality=100,wi
       <dl class="datapoint row">
         <dt class="item">Filed under</dt>
         <dd><a class="small item emphasis" href={`/tags/${subtype || type || "notes"}`}>#{subtype || type || "notes"}</a></dd>
-        {tags.map((tag) => (
-        <dd><a class="small item emphasis" href={`/tags/${tag}`}>#{tag}</a></dd>
-      ))}
+        {(tags ?? []).map((tag) => (
+          <dd><a class="small item emphasis" href={`/tags/${tag}`}>#{tag}</a></dd>
+        ))}
       </dl>
     </div>
   </article>
@@ -116,11 +116,6 @@ const src = "https://assets.ysabella.me/cdn-cgi/image/format=webp,quality=100,wi
 
   .content h3 {
     font-size: var(--size-heading-md);
-  }
-  
-  .content img {
-    max-height: 30rem;
-    width: 100%;
   }
 </style>
 
