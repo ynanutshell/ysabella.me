@@ -337,6 +337,7 @@ code, .mono, .astro-code, .astro-code span {
   background-color: var(--color-background-200) !important;
   font-family: var(--font-mono);
   font-size: var(--size-type-caption);
+  word-break: break-all;
 }
 
 blockquote {
@@ -380,7 +381,7 @@ sup {
 
 .caption.label, .callout-title {
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
   gap: var(--size-padding-xs);
   text-transform: uppercase;
   white-space: nowrap;
@@ -418,7 +419,7 @@ a .emphasis:hover {
   }
 }
 
-* + .callout.note {
+* + .callout.note, .content figure, .content picture {
   margin-top: var(--size-padding-xs);
 }
 
@@ -529,8 +530,8 @@ figure {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: auto;
   width: 100%;
-  margin-bottom: var(--size-padding-lg);
 }
 
 .wide {
@@ -661,10 +662,13 @@ th {
 }
 
 /* Alignment */
+.center {
+  text-align: center;
+}
+
 .horizontal.center {
   margin: 0 auto;
   justify-content: center;
-  text-align: center;
 }
 
 .vertical.center {
@@ -776,10 +780,6 @@ footer .social:hover {
   position: relative;
   background-color: var(--color-background-200);
   transition: var(--transition-fast);
-
-  * {
-    text-align: inherit;
-  }
 }
 
 .card.sm {
@@ -793,7 +793,7 @@ footer .social:hover {
 
 .card.lg {
   padding: var(--size-padding-lg);
-  gap: var(--size-padding-xs);
+  gap: var(--size-padding-sm);
 }
 
 .card.accent {
@@ -834,7 +834,7 @@ footer .social:hover {
 }
 
 /* Contained */
-.card.grid .contained {
+.contained {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1108,7 +1108,7 @@ footer .social:hover {
 article a[target="_blank"]::after {
   content: '';
   display: inline-block;
-  width: 0.4rem;
+  width: 0.5rem;
   aspect-ratio: 1/1;
   margin-left: var(--base-size-40);
   transition: var(--transition-fast);
@@ -1173,7 +1173,6 @@ article a[target="_blank"]:hover::after {
 .divider {
   width: var(--base-size-20);
   height: var(--base-size-20);
-  margin-top: 0.1rem;
   aspect-ratio: 1/1;
   background-color: var(--color-border-2nd);
 }
@@ -1357,7 +1356,8 @@ button {
     align-items: center;
     width: 100%;
   }
-  .wide {
+  picture.wide, img.wide, .wide {
+    height: auto;
     width: 100vw;
   }
 
@@ -1388,6 +1388,14 @@ button {
   .moon {
     display: inline;
   }
+
+  .img-light {
+    display: none;
+  }
+
+  .img-dark {
+    display: unset;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -1398,6 +1406,14 @@ button {
   .sun {
     display: inline;
   }
+
+  .img-light {
+    display: unset;
+  }
+
+  .img-dark {
+    display: none;
+  }
 }
 
 [style*="color-scheme: dark"] { 
@@ -1407,6 +1423,14 @@ button {
 
   .sun {
     display: inline; 
+  }
+
+  .img-dark {
+    display: unset;
+  }
+
+  .img-light {
+    display: none;
   }
 
   [data-rehype-pretty-code-figure],
@@ -1422,6 +1446,14 @@ button {
 
   .moon {
     display: inline; 
+  }
+
+  .img-light {
+    display: unset;
+  }
+
+  .img-dark {
+    display: none;
   }
 
   [data-rehype-pretty-code-figure],
