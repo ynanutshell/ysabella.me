@@ -11,12 +11,11 @@ tags:
   - domain
   - website
 planted: 2026-06-08T16:02:54+08:00
-tended: 2026-06-09T18:09:32+08:00
+tended: 2026-06-09T22:07:35+08:00
 ---
+A bit of context: I made the switch over to [Cloudflare](https://www.cloudflare.com/) for domain hosting a few years back because at-cost pricing made them the cheapest renewal option. Since then, I have relied on them for both of my domains: `ysabella.me` and `ynanutshell.com`.
 
-A bit of context: my first domain provider was [Porkbun](https://porkbun.com/). It was one of the more well-regarded and cost-effective options and, as far as my experience goes, I don’t recall any notable issues! But, when the time came to renew, I made the switch over to [Cloudflare](https://www.cloudflare.com/) because at-cost pricing made them the cheapest renewal option. Since then, I have relied on them when it comes to hosting both my domains: `ysabella.me` and `ynanutshell.com`.
-
-At the time, it was a convenient choice because I was already using [Cloudflare Workers](https://www.cloudflare.com/products/workers/) to serve my Notion-based portfolio through a custom domain. Now, I host the current iteration of my personal site through the same service, and I've had nearly no issues whatsoever.
+At the time, it was a convenient choice because I was already using [Cloudflare Workers](https://www.cloudflare.com/products/workers/) to serve my Notion-based portfolio through a custom domain. Now, I've been hosting the current iteration of my personal site through the same service with nearly no issues whatsoever.
 
 ## A Small Problem
 Today, I stumbled across an unfamiliar script while inspecting my personal site: `https://static.cloudflareinsights.com/beacon.min.js/`.
