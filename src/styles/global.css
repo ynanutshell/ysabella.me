@@ -333,7 +333,7 @@ kbd {
 }
 
 code, .mono, .astro-code, .astro-code span {
-  padding: 0.05rem var(--size-padding-2xs);
+  padding: 0.2rem;
   background-color: var(--color-background-200) !important;
   font-family: var(--font-mono);
   font-size: var(--size-type-caption);

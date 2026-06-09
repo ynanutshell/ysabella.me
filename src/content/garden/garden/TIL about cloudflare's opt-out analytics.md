@@ -11,17 +11,17 @@ tags:
   - domain
   - website
 planted: 2026-06-08T16:02:54+08:00
-tended: 2026-06-09T14:31:43+08:00
+tended: 2026-06-09T18:09:32+08:00
 ---
 
-My first domain provider was [Porkbun](https://porkbun.com/); it was one of the more well-regarded and cost-effective options I could find. As far as my experience goes, I don’t recall any notable issues! But, when the time came to renew, I made the switch over to [Cloudflare](https://www.cloudflare.com/). At-cost pricing made them the cheapest renewal option. Since then, I have relied on them for hosting both my domains: `ysabella.me` and `ynanutshell.com`.
+A bit of context: my first domain provider was [Porkbun](https://porkbun.com/). It was one of the more well-regarded and cost-effective options and, as far as my experience goes, I don’t recall any notable issues! But, when the time came to renew, I made the switch over to [Cloudflare](https://www.cloudflare.com/) because at-cost pricing made them the cheapest renewal option. Since then, I have relied on them when it comes to hosting both my domains: `ysabella.me` and `ynanutshell.com`.
 
 At the time, it was a convenient choice because I was already using [Cloudflare Workers](https://www.cloudflare.com/products/workers/) to serve my Notion-based portfolio through a custom domain. Now, I host the current iteration of my personal site through the same service, and I've had nearly no issues whatsoever.
 
 ## A Small Problem
-Today, I stumbled across an unfamiliar script while inspecting my personal site for redundant code: `https://static.cloudflareinsights.com/beacon.min.js/`.
+Today, I stumbled across an unfamiliar script while inspecting my personal site: `https://static.cloudflareinsights.com/beacon.min.js/`.
 
-A few searches later and I learned that Cloudflare enables their own [Web Analytics](https://www.cloudflare.com/web-analytics/) (also known as Real User Monitoring) by default on [proxied websites](https://developers.cloudflare.com/web-analytics/get-started/) under a [free plan](https://developers.cloudflare.com/speed/observatory/rum-beacon/#rum-excluding-eeaeu). I have a few thoughts on automatic opt-in patterns, especially in the time of generative AI and LLMs, though I've come to accept that navigating these scenarios comes with the territory of relying on free services: *"The customer is the product."*
+A few searches later and I learned that Cloudflare enables their own [Web Analytics](https://www.cloudflare.com/web-analytics/) (also known as Real User Monitoring) by default on [proxied websites](https://developers.cloudflare.com/web-analytics/get-started/) under a [free plan](https://developers.cloudflare.com/speed/observatory/rum-beacon/#rum-excluding-eeaeu). I have a few thoughts on opt-out frameworks, especially in the time of generative AI and LLMs, though I'll save that for a later entry.
 
 ## Opting Out
 I already use a self-hosted instance of [Umami](https://umami.is/) for web analytics, so another service that covers the same area adds unnecessary performance drain to my website. Luckily, it’s easy enough to disable the feature, if not the most intuitive process at first.
@@ -29,7 +29,7 @@ I already use a self-hosted instance of [Umami](https://umami.is/) for web analy
 2. Navigate to `Analytics > Web Analytics` via [account](https://dash.cloudflare.com/?to=/:account/web-analytics) or domain-level settings.
 3. Depending on how you accessed Web Analytics, click either **Manage site** for the website(s) you’re updating or **Manage RUM Settings** under `Quick Actions`. 
 4. Under `Real User Measurements (RUM)`, select the option **Disable** or whichever one is most applicable in your case.
-5. Lastly, click **Update** to save your changes. Based on my experience, the change should take effect almost immediately or within a few minutes.
+5. Lastly, click **Update** to save your changes. Based on my experience, the change should take effect almost immediately or within a few minutes at most.
 
 <figure class="card lg">
     <img alt="A few radio options under the heading Real User Measurements. A description reads: Enable Real User Measurements (RUM) for your Hostname(s) to monitor how real users experience the speed of your website or application. Options range from Enable, Enable (excluding visitor data in the EU), Enable with JS Snippet installation, and Disable." class="img-dark" src="https://assets.ysabella.me/cdn-cgi/image/format=webp,quality=100,width=950/garden/cloudflare-analytics-dark.png">
@@ -37,7 +37,11 @@ I already use a self-hosted instance of [Umami](https://umami.is/) for web analy
     <figcaption class="caption center">Disabling Cloudflare's built-in web analytics takes effect almost immediately.</figcaption>
 </figure>
 
-## Thoughts
-Automatic opt-ins have increasingly become a norm across digital services—especially in a time of generative AI and LLMs. I've honestly lost track of the number of times I've had to opt out of a feature or agreement I didn't initially consent to.
+## My Thoughts
+Opt-out models have long existed as a pattern and are increasingly becoming a norm across digital services—normally at the expense of consumer data. I've honestly lost track of the number of times I've had to dig through my account settings to opt out of something I didn't initially consent to. 
 
-I've resolved to chalk this instance up as a minor performance concern, but I generally believe that, in the modern age of the internet, it's important to be aware of and continue documenting similar implementations that might otherwise go unnoticed.
+At this point, it's kind of a given that navigating these scenarios comes with the territory of relying on free products[^1]. There is a common saying: *"If you're not paying for the product, you are the product."*
+
+I've chalked this instance up as a minor performance concern, but I generally believe that, in the modern age of the internet, it's important to be aware of and continue documenting similar implementations that might otherwise go unnoticed.
+
+[^1]: It should go without saying that this doesn't apply to every free product.
