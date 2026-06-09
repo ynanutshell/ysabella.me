@@ -11,12 +11,12 @@ tags:
   - domain
   - website
 planted: 2026-06-08T16:02:54+08:00
-tended: 2026-06-09T01:17:04+08:00
+tended: 2026-06-09T14:31:43+08:00
 ---
 
-My domain provider of choice used to be [Porkbun](https://porkbun.com/), which worked great and had no notable issues that I can recall. When the time came to renew, I made the switch over to Cloudflare; at-cost pricing meant that it was the cheapest renewal option. Since then, I have hosted two domains, `ysabella.me` and `ynanutshell.com`, under [Cloudflare](https://www.cloudflare.com/).
+My first domain provider was [Porkbun](https://porkbun.com/); it was one of the more well-regarded and cost-effective options I could find. As far as my experience goes, I don’t recall any notable issues! But, when the time came to renew, I made the switch over to [Cloudflare](https://www.cloudflare.com/). At-cost pricing made them the cheapest renewal option. Since then, I have relied on them for hosting both my domains: `ysabella.me` and `ynanutshell.com`.
 
-At the time, it was also a convenient choice because I was already using [Cloudflare Workers](https://www.cloudflare.com/products/workers/) to serve my Notion-based portfolio through a custom domain. Now, I host the current iteration of my personal site through the same service, and I've had nearly no issues whatsoever.
+At the time, it was a convenient choice because I was already using [Cloudflare Workers](https://www.cloudflare.com/products/workers/) to serve my Notion-based portfolio through a custom domain. Now, I host the current iteration of my personal site through the same service, and I've had nearly no issues whatsoever.
 
 ## A Small Problem
 Today, I stumbled across an unfamiliar script while inspecting my personal site for redundant code: `https://static.cloudflareinsights.com/beacon.min.js/`.
@@ -37,7 +37,7 @@ I already use a self-hosted instance of [Umami](https://umami.is/) for web analy
     <figcaption class="caption center">Disabling Cloudflare's built-in web analytics takes effect almost immediately.</figcaption>
 </figure>
 
-## Reflections
+## Thoughts
 Automatic opt-ins have increasingly become a norm across digital services—especially in a time of generative AI and LLMs. I've honestly lost track of the number of times I've had to opt out of a feature or agreement I didn't initially consent to.
 
 I've resolved to chalk this instance up as a minor performance concern, but I generally believe that, in the modern age of the internet, it's important to be aware of and continue documenting similar implementations that might otherwise go unnoticed.
