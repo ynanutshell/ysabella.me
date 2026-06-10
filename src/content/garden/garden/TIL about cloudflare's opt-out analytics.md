@@ -11,9 +11,10 @@ tags:
   - domain
   - website
 planted: 2026-06-08T16:02:54+08:00
-tended: 2026-06-09T22:07:35+08:00
+tended: 2026-06-10T02:54:36+08:00
 ---
-A bit of context: I made the switch over to [Cloudflare](https://www.cloudflare.com/) for domain hosting a few years back because at-cost pricing made them the cheapest renewal option. Since then, I have relied on them for both of my domains: `ysabella.me` and `ynanutshell.com`.
+## Context
+I made the switch over to [Cloudflare’s](https://www.cloudflare.com/) domain hosting a few years back because at-cost pricing made them the cheapest renewal option. Since then, I have relied on them when it comes to hosting both of my domains: `ysabella.me` and `ynanutshell.com`.
 
 At the time, it was a convenient choice because I was already using [Cloudflare Workers](https://www.cloudflare.com/products/workers/) to serve my Notion-based portfolio through a custom domain. Now, I've been hosting the current iteration of my personal site through the same service with nearly no issues whatsoever.
 
@@ -28,7 +29,7 @@ I already use a self-hosted instance of [Umami](https://umami.is/) for web analy
 2. Navigate to `Analytics > Web Analytics` via [account](https://dash.cloudflare.com/?to=/:account/web-analytics) or domain-level settings.
 3. Depending on how you accessed Web Analytics, click either **Manage site** for the website(s) you’re updating or **Manage RUM Settings** under `Quick Actions`. 
 4. Under `Real User Measurements (RUM)`, select the option **Disable** or whichever one is most applicable in your case.
-5. Lastly, click **Update** to save your changes. Based on my experience, the change should take effect almost immediately or within a few minutes at most.
+5. Lastly, click **Update** to save your changes. Based on my experience, it should take effect almost immediately or within a few minutes at most.
 
 <figure class="card lg">
     <img alt="A few radio options under the heading Real User Measurements. A description reads: Enable Real User Measurements (RUM) for your Hostname(s) to monitor how real users experience the speed of your website or application. Options range from Enable, Enable (excluding visitor data in the EU), Enable with JS Snippet installation, and Disable." class="img-dark" src="https://assets.ysabella.me/cdn-cgi/image/format=webp,quality=100,width=950/garden/cloudflare-analytics-dark.png">
@@ -37,10 +38,10 @@ I already use a self-hosted instance of [Umami](https://umami.is/) for web analy
 </figure>
 
 ## My Thoughts
-Opt-out models have long existed as a pattern and are increasingly becoming a norm across digital services—normally at the expense of consumer data. I've honestly lost track of the number of times I've had to dig through my account settings to opt out of something I didn't initially consent to. 
+Opt-out models have long existed as a pattern and are increasingly becoming a norm across digital services—typically at the expense of consumer data privacy. I honestly lost track of the number of times I've had to dig through account settings to opt out of something I didn't initially consent to.
 
 At this point, it's kind of a given that navigating these scenarios comes with the territory of relying on free products[^1]. There is a common saying: *"If you're not paying for the product, you are the product."*
 
-I've chalked this instance up as a minor performance concern, but I generally believe that, in the modern age of the internet, it's important to be aware of and continue documenting similar implementations that might otherwise go unnoticed.
+While I’ve chalked this particular instance up as a minor performance concern, I generally believe that, in the modern age of the internet, it's important to be aware of and continue documenting similar implementations that might otherwise go unnoticed.
 
-[^1]: It should go without saying that this doesn't apply to every free product.
+[^1]:Though it should go without saying that this principle doesn't apply to every free product out there.
