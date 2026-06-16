@@ -26,7 +26,7 @@ const bookmarks = published.filter(entry => entry.data.type === 'bookmark');
         Writing
         <ArrowRightIcon />
       </a></h2>
-      <Writings entries={writing.slice(0, 6)} />
+      <Writings entries={writing.slice(0, 5)} />
     </section>
   )}
   {bookmarks.length > 0 && (
@@ -35,7 +35,7 @@ const bookmarks = published.filter(entry => entry.data.type === 'bookmark');
         <span>Bookmarks</span>
         <ArrowRightIcon />
       </a></h2>
-      <Links entries={bookmarks.slice(0, 6)} />
+      <Links entries={bookmarks.slice(0, 10)} />
     </section>
   )}
 </Layout>

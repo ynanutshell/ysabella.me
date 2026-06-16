@@ -1,13 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
-import { getPageMetadata } from '../utils/seo';
 import ArrowLeftIcon from '../components/icons/ArrowLeft.astro';
 import Layout from '../layouts/BaseLayout.astro';
 // import LinkButton from '../components/LinkButton.astro';
 import Links from '../sections/links.astro';
 
 const entries = await getCollection('garden');
-
 const published = entries.filter(entry => entry.data.published !== false);
 const bookmarks = published.filter(entry => entry.data.type === 'bookmark');
 

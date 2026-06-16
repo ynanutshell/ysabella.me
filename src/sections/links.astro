@@ -6,7 +6,10 @@ interface Props {
 
 const { entries, limit = false } = Astro.props;
 
-const displayed = limit === false ? entries : entries.slice(0, limit);
+const sorted = [...entries]
+  .sort((a, b) => new Date(b.data.planted || 0).getTime() - new Date(a.data.planted || 0).getTime());
+
+const displayed = limit === false ? sorted : sorted.slice(0, limit);
 ---
 <ol class="list" reversed style={`--total: ${displayed.length}`}>
   {displayed.map(entry => (

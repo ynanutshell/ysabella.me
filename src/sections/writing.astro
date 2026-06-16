@@ -7,7 +7,7 @@ interface Props {
 const { entries, limit = 4 } = Astro.props;
 
 const sorted = [...entries]
-  .sort((a, b) => (b.data.planted?.getTime() ?? 0) - (a.data.planted?.getTime() ?? 0));
+  .sort((a, b) => new Date(b.data.planted || 0).getTime() - new Date(a.data.planted || 0).getTime());
 
 const displayed = limit === false ? sorted : sorted.slice(0, limit);
 
