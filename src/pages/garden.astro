@@ -9,7 +9,7 @@ import Links from '../sections/links.astro';
 const metadata = getPageMetadata('garden');
 const entries = await getCollection('garden');
 const published = entries.filter(entry => entry.data.published !== false);
-const writing = published.filter(entry => entry.data.type !== 'bookmark' || !entry.data.type);
+const writing = published.filter(entry => entry.data.type !== 'bookmark' || !entry.data.type).sort((a, b) => (b.data.planted?.getTime() ?? 0) - (a.data.planted?.getTime() ?? 0));;
 const bookmarks = published.filter(entry => entry.data.type === 'bookmark');
 ---
 <Layout {...metadata} classes="text" activeTab="garden">
@@ -26,7 +26,7 @@ const bookmarks = published.filter(entry => entry.data.type === 'bookmark');
         Writing
         <ArrowRightIcon />
       </a></h2>
-      <Writings entries={writing.slice(0, 5)} />
+      <Writings entries={writing.slice(0, 3)} />
     </section>
   )}
   {bookmarks.length > 0 && (
