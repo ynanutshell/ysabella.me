@@ -1,13 +1,12 @@
 import { defineConfig } from 'astro/config';
 import remarkCallout from 'remark-callout';
 import remarkCodeTitles from 'remark-code-titles';
-import remarkReferenceLinks from 'remark-reference-links';
 import remarkSectionize from 'remark-sectionize';
 import remarkSmartypants from 'remark-smartypants';
 import { remarkFootnotes, stripUserContent } from './src/remark/footnotes.mjs';
 import rehypeExternalLinks from 'rehype-external-links';
 import rehypePrettyCode from 'rehype-pretty-code';
-import { headingAnchors, wrapListItems, obsidianHighlights, addMissingFootnotes, replaceFootnoteIcons } from './src/rehype/obsidian.mjs';
+import { headingAnchors, obsidianHighlights, addMissingFootnotes, replaceFootnoteIcons } from './src/rehype/obsidian.mjs';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
