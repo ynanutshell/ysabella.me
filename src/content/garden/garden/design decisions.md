@@ -11,11 +11,11 @@ tags:
   - website
   - pattern
 planted: 2026-07-02T13:18:45+08:00
-tended: 2026-07-15T10:58:18+08:00
+tended: 2026-08-05T14:12:59+08:00
 ---
-A running log of design decisions in the current iteration my personal website: some I haven’t completely made up my mind on, others I still need to iron out the kinks in, and more still I've decided to document anyway.
+A running log of design decisions in the current iteration my personal website: some I haven’t completely made up my mind on and others I still need to iron out the kinks in.
 
-This is bound to change over time, but my goal is to continuously document any doubts I have and choices I make as this space transforms and evolves.
+This is bound to change over time! My goal is to continuously document any doubts I have and choices I make as this space changes and grows.
 
 ## 1. Marquee animation
 I wrote a short entry touching on my [[marquee animations|use of marquee animations]], a few common arguments against their use, and my workarounds for specific issues.

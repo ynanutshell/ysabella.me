@@ -13,14 +13,14 @@ tags:
   - website
   - writing
 planted: 2026-05-20T10:52:00
-tended: 2026-06-06T07:56:34+08:00
+tended: 2026-08-05T14:17:58+08:00
 ---
 I started using [Obsidian](https://obsidian.md/) again early this year, now that I’m fully indoctrinated into the Apple ecosystem and syncing across devices is as easy as storing everything in iCloud. Since then, I very quickly played with the idea of publishing some of my thoughts to a [[on starting a digital garden|digital garden]].
 
 I've long been drawn to the concept of using one form of note taking software or another as a content management system. From the day I set up a [TiddlyWiki](https://tiddlywiki.com/) for personal gaming notes <span class="subtle">(lol)</span> to when I hosted the first ever iteration of my online portfolio on [Notion](https://ynanutshell.com). 
 
 ## Selection Criteria
-There are a few considerations that I have kept in mind when choosing between platforms to write on and, eventually, to build a CMS from. It's safe to say this extends to how I decide on software in general!
+There are a few considerations that I kept in mind when choosing between platforms to write on and, eventually, to build a CMS from. Suffice it to say, this extends to how I decide on software in general!
 
 ### No subscription models.
 It's important to me that I'm not forced into a subscription plan to retain access to basic functionality and (more importantly) my own content. If times are lean, subscriptions are the very first thing I cut down on and they're generally just a pain to keep track of. I've made it a point to simply look for alternatives if something is locked behind monthly payments.

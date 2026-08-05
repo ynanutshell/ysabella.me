@@ -10,11 +10,11 @@ tags:
   - garden
   - website
 planted: 2026-05-18T22:22:00+08:00
-tended: 2026-06-02T00:09:33+08:00
+tended: 2026-08-05T14:16:56+08:00
 ---
 I’m a little late to the party, but this string of words is the first in my attempt to keep a digital garden! I've come across a number of different variations but the general consensus of what a ["digital garden"](https://danielsieger.com/blog/2021/05/30/digital-gardens.html) is seems to be somewhere between a thought dump, personal wiki, and experimental knowledge base that is growing and evolving continuously, reminiscent of personal sites from the early 90s to 00s.
 ## My Personal Take
-In the spirit of keeping my digital garden true to form, weeds and all, expect to see writing in varying stages of polish—from brain farts to unfinished drafts to working notes. I might prune and cultivate as I go but, for the most part, I will be using this space to share my musings without the pressure of a more traditional, blog-like approach. I’ve kept a few failed blogs over the years so here's hoping this is the approach that sticks!
+In the spirit of keeping my digital garden true to form, weeds and all, expect to see writing in varying stages of polish—from brain farts to unfinished drafts to working notes. I might prune and cultivate as I go but, for the most part, I will be using this space to share my musings without the pressures of a more traditional, blog-like approach. I’ve kept a few failed blogs over the years so here's hoping this is the approach that sticks!
 ## Navigational Structure
 Structurally speaking, my digital garden is set up more like a chronological blog than something truly wild and free form. As more of my thoughts take root here, my goal is to eventually build an interconnected web of thoughts, experimentation, and insights that I've gleaned through work (and play!). At some point, I want to adapt this and modify my setup to include [growth stages](https://freezing.cool/notes/maturity-identification), [bidirectional links](https://maggieappleton.com/bidirectionals), and maybe something closer to a [nested linking navigation](https://www.eastgate.com/garden/Beyond_Navigation.html) (which fondly reminds me of text-based games).
 ## Some Inspiration
