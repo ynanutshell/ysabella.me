@@ -11,9 +11,9 @@ tags:
   - website
   - pattern
 planted: 2026-07-02T13:18:45+08:00
-tended: 2026-08-05T14:12:59+08:00
+tended: 2026-09-18T19:20:43+08:00
 ---
-A running log of design decisions in the current iteration my personal website: some I haven’t completely made up my mind on and others I still need to iron out the kinks in.
+A running log of design decisions in the current iteration of my personal website: some I haven’t completely made up my mind on and others I still need to iron out the kinks in.
 
 This is bound to change over time! My goal is to continuously document any doubts I have and choices I make as this space changes and grows.
 

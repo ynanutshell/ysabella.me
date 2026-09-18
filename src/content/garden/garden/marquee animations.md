@@ -10,9 +10,9 @@ tags:
   - website
   - design
 planted: 2026-07-14T23:34:10+08:00
-tended: 2026-08-05T14:16:12+08:00
+tended: 2026-08-18T09:10:16+08:00
 ---
-Up until adding this particular scrolling banner to my homepage, I didn’t have the faintest clue there was a specific term and HTML tag for it: `<marquee>`. This might give my age away a little, but I also learned it was first introduced in early versions of Internet Explorer and phased out as early as 1996.
+Up until adding this particular scrolling banner to my homepage, I didn’t have the faintest clue there was a specific term and HTML tag for it: `<marquee>`. This might give my age away a little, but I learned it was first introduced in early versions of Internet Explorer and phased out as early as 1996.
 
 Nowadays, marquees aren't commonly used and there has been [countless arguments](https://ux.stackexchange.com/questions/76951/what-are-arguments-against-the-usage-of-a-ticker-marquee-on-websites) [against their use](https://overnightwebsite.com/trends-to-avoid-marquee-animation/):
 
