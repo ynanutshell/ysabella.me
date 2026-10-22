@@ -1,7 +1,7 @@
 ---
 published: true
 slug:
-title: Using Obsidian as a CMS
+title: using Obsidian as a CMS
 description:
 type: notes
 subtype: process
@@ -13,9 +13,9 @@ tags:
   - website
   - writing
 planted: 2026-05-20T10:52:00
-tended: 2026-08-05T14:17:58+08:00
+tended: 2026-10-21T13:09:48+08:00
 ---
-I started using [Obsidian](https://obsidian.md/) again early this year, now that I’m fully indoctrinated into the Apple ecosystem and syncing across devices is as easy as storing everything in iCloud. Since then, I very quickly played with the idea of publishing some of my thoughts to a [[on starting a digital garden|digital garden]].
+I started using [Obsidian](https://obsidian.md/) again early this year, now that I’m fully indoctrinated into the Apple ecosystem and syncing across devices is as easy as storing everything in iCloud. Since then, I very quickly played with the idea of publishing some of my thoughts to a [[on starting digital garden|digital garden]].
 
 I've long been drawn to the concept of using one form of note taking software or another as a content management system. From the day I set up a [TiddlyWiki](https://tiddlywiki.com/) for personal gaming notes <span class="subtle">(lol)</span> to when I hosted the first ever iteration of my online portfolio on [Notion](https://ynanutshell.com). 
 

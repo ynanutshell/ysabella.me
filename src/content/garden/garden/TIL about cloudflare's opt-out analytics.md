@@ -1,7 +1,7 @@
 ---
 published: true
 slug:
-title: TIL about Cloudflare's opt-out analytics
+title: til about Cloudflare's opt-out analytics
 description:
 type: notes
 subtype: til
@@ -11,7 +11,7 @@ tags:
   - domain
   - website
 planted: 2026-06-08T16:02:54+08:00
-tended: 2026-06-16T11:18:01+08:00
+tended: 2026-10-21T13:09:58+08:00
 ---
 ## Context
 I made the switch over to [Cloudflare’s](https://www.cloudflare.com/) domain hosting a few years back because at-cost pricing made them the cheapest renewal option. Since then, I have relied on them when it comes to hosting both of my domains: `ysabella.me` and `ynanutshell.com`.

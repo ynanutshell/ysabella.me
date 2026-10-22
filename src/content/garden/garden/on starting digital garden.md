@@ -1,7 +1,7 @@
 ---
 published: true
 slug:
-title: On starting a digital garden
+title: on starting a digital garden
 description:
 type: writing
 subtype:
@@ -10,7 +10,7 @@ tags:
   - garden
   - website
 planted: 2026-05-18T22:22:00+08:00
-tended: 2026-08-05T14:16:56+08:00
+tended: 2026-10-21T13:09:42+08:00
 ---
 I’m a little late to the party, but this string of words is the first in my attempt to keep a digital garden! I've come across a number of different variations but the general consensus of what a ["digital garden"](https://danielsieger.com/blog/2021/05/30/digital-gardens.html) is seems to be somewhere between a thought dump, personal wiki, and experimental knowledge base that is growing and evolving continuously, reminiscent of personal sites from the early 90s to 00s.
 ## My Personal Take

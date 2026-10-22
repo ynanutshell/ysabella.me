@@ -1,7 +1,7 @@
 ---
 published: true
 slug:
-title: Using marquee animations
+title: using marquee animations
 description:
 type: notes
 subtype: process
@@ -10,7 +10,7 @@ tags:
   - website
   - design
 planted: 2026-07-14T23:34:10+08:00
-tended: 2026-08-18T09:10:16+08:00
+tended: 2026-10-21T13:09:27+08:00
 ---
 Up until adding this particular scrolling banner to my homepage, I didn’t have the faintest clue there was a specific term and HTML tag for it: `<marquee>`. This might give my age away a little, but I learned it was first introduced in early versions of Internet Explorer and phased out as early as 1996.
 
