@@ -19,7 +19,7 @@ const tabs = [
 ];
 ---
 <nav aria-label="Site Menu" id="navbar" class={classes} >
-  {type === 'top' && (<span class="small tab">[</span>)}
+  <!-- {type === 'top' && (<span class="small tab">[</span>)} -->
   {tabs.map((tab) => (
     <a 
       class={`noborder tab ${activeTab === tab.label ? 'active' : ''}`}
@@ -35,7 +35,7 @@ const tabs = [
       <MoonIcon aria-hidden="true" />
     </button>
   )}
-  {type === 'top' && (<span class="small tab">]</span>)}
+  <!-- {type === 'top' && (<span class="small tab">]</span>)} -->
 </nav>
 
 <script>
