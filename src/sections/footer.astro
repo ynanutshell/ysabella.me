@@ -60,10 +60,10 @@ const { activeTab } = Astro.props;
     </div>
     <div id="misc" class="row sm right">
       <a class="small" href="https://analytics.ysabella.me/share" target="_blank">Analytics</a>
-      <span class="divider" />
+      <span class="divider" aria-hidden="true" />
       <a class="small" href="https://github.com/ynanutshell/ysabella.me" target="_blank">Source</a>
       {commit !== 'unknown' && (
-        <span class="divider" />
+        <span class="divider" aria-hidden="true" />
         <dl class="row sm">
           <dt>Last commit:</dt>
           <dd><a class="small" href={`https://github.com/ynanutshell/ysabella.me/commit/${commit}`} target="_blank">{commit.slice(0, 7)}</a></dd>

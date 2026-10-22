@@ -6,7 +6,7 @@ import SmallCard from "../components/SmallCard.astro";
 
 const metadata = getPageMetadata('work');
 const message = "welcome to my digital world";
-const status = "Currently figuring out<br>how to rollerblade";
+const status = "currently figuring out<br>how to rollerblade";
 ---
 <Layout {...metadata} activeTab="work">
   <section id="hero" class="full-screen stack">
@@ -14,7 +14,7 @@ const status = "Currently figuring out<br>how to rollerblade";
       <div id="portrait">
         <div id="dialogue">
           <p id="message" class="caption">{message}</p>
-          <span class="tail caption">/</span>
+          <span aria-label="dialogue bubble" class="tail caption">/</span>
         </div>
         <svg aria-label="Doodle of a curly-haired woman drawn with dynamic strokes" role="img" viewBox="0 0 1009 996" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -81,18 +81,20 @@ const status = "Currently figuring out<br>how to rollerblade";
         </svg>
       </div>
       <div id="title" class="secondary">
-        <h1>Ysabella is a designer with</h1>
-        <svg class="stroke" viewBox="0 0 300 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 3.2 C15 2.1, 28 4.3, 45 3.0 C62 1.7, 78 4.5, 95 2.8 C112 1.1, 130 4.0, 148 3.1 C166 2.2, 182 3.9, 200 3.3 C218 2.7, 235 3.6, 255 2.9 C275 2.2, 292 3.4, 310 3.0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <h1>a love for <span>storytelling</span> and</h1>
-        <svg class="stroke" viewBox="0 0 310 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 3.1 C12 2.4, 25 3.8, 42 3.0 C59 2.2, 74 3.9, 88 3.1 C102 2.3, 118 3.7, 135 2.9 C152 2.1, 168 3.8, 185 3.2 C202 2.6, 218 3.5, 235 2.8 C252 2.1, 268 3.4, 285 3.0 C296 2.7, 305 3.2, 310 3.0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <h1>whimsical <span>experiences</span>.</h1>
-        <svg class="stroke" viewBox="0 0 300 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 2.8 C18 2.4, 36 3.1, 55 2.6 C74 2.1, 90 3.4, 108 2.9 C126 2.4, 145 3.2, 162 3.0 C179 2.8, 196 3.5, 215 3.2 C234 2.9, 252 3.6, 270 3.3 C286 3.1, 300 3.4, 310 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
+        <h1>
+          <span>Ysabella is a designer with</span>
+          <svg aria-hidden="true" class="stroke" viewBox="0 0 300 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 3.2 C15 2.1, 28 4.3, 45 3.0 C62 1.7, 78 4.5, 95 2.8 C112 1.1, 130 4.0, 148 3.1 C166 2.2, 182 3.9, 200 3.3 C218 2.7, 235 3.6, 255 2.9 C275 2.2, 292 3.4, 310 3.0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span>a love for <span class="highlight">storytelling</span> and</span>
+          <svg aria-hidden="true" class="stroke" viewBox="0 0 310 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 3.1 C12 2.4, 25 3.8, 42 3.0 C59 2.2, 74 3.9, 88 3.1 C102 2.3, 118 3.7, 135 2.9 C152 2.1, 168 3.8, 185 3.2 C202 2.6, 218 3.5, 235 2.8 C252 2.1, 268 3.4, 285 3.0 C296 2.7, 305 3.2, 310 3.0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span>whimsical <span class="highlight">experiences</span>.</span>
+          <svg aria-hidden="true" class="stroke" viewBox="0 0 300 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 2.8 C18 2.4, 36 3.1, 55 2.6 C74 2.1, 90 3.4, 108 2.9 C126 2.4, 145 3.2, 162 3.0 C179 2.8, 196 3.5, 215 3.2 C234 2.9, 252 3.6, 270 3.3 C286 3.1, 300 3.4, 310 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </h1> 
       </div>
       <SmallCard id="currently" background="primary">
         <Fragment set:html={status} />
@@ -160,31 +162,30 @@ const status = "Currently figuring out<br>how to rollerblade";
 
   /* Title Card */ 
   #title {
-    display: flex;
-    flex-direction: column;
     padding: var(--size-padding-xl);
     color: var(--color-secondary-fg);
     background-color: var(--color-secondary-bg);
     transform: rotate3d(0,0,1,2deg);
 
     h1 {
+      display: flex;
+      flex-direction: column;
       font-size: var(--size-heading-lg);
       text-align: center;
       color: inherit;
       line-height: 2.0;
     }
 
-    span {
+    .highlight {
       color: var(--color-tertiary);
     }
 
-    span:hover {
+    .highlight:hover {
       background-color: var(--color-tertiary);
       color: var(--color-secondary-bg);
     }
 
     .stroke {
-      width: 100%;
       opacity: 0.1;
       color: inherit;
     }
