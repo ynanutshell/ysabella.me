@@ -56,4 +56,13 @@ const displayed = limit === false ? sorted : sorted.slice(0, limit);
     text-transform: none;
     letter-spacing: 0;
   }
+
+  @media (max-width: 768px) {
+    .bookmark h3 {
+      max-width: 20ch;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: inherit;
+    }
+  }
 </style>
