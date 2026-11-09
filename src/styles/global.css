@@ -545,7 +545,6 @@ figure {
   width: 100%;
   max-width: 75ch;
   margin: auto;
-  margin-top: var(--size-padding-2xl);
   gap: var(--size-padding-md);
   padding: var(--size-padding-lg);
 }
@@ -995,6 +994,8 @@ footer .social:hover {
 
 /* Footer Navbar */
 #navbar.footer {
+  position: sticky;
+  bottom: 0;
   align-items: flex-end;
   margin-left: var(--size-padding-lg);
   gap: var(--size-padding-sm);
@@ -1375,7 +1376,7 @@ button {
   display: none;
   margin-top: 0.1rem;
   width: var(--size-type-caption);
-  stroke-width: 0.06rem;
+  stroke-width: 0.04rem;
   aspect-ratio: 1/1;
   transition: var(--transition-fast);
 }

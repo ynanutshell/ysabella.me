@@ -2,6 +2,8 @@
 import { getCommit } from '../utils/commit';
 import Navbar from '../components/NavigationBar.astro';
 import SmallCard from "../components/SmallCard.astro";
+import SunIcon from '../components/icons/Sun.astro';
+import MoonIcon from '../components/icons/Moon.astro';
 
 const commit = await getCommit();
 const src = "https://assets.ysabella.me/cdn-cgi/image/format=webp,quality=100,width=500";
@@ -69,6 +71,11 @@ const { activeTab } = Astro.props;
           <dd><a class="small" href={`https://github.com/ynanutshell/ysabella.me/commit/${commit}`} target="_blank">{commit.slice(0, 7)}</a></dd>
         </dl>
       )}
+      <span class="divider" aria-hidden="true" />
+      <button class="small" id="theme-toggle" aria-label="Toggle light/dark mode">
+        <SunIcon aria-hidden="true" />
+        <MoonIcon aria-hidden="true" />
+      </button>
     </div>
   </div>
 </footer>
